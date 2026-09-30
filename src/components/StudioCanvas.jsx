@@ -9,7 +9,11 @@ import {
   Flame, 
   Crown,
   Play,
-  ArrowRightLeft
+  ArrowRightLeft,
+  BarChart3,
+  PenTool,
+  Palette,
+  Film
 } from 'lucide-react';
 import { DIRECTOR_DATA, MEETING_SEATS, MEETING_DIALOGUES } from '../data/mockData';
 
@@ -46,7 +50,7 @@ export default function StudioCanvas({
   useEffect(() => {
     if (isMeetingActive) return;
 
-    // Random cross-zone visits every 9 seconds
+    // Random cross-department visits every 9 seconds
     const interval = setInterval(() => {
       triggerRandomCollab();
     }, 9000);
@@ -69,11 +73,11 @@ export default function StudioCanvas({
     return () => clearTimeout(dialogueTimer);
   }, [isMeetingActive, meetingStep]);
 
-  // Start Meeting: Move agents to meeting room
+  // Start Meeting: Move department heads to boardroom
   const handleStartMeeting = () => {
     setIsMeetingActive(true);
     setMeetingStep(0);
-    onTriggerLog?.('Human_Director', '召集 AI 专项圆桌会！各工位核心 Agent 正在前往会议室...');
+    onTriggerLog?.('Human_Director', '召集四大部门碰头会！市场、文案、设计、视听主管正前往战略决策室...');
 
     setAgentPositions(prev => {
       const next = { ...prev };
@@ -104,12 +108,12 @@ export default function StudioCanvas({
     }, 1500);
   };
 
-  // End Meeting: Return everyone back to their desks
+  // End Meeting: Return everyone back to their department desks
   const handleEndMeeting = () => {
     setIsMeetingActive(false);
     setActiveSpeakerId(null);
     setCurrentSpeakerBubble(null);
-    onTriggerLog?.('AI_CMO', '圆桌讨论完毕，全员回到工位投入生产流水线！');
+    onTriggerLog?.('AI_CMO', '四大部门圆桌碰头结束，全员返回各自工位投入 Tomato Boy 宣发流水线！');
 
     setAgentPositions(prev => {
       const next = { ...prev };
@@ -136,53 +140,44 @@ export default function StudioCanvas({
     }, 1500);
   };
 
-  // Spontaneous random cross-zone visit
+  // Spontaneous cross-department collaboration
   const triggerRandomCollab = () => {
     const scenarios = [
       {
         walker: 'trend_scout',
-        targetX: 160,
-        targetY: 235, // Script_Master's desk
-        walkerSpeech: '🔥 刚逮到一个飙升音频，快加进 GlowSkin 0~3s 脚本！',
+        targetX: 130,
+        targetY: 280, // Walks from Market Dept to Copy Dept
+        walkerSpeech: '📊 市场部捕获到 KL 飙升词 #沙巴海鲜粉，快写入今日 0~3s 脚本！',
         targetId: 'script_master',
-        targetSpeech: '收到！冲突感已融入第 1 镜头！',
-        log: 'Trend_Scout 走到 Script_Master 工位交付爆款卡点音效。'
-      },
-      {
-        walker: 'seedance_motion',
-        targetX: 470,
-        targetY: 130, // Kling's desk
-        walkerSpeech: '⚡ 瓶身挤压动作已锁定，美感高光片段准备合并！',
-        targetId: 'kling_master',
-        targetSpeech: 'Kling 氛围光效渲染完毕，准备提交 Google Flow 总成！',
-        log: 'Seedance_Motion 走向 Kling 工位交接动作与美感分镜。'
-      },
-      {
-        walker: 'gpt_image_artist',
-        targetX: 230,
-        targetY: 235, // Copy_Alchemist's desk
-        walkerSpeech: '🎨 GPT Image 小红书大字封面已直出，来核对标题字数！',
-        targetId: 'copy_alchemist',
-        targetSpeech: '排版极佳，已加上高转化 Emoji 与标签！',
-        log: 'GPT_Image_Master 走向 Copy_Alchemist 对齐图文排版。'
-      },
-      {
-        walker: 'standby_crawler',
-        targetX: 300,
-        targetY: 375, // Coffee machine in Lounge
-        walkerSpeech: '☕ 去咖啡角倒了杯手冲，顺便监听突发热点词...',
-        targetId: null,
-        targetSpeech: null,
-        log: 'Standby 机器人在休闲区走动倒咖啡，保持待命。'
+        targetSpeech: '文案部收到！痛点冲突已敲定：“别飞沙巴排队了”！',
+        log: '【市场分析部】Trend_Scout 走到【文案脚本部】工位交付大马爆款热词。'
       },
       {
         walker: 'script_master',
-        targetX: 840,
-        targetY: 135, // Walks over to Director in meeting room to report!
-        walkerSpeech: '👑 总监，GlowSkin 今日 15s 脚本已分配给 Kling & Seedance！',
+        targetX: 490,
+        targetY: 175, // Walks from Copy Dept to Design Dept (Seedream)
+        walkerSpeech: '✍️ 脚本出炉！设计部 Seedream 老师，需要一张顶级诱人的海鲜微距图！',
+        targetId: 'seedream_artist',
+        targetSpeech: '设计部收到！Seedream 正在渲染摄影级鲜虾光泽与老坛番茄红汤！',
+        log: '【文案脚本部】Script_Master 走向【视觉设计部】交付 Seedream 美学海报需求。'
+      },
+      {
+        walker: 'seedance_motion',
+        targetX: 490,
+        targetY: 360, // Walks from Seedance to Kling in AV Dept
+        walkerSpeech: '⚡ 筷子夹粉拉丝动作已锁定，Kling 老师美感沸腾分镜准备合并！',
+        targetId: 'kling_master',
+        targetSpeech: 'Kling 0~3s 沸腾热气已渲染完成，移交 Google Flow 串联！',
+        log: '【视听制作部】Seedance_Motion 走向 Kling 工位交接动作与美感分镜。'
+      },
+      {
+        walker: 'gpt_image_master',
+        targetX: 920,
+        targetY: 140, // Walks to Boardroom to show poster to Director
+        walkerSpeech: '👑 总监，设计部 GPT Image 3:4 小红书大字封面已直出，请检阅！',
         targetId: 'human_director',
-        targetSpeech: '干得漂亮，按美感+产品动作结合的策略推进！',
-        log: 'Script_Master 走到总监面前进行分镜汇报。'
+        targetSpeech: '字体对比极具冲击力，非常契合大马探店习惯！',
+        log: '【视觉设计部】GPT_Image_Master 走进决策室向总监展示大字封面。'
       }
     ];
 
@@ -260,7 +255,7 @@ export default function StudioCanvas({
         }}
       />
 
-      {/* Main Floor Plan Container */}
+      {/* Main Floor Plan Container (1240px x 580px) */}
       <div className="relative w-full max-w-[1240px] h-[580px] bg-[#0c1322]/95 rounded-2xl border border-slate-800 shadow-2xl backdrop-blur-xl overflow-hidden">
         
         {/* Top Floating Control Bar for Movement / Meetings */}
@@ -268,10 +263,10 @@ export default function StudioCanvas({
           {!isMeetingActive ? (
             <button
               onClick={handleStartMeeting}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg shadow-violet-600/30 transition-all hover:scale-105 active:scale-95 border border-violet-400/40"
+              className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white text-xs font-bold shadow-lg shadow-violet-600/30 transition-all hover:scale-105 active:scale-95 border border-violet-400/40"
             >
               <Users className="w-3.5 h-3.5 text-violet-200 animate-pulse" />
-              <span>召集 AI 专项圆桌会 (全员走入会议室)</span>
+              <span>召集四大部门碰头会 (各部门主管进决策室)</span>
             </button>
           ) : (
             <button
@@ -279,139 +274,125 @@ export default function StudioCanvas({
               className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600/80 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-600/30 transition-all hover:scale-105 active:scale-95 border border-emerald-400/40"
             >
               <Users className="w-3.5 h-3.5 text-emerald-200" />
-              <span>散会！各 AI 回各自工位</span>
+              <span>散会！各部门回工位开工</span>
             </button>
           )}
 
           <button
             onClick={triggerRandomCollab}
-            title="触发一次跨工位走动讨论"
+            title="触发一次跨部门走动讨论"
             className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 text-xs font-medium border border-slate-700 transition"
           >
             <ArrowRightLeft className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="hidden sm:inline">自主串门走动</span>
+            <span className="hidden sm:inline">跨部门串门协作</span>
           </button>
         </div>
 
-        {/* Room Partition Backgrounds */}
+        {/* ── 4 大核心业务部门 + 战略决策室 Floor Plan ── */}
         <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 gap-3 p-4 pointer-events-none">
           
-          {/* Zone 1: Desk Zone */}
-          <div className="col-span-4 row-span-4 rounded-xl border border-dashed border-emerald-500/20 bg-emerald-950/10 p-3 relative">
-            <div className="flex items-center space-x-1.5 text-emerald-400 font-mono text-[11px] font-semibold tracking-wider">
-              <span className="w-2 h-2 rounded-sm bg-emerald-400"></span>
-              <span>DESK ZONE / 策划与情报工位</span>
+          {/* Department 1: 市场分析部 (Cols 1-4, Rows 1-3) */}
+          <div className="col-span-4 row-span-3 rounded-xl border border-teal-500/25 bg-teal-950/15 p-2.5 relative flex flex-col justify-between">
+            <div className="flex items-center justify-between text-teal-400 font-mono text-[11px] font-bold tracking-wider">
+              <div className="flex items-center space-x-1.5">
+                <BarChart3 className="w-3.5 h-3.5 text-teal-400" />
+                <span>市场分析部 / MARKET INTEL</span>
+              </div>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-teal-900/40 text-teal-300 border border-teal-700/40">
+                爆款嗅探与留存归因
+              </span>
             </div>
             {/* Visual Desk Pods */}
-            <div className="absolute top-12 left-6 right-6 bottom-4 grid grid-cols-2 gap-3 opacity-30">
-              <div className="rounded-lg border border-slate-700 bg-slate-800/30 flex items-center justify-center text-[9px] text-emerald-300 font-mono">Trend Desk</div>
-              <div className="rounded-lg border border-slate-700 bg-slate-800/30 flex items-center justify-center text-[9px] text-rose-300 font-mono">RedBook Desk</div>
-              <div className="rounded-lg border border-slate-700 bg-slate-800/30 flex items-center justify-center text-[9px] text-amber-300 font-mono">15s Script Desk</div>
-              <div className="rounded-lg border border-slate-700 bg-slate-800/30 flex items-center justify-center text-[9px] text-purple-300 font-mono">Copy Desk</div>
+            <div className="grid grid-cols-2 gap-2 opacity-35">
+              <div className="h-10 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[9px] text-teal-300 font-mono">全网飙升雷达</div>
+              <div className="h-10 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[9px] text-emerald-300 font-mono">留存归因分析</div>
             </div>
           </div>
 
-          {/* Zone 2: Production Studio */}
-          <div className="col-span-4 row-span-4 rounded-xl border border-dashed border-cyan-500/20 bg-cyan-950/10 p-3 relative">
-            <div className="flex items-center space-x-1.5 text-cyan-400 font-mono text-[11px] font-semibold tracking-wider">
-              <span className="w-2 h-2 rounded-sm bg-cyan-400"></span>
-              <span>PRODUCTION / Google Flow + Kling + Higgsfield + GPT</span>
-            </div>
-            {/* Rigs outlines */}
-            <div className="absolute top-12 left-4 right-4 bottom-4 grid grid-cols-3 gap-2 opacity-35">
-              <div className="rounded-lg border border-sky-800/70 bg-sky-950/30 flex items-center justify-center text-[9px] text-sky-300 font-mono text-center p-1">Google Flow (主力)</div>
-              <div className="rounded-lg border border-cyan-800/70 bg-cyan-950/30 flex items-center justify-center text-[9px] text-cyan-300 font-mono text-center p-1">Kling (美感)</div>
-              <div className="rounded-lg border border-amber-800/70 bg-amber-950/30 flex items-center justify-center text-[9px] text-amber-300 font-mono text-center p-1">Seedance 2.5 (动作)</div>
-              <div className="rounded-lg border border-emerald-800/70 bg-emerald-950/30 flex items-center justify-center text-[9px] text-emerald-300 font-mono text-center p-1 col-span-2">GPT Image (40%图文直出)</div>
-              <div className="rounded-lg border border-pink-800/70 bg-pink-950/30 flex items-center justify-center text-[9px] text-pink-300 font-mono text-center p-1">Higgsfield 特效</div>
-            </div>
-          </div>
-
-          {/* Zone 3: Meeting Zone */}
-          <div className="col-span-4 row-span-4 rounded-xl border border-dashed border-violet-500/30 bg-violet-950/15 p-3 relative flex flex-col items-center">
-            <div className="w-full flex items-center justify-between text-violet-400 font-mono text-[11px] font-semibold tracking-wider">
+          {/* Department 3: 视觉设计部 (Cols 5-8, Rows 1-3) - GPT Image & Seedream */}
+          <div className="col-span-4 row-span-3 rounded-xl border border-rose-500/30 bg-rose-950/15 p-2.5 relative flex flex-col justify-between">
+            <div className="flex items-center justify-between text-rose-400 font-mono text-[11px] font-bold tracking-wider">
               <div className="flex items-center space-x-1.5">
-                <span className="w-2 h-2 rounded-sm bg-violet-400"></span>
-                <span>MEETING ZONE / 策略圆桌 (跟总监讨论)</span>
+                <Palette className="w-3.5 h-3.5 text-rose-400" />
+                <span>视觉设计部 / GPT IMAGE & SEEDREAM</span>
+              </div>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-rose-900/40 text-rose-300 border border-rose-700/40">
+                40% 图文与封面海报
+              </span>
+            </div>
+            {/* Design Pods */}
+            <div className="grid grid-cols-3 gap-2 opacity-35">
+              <div className="h-10 rounded-lg border border-rose-800/60 bg-rose-900/20 flex items-center justify-center text-[9px] text-rose-300 font-mono text-center">GPT Image 大字封面</div>
+              <div className="h-10 rounded-lg border border-pink-800/60 bg-pink-900/20 flex items-center justify-center text-[9px] text-pink-300 font-mono text-center">Seedream 美学摄影</div>
+              <div className="h-10 rounded-lg border border-fuchsia-800/60 bg-fuchsia-900/20 flex items-center justify-center text-[9px] text-fuchsia-300 font-mono text-center">Higgsfield 特效</div>
+            </div>
+          </div>
+
+          {/* Department 5: 战略决策会议室 (Cols 9-12, Rows 1-6) */}
+          <div className="col-span-4 row-span-6 rounded-xl border border-violet-500/30 bg-violet-950/15 p-3 relative flex flex-col items-center justify-between">
+            <div className="w-full flex items-center justify-between text-violet-400 font-mono text-[11px] font-bold tracking-wider">
+              <div className="flex items-center space-x-1.5">
+                <Crown className="w-3.5 h-3.5 text-amber-400" />
+                <span>战略决策室 / EXECUTIVE BOARDROOM</span>
               </div>
               {isMeetingActive && (
-                <span className="text-[10px] text-rose-400 font-bold px-2 py-0.5 rounded bg-rose-950/80 border border-rose-800 animate-pulse">
-                  ● 正在激烈复盘中
+                <span className="text-[9px] text-rose-400 font-bold px-2 py-0.5 rounded bg-rose-950/80 border border-rose-800 animate-pulse">
+                  ● 部门汇报中
                 </span>
               )}
             </div>
 
             {/* Circular Conference Table Graphic */}
-            <div className="relative mt-7 w-48 h-48 rounded-full border-2 border-violet-500/40 bg-violet-950/30 flex items-center justify-center shadow-2xl shadow-violet-900/20">
-              {/* Table center dynamic hologram */}
-              <div className="w-24 h-24 rounded-full border border-violet-400/50 bg-violet-900/40 flex flex-col items-center justify-center relative">
+            <div className="relative my-auto w-52 h-52 rounded-full border-2 border-violet-500/40 bg-violet-950/30 flex items-center justify-center shadow-2xl shadow-violet-900/30">
+              <div className="w-28 h-28 rounded-full border border-violet-400/50 bg-violet-900/40 flex flex-col items-center justify-center relative">
                 <div className="absolute inset-0 rounded-full border border-violet-400/30 animate-ping-slow"></div>
-                <span className="text-[11px] font-mono text-violet-200 font-bold tracking-wider">ROUNDTABLE</span>
-                <span className="text-[9px] text-violet-400">15s 策略中枢</span>
+                <span className="text-[11px] font-mono text-violet-200 font-bold tracking-wider">BOARDROOM</span>
+                <span className="text-[9px] text-violet-400">总监指挥中枢</span>
               </div>
+            </div>
+
+            {/* Bottom Room Tag */}
+            <div className="w-full text-center text-[10px] text-slate-500 font-mono">
+              四部门联席汇报 • 策略与排期拍板
             </div>
           </div>
 
-          {/* Zone 4: Lounge & Standby */}
-          <div className="col-span-5 row-span-2 rounded-xl border border-dashed border-slate-700/40 bg-slate-900/30 p-3 flex flex-col justify-between relative">
-            <div className="flex items-center justify-between text-slate-400 font-mono text-[11px] font-semibold">
+          {/* Department 2: 文案脚本部 (Cols 1-4, Rows 4-6) */}
+          <div className="col-span-4 row-span-3 rounded-xl border border-amber-500/25 bg-amber-950/15 p-2.5 relative flex flex-col justify-between">
+            <div className="flex items-center justify-between text-amber-400 font-mono text-[11px] font-bold tracking-wider">
               <div className="flex items-center space-x-1.5">
-                <Coffee className="w-3.5 h-3.5 text-amber-400" />
-                <span>LOUNGE & STANDBY / 休闲与备用区</span>
+                <PenTool className="w-3.5 h-3.5 text-amber-400" />
+                <span>文案脚本部 / COPY & SCRIPTS</span>
               </div>
-              <span className="text-[10px] text-amber-400/80 font-mono flex items-center gap-1">
-                <span className="animate-steam">♨️</span> 手冲咖啡角
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-900/40 text-amber-300 border border-amber-700/40">
+                15s 三段式 & 种草文案
               </span>
             </div>
-            
-            {/* Visual coffee counter */}
-            <div className="flex items-center space-x-6 text-[10px] text-slate-500 font-mono">
-              <div className="flex items-center space-x-1.5 bg-slate-800/50 px-2 py-1 rounded border border-slate-700/50">
-                <span>☕ 咖啡机</span>
-                <span className="text-amber-300">热萃中</span>
-              </div>
-              <div className="flex items-center space-x-1.5 bg-slate-800/50 px-2 py-1 rounded border border-slate-700/50">
-                <span>🛋️ 休闲沙发</span>
-                <span className="text-slate-400">随时响应</span>
-              </div>
+            {/* Visual Desk Pods */}
+            <div className="grid grid-cols-2 gap-2 opacity-35">
+              <div className="h-10 rounded-lg border border-amber-800/60 bg-amber-900/20 flex items-center justify-center text-[9px] text-amber-300 font-mono">15s 黄金分镜架构</div>
+              <div className="h-10 rounded-lg border border-orange-800/60 bg-orange-900/20 flex items-center justify-center text-[9px] text-orange-300 font-mono">社媒种草与圈友文案</div>
             </div>
           </div>
 
-          {/* Zone 5: Active Client Task Pipeline Bar */}
-          <div className="col-span-7 row-span-2 rounded-xl border border-cyan-500/30 bg-gradient-to-r from-slate-900/95 to-cyan-950/40 p-3 flex items-center justify-between pointer-events-auto">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-xl shadow-md">
-                {currentClient.avatar}
+          {/* Department 4: 视听制作部 (Cols 5-8, Rows 4-6) - Flow + Kling + Seedance + Suno */}
+          <div className="col-span-4 row-span-3 rounded-xl border border-cyan-500/30 bg-cyan-950/15 p-2.5 relative flex flex-col justify-between">
+            <div className="flex items-center justify-between text-cyan-400 font-mono text-[11px] font-bold tracking-wider">
+              <div className="flex items-center space-x-1.5">
+                <Film className="w-3.5 h-3.5 text-cyan-400" />
+                <span>视听制作部 / AV PRODUCTION</span>
               </div>
-              <div>
-                <div className="flex items-center space-x-2">
-                  <h3 className="text-xs font-bold text-white">{currentClient.name}</h3>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono">
-                    {currentClient.category}
-                  </span>
-                  <span className="text-[10px] text-slate-400">
-                    目标: {currentClient.todayGoal}
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2 mt-1">
-                  <div className="w-52 h-2 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
-                    <div 
-                      className="h-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-400 rounded-full transition-all duration-1000"
-                      style={{ width: `${currentClient.progress}%` }}
-                    />
-                  </div>
-                  <span className="text-[10px] font-mono font-bold text-cyan-400">{currentClient.progress}% 生产就绪</span>
-                </div>
-              </div>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-900/40 text-cyan-300 border border-cyan-700/40">
+                60% 15s 视频管线
+              </span>
             </div>
-
-            <button
-              onClick={() => onOpenApprovalForClient(currentClient.id)}
-              className="flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 text-xs font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-cyan-900/30"
-            >
-              <span>查看今日 15s 成片/图文</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
+            {/* AV Pods */}
+            <div className="grid grid-cols-4 gap-1.5 opacity-35">
+              <div className="h-10 rounded-lg border border-sky-800/70 bg-sky-950/30 flex items-center justify-center text-[9px] text-sky-300 font-mono text-center p-1">Google Flow</div>
+              <div className="h-10 rounded-lg border border-cyan-800/70 bg-cyan-950/30 flex items-center justify-center text-[9px] text-cyan-300 font-mono text-center p-1">Kling 美感</div>
+              <div className="h-10 rounded-lg border border-amber-800/70 bg-amber-950/30 flex items-center justify-center text-[9px] text-amber-300 font-mono text-center p-1">Seedance 动作</div>
+              <div className="h-10 rounded-lg border border-violet-800/70 bg-violet-950/30 flex items-center justify-center text-[9px] text-violet-300 font-mono text-center p-1">Suno 卡点</div>
+            </div>
           </div>
 
         </div>
@@ -460,10 +441,10 @@ export default function StudioCanvas({
           })}
         </svg>
 
-        {/* --- Characters Layer (Director + AI Agents) --- */}
+        {/* --- Characters Layer (Director + 4 Departments) --- */}
         <div className="absolute inset-0 z-20 pointer-events-auto">
           
-          {/* 1. YOU (The Human Director / Studio Boss in Meeting Room) */}
+          {/* 1. YOU (The Human Director / Studio Boss in Boardroom) */}
           <div 
             className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300"
             style={{ left: `${DIRECTOR_DATA.x}px`, top: `${DIRECTOR_DATA.y}px` }}
@@ -503,7 +484,7 @@ export default function StudioCanvas({
             </div>
           </div>
 
-          {/* 2. All AI Agents with Live Smooth Moving Coordinates & Walking Wobble */}
+          {/* 2. All Department Agents with Live Smooth Moving Coordinates & Walking Wobble */}
           {agents.map((agent) => {
             const pos = agentPositions[agent.id] || { x: agent.homeX, y: agent.homeY, isWalking: false };
             const isSpeaking = activeSpeakerId === agent.id;
@@ -532,7 +513,7 @@ export default function StudioCanvas({
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
                         {agent.name}
                       </span>
-                      <span>{agent.tokenUsage}</span>
+                      <span className="text-[8px] px-1 rounded bg-slate-800 text-slate-300">{agent.deptName}</span>
                     </div>
                     <p className="line-clamp-3 text-slate-100 font-medium">{speechText}</p>
                     <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 border-r border-b border-cyan-400 rotate-45"></div>
@@ -579,6 +560,44 @@ export default function StudioCanvas({
           })}
         </div>
 
+      </div>
+
+      {/* Floating Bottom Client Pipeline Bar */}
+      <div className="w-full max-w-[1240px] mt-2.5 h-12 bg-gradient-to-r from-slate-900/90 via-[#0d1526]/90 to-cyan-950/80 border border-cyan-500/30 rounded-xl px-4 flex items-center justify-between shadow-lg">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-lg shadow">
+            {currentClient.avatar}
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-xs font-bold text-white">{currentClient.name}</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono">
+              {currentClient.category}
+            </span>
+            <span className="text-[10px] text-slate-400 hidden md:inline">
+              目标: {currentClient.todayGoal}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            <div className="w-36 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
+              <div 
+                className="h-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-400 rounded-full transition-all duration-1000"
+                style={{ width: `${currentClient.progress}%` }}
+              />
+            </div>
+            <span className="text-[10px] font-mono font-bold text-cyan-400">{currentClient.progress}% 四部门已就绪</span>
+          </div>
+
+          <button
+            onClick={() => onOpenApprovalForClient(currentClient.id)}
+            className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 text-xs font-semibold transition-all hover:scale-105 active:scale-95 shadow"
+          >
+            <span>检阅 15s 成片与图文</span>
+            <ChevronRight className="w-3 h-3" />
+          </button>
+        </div>
       </div>
     </div>
   );

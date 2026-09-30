@@ -369,30 +369,55 @@ export default function ApprovalModal({
             {/* Action Bar: Approve or Regenerate with specific models */}
             <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center space-x-2">
-                <button 
-                  onClick={() => alert('已调用 Kling AI：正在重新增强 0~3s 面部素颜反差与美感光影质感...')}
-                  className="px-2.5 py-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-900 text-cyan-300 text-[11px] font-medium border border-cyan-800 transition flex items-center gap-1"
-                >
-                  <span>✨ 调 Kling 强化美感</span>
-                </button>
-                <button 
-                  onClick={() => alert('已调用 Higgsfield Seedance 2.5：正在重新演算滴管挤出与掌心爆破微距运动轨迹...')}
-                  className="px-2.5 py-1.5 rounded-lg bg-amber-950/60 hover:bg-amber-900 text-amber-300 text-[11px] font-medium border border-amber-800 transition flex items-center gap-1"
-                >
-                  <span>🎯 调 Seedance 优化动作</span>
-                </button>
-                <button 
-                  onClick={() => alert('已调用 Suno v3.5：正在基于 15s 情绪转折曲线重新生成第 3.0s 精准 Beat Drop 伴奏...')}
-                  className="px-2.5 py-1.5 rounded-lg bg-fuchsia-950/60 hover:bg-fuchsia-900 text-fuchsia-300 text-[11px] font-medium border border-fuchsia-800 transition flex items-center gap-1"
-                >
-                  <span>🎵 调 Suno 重做卡点</span>
-                </button>
-                <button 
-                  onClick={() => alert('已调用 Google Flow：正在全局调度控速重刷完整 15s 渲染管线...')}
-                  className="px-2.5 py-1.5 rounded-lg bg-sky-950/60 hover:bg-sky-900 text-sky-300 text-[11px] font-medium border border-sky-800 transition flex items-center gap-1"
-                >
-                  <span>🌊 调 Google Flow 全片重刷</span>
-                </button>
+                {activeItem.type === '15s_video' ? (
+                  <>
+                    <button 
+                      onClick={() => alert('已调用 Kling AI：正在重新增强 0~3s 面部素颜反差与美感光影质感...')}
+                      className="px-2.5 py-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-900 text-cyan-300 text-[11px] font-medium border border-cyan-800 transition flex items-center gap-1"
+                    >
+                      <span>✨ 调 Kling 强化美感</span>
+                    </button>
+                    <button 
+                      onClick={() => alert('已调用 Higgsfield Seedance 2.5：正在重新演算物理运镜与产品动作轨迹...')}
+                      className="px-2.5 py-1.5 rounded-lg bg-amber-950/60 hover:bg-amber-900 text-amber-300 text-[11px] font-medium border border-amber-800 transition flex items-center gap-1"
+                    >
+                      <span>🎯 调 Seedance 优化动作</span>
+                    </button>
+                    <button 
+                      onClick={() => alert('已调用 Suno v3.5：正在基于 15s 情绪转折曲线重新生成第 3.0s 精准 Beat Drop 伴奏...')}
+                      className="px-2.5 py-1.5 rounded-lg bg-fuchsia-950/60 hover:bg-fuchsia-900 text-fuchsia-300 text-[11px] font-medium border border-fuchsia-800 transition flex items-center gap-1"
+                    >
+                      <span>🎵 调 Suno 重做卡点</span>
+                    </button>
+                    <button 
+                      onClick={() => alert('已调用 Google Flow：正在全局调度控速重刷完整 15s 渲染管线...')}
+                      className="px-2.5 py-1.5 rounded-lg bg-sky-950/60 hover:bg-sky-900 text-sky-300 text-[11px] font-medium border border-sky-800 transition flex items-center gap-1"
+                    >
+                      <span>🌊 调 Google Flow 全片重刷</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button 
+                      onClick={() => alert('【视觉设计部】已调用 GPT Image：正在重新排版小红书 3:4 高对比大字报封面...')}
+                      className="px-2.5 py-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900 text-rose-300 text-[11px] font-medium border border-rose-800 transition flex items-center gap-1"
+                    >
+                      <span>🎨 调 GPT Image 重出大字封面</span>
+                    </button>
+                    <button 
+                      onClick={() => alert('【视觉设计部】已调用 Seedream：正在重新生成摄影级食材微距与光泽质感大片...')}
+                      className="px-2.5 py-1.5 rounded-lg bg-pink-950/60 hover:bg-pink-900 text-pink-300 text-[11px] font-medium border border-pink-800 transition flex items-center gap-1"
+                    >
+                      <span>🌱 调 Seedream 重生美学摄影</span>
+                    </button>
+                    <button 
+                      onClick={() => alert('【文案脚本部】已通知文案工位重新构思爆款种草文案...')}
+                      className="px-2.5 py-1.5 rounded-lg bg-amber-950/60 hover:bg-amber-900 text-amber-300 text-[11px] font-medium border border-amber-800 transition flex items-center gap-1"
+                    >
+                      <span>✍️ 调文案部重写种草文</span>
+                    </button>
+                  </>
+                )}
               </div>
 
               <button 
