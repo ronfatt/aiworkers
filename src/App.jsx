@@ -5,9 +5,11 @@ import ApprovalModal from './components/ApprovalModal';
 import AgentDetailModal from './components/AgentDetailModal';
 import InsightsDrawer from './components/InsightsDrawer';
 import EventTicker from './components/EventTicker';
+import ClientQueueModal from './components/ClientQueueModal';
 
 import { 
   INITIAL_CLIENTS, 
+  WAITING_CLIENTS,
   INITIAL_AGENTS, 
   INITIAL_LINKS, 
   PENDING_APPROVALS, 
@@ -16,6 +18,7 @@ import {
 
 export default function App() {
   const [clients, setClients] = useState(INITIAL_CLIENTS);
+  const [waitingClients, setWaitingClients] = useState(WAITING_CLIENTS);
   const [agents, setAgents] = useState(INITIAL_AGENTS);
   const [links, setLinks] = useState(INITIAL_LINKS);
   const [approvals, setApprovals] = useState(PENDING_APPROVALS);
@@ -24,6 +27,7 @@ export default function App() {
   const [selectedClientId, setSelectedClientId] = useState('c1');
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [isApprovalOpen, setIsApprovalOpen] = useState(false);
+  const [isQueueOpen, setIsQueueOpen] = useState(false);
   const [selectedApprovalId, setSelectedApprovalId] = useState('app_1');
   const [isInsightsOpen, setIsInsightsOpen] = useState(false);
 
@@ -107,6 +111,45 @@ export default function App() {
     setIsApprovalOpen(true);
   };
 
+  // Activate a queued client from Reception into Production
+  const handleActivateClient = (clientId) => {
+    const target = waitingClients.find(c => c.id === clientId);
+    if (!target) return;
+
+    setSelectedClientId(clientId);
+    setWaitingClients(prev => prev.map(c => {
+      if (c.id === clientId) return { ...c, status: 'active', waitTime: '正在四部门生产中' };
+      return c;
+    }));
+
+    // If not in clients list, add it
+    if (!clients.some(c => c.id === clientId)) {
+      setClients(prev => [...prev, {
+        id: target.id,
+        name: target.name,
+        category: target.category,
+        avatar: target.avatar,
+        platforms: ['Facebook', 'Instagram', '小红书'],
+        todayGoal: target.service,
+        progress: 20,
+        status: 'in_production',
+        activePostType: '15s_video',
+        brandTone: target.brief
+      }]);
+    }
+
+    const now = new Date();
+    const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    setLogs(prev => [
+      ...prev,
+      {
+        time: timeStr,
+        agent: 'Client_Concierge',
+        text: `【顾客接洽部】已接入「${target.name}」！市场、文案、设计、视听已启动专属流水线！`
+      }
+    ]);
+  };
+
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#090d16] text-slate-100 font-sans">
       {/* Top Header */}
@@ -117,6 +160,8 @@ export default function App() {
         onOpenApproval={() => setIsApprovalOpen(true)}
         pendingCount={approvals.length}
         onOpenInsights={() => setIsInsightsOpen(true)}
+        onOpenQueue={() => setIsQueueOpen(true)}
+        waitingCount={waitingClients.filter(c => c.status === 'waiting').length}
         onTriggerRun={handleTriggerRun}
       />
 
@@ -128,7 +173,9 @@ export default function App() {
           onSelectAgent={setSelectedAgent}
           activeClientId={selectedClientId}
           clients={clients}
+          waitingClients={waitingClients}
           onOpenApprovalForClient={handleOpenApprovalForClient}
+          onOpenQueue={() => setIsQueueOpen(true)}
           onTriggerLog={(agent, text) => {
             const now = new Date();
             const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
@@ -139,6 +186,15 @@ export default function App() {
 
       {/* Bottom Live Event Stream */}
       <EventTicker logs={logs} />
+
+      {/* Client Reception & Waiting Queue Modal */}
+      <ClientQueueModal
+        isOpen={isQueueOpen}
+        onClose={() => setIsQueueOpen(false)}
+        waitingClients={waitingClients}
+        activeClientId={selectedClientId}
+        onActivateClient={handleActivateClient}
+      />
 
       {/* Human-in-the-Loop Content Approval Modal (15s Video + Carousel) */}
       <ApprovalModal

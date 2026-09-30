@@ -8,7 +8,8 @@ import {
   TrendingUp, 
   RefreshCw,
   Cpu,
-  ChevronDown
+  ChevronDown,
+  BellRing
 } from 'lucide-react';
 
 export default function Header({ 
@@ -18,6 +19,8 @@ export default function Header({
   onOpenApproval, 
   pendingCount,
   onOpenInsights,
+  onOpenQueue,
+  waitingCount = 0,
   onTriggerRun
 }) {
   const currentClient = clients.find(c => c.id === selectedClientId) || clients[0];
@@ -88,6 +91,18 @@ export default function Header({
 
       {/* Right: Actions */}
       <div className="flex items-center space-x-3">
+        {/* Client Waiting Queue Button */}
+        <button 
+          onClick={onOpenQueue}
+          className="flex items-center space-x-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-yellow-300 bg-yellow-950/40 hover:bg-yellow-900/60 border border-yellow-500/40 transition-all hover:scale-105 active:scale-95 shadow"
+        >
+          <BellRing className="w-4 h-4 text-yellow-400 animate-pulse" />
+          <span className="hidden sm:inline">顾客等候厅</span>
+          <span className="w-4 h-4 rounded-full bg-yellow-500 text-slate-950 text-[10px] font-extrabold flex items-center justify-center">
+            {waitingCount}
+          </span>
+        </button>
+
         <button 
           onClick={onOpenInsights}
           className="flex items-center space-x-1.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-300 bg-slate-800/70 hover:bg-slate-700/80 border border-slate-700/50 transition-all hover:text-white"

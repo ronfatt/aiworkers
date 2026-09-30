@@ -12,6 +12,30 @@ export const INITIAL_CLIENTS = [
     brandTone: '浓郁鲜红老坛番茄汤底、生猛老虎虾/鲜鱿/鱼片、食欲拉满、新店开张福利'
   },
   {
+    id: 'w1',
+    name: 'Uncle Lim 瓦煲肉骨茶',
+    category: 'KL甲洞老字号肉骨茶',
+    avatar: '🍲',
+    platforms: ['Facebook', '小红书', 'TikTok'],
+    todayGoal: '15s 药膳沸腾探店视频 + FB 爆款打卡贴',
+    progress: 25,
+    status: 'review_ready',
+    activePostType: '15s_video',
+    brandTone: '30年祖传秘方药膳、大块排骨与酥脆油条、古早味情怀'
+  },
+  {
+    id: 'w2',
+    name: 'DurianBB 榴莲甜品工坊',
+    category: '武吉免登旗舰店',
+    avatar: '🍈',
+    platforms: ['Instagram', '小红书', 'TikTok'],
+    todayGoal: '猫山王纯果肉爆浆冰淇淋视频 + Seedream 摄影图',
+    progress: 15,
+    status: 'in_production',
+    activePostType: '15s_video',
+    brandTone: '顶级猫山王D197、金黄爆浆、年轻潮酷打卡'
+  },
+  {
     id: 'c2',
     name: 'Zenith Coffee',
     category: '精品咖啡连锁',
@@ -22,18 +46,58 @@ export const INITIAL_CLIENTS = [
     status: 'review_ready',
     activePostType: 'image_carousel',
     brandTone: '美学生活方式、保姆级保真教程、文艺松弛感'
+  }
+];
+
+// 顾客接洽部：等候服务大厅与签约客户队列
+export const WAITING_CLIENTS = [
+  {
+    id: 'c1',
+    name: 'Tomato Boy 番茄仔',
+    category: 'KL沙巴海鲜番茄粉',
+    avatar: '🍅',
+    status: 'active',
+    waitTime: '正在四部门生产中',
+    priority: '最高 - 下周正式开张',
+    progress: 92,
+    service: '60% 15s 短视频 (Flow+Kling+Seedance+Suno) + 40% 小红书图文 (GPT Image+Seedream)',
+    brief: '大马 KL 首家正宗沙巴老坛番茄海鲜汤粉，鲜虾鱼片爆汁，下周新店开张大促销。'
   },
   {
-    id: 'c3',
-    name: 'NovaSaaS AI',
-    category: 'AI 生产力工具',
-    avatar: '⚡',
-    platforms: ['TikTok', 'Instagram', 'Facebook'],
-    todayGoal: '1 条 15s 效率翻倍短视频演示',
-    progress: 40,
-    status: 'in_production',
-    activePostType: '15s_video',
-    brandTone: '快节奏、痛点打击、高能对比、免费试用CTA'
+    id: 'w1',
+    name: 'Uncle Lim 瓦煲肉骨茶',
+    category: 'KL甲洞老字号肉骨茶',
+    avatar: '🍲',
+    status: 'waiting',
+    waitTime: '排队 15 分钟',
+    priority: '紧急 - 下周试营业',
+    progress: 25,
+    service: '15s 药膳沸腾探店视频 + FB 爆款打卡贴',
+    brief: '30年祖传秘方药膳瓦煲肉骨茶，大块排骨与油条，需强化老字号醇厚食欲感。'
+  },
+  {
+    id: 'w2',
+    name: 'DurianBB 榴莲甜品工坊',
+    category: '武吉免登旗舰店',
+    avatar: '🍈',
+    status: 'waiting',
+    waitTime: '排队 28 分钟',
+    priority: '高 - 旺季特推',
+    progress: 15,
+    service: '15s 猫山王冰淇淋物理动作视频 + Seedream 摄影美学图',
+    brief: '纯正猫山王D197榴莲果肉爆浆泡芙与手作冰淇淋，主攻年轻游客与情侣打卡。'
+  },
+  {
+    id: 'w3',
+    name: '南洋经典 Kopitiam 1978',
+    category: '传统炭烤吐司与白咖啡',
+    avatar: '☕',
+    status: 'waiting',
+    waitTime: '排队 42 分钟',
+    priority: '常规日更托管',
+    progress: 0,
+    service: '40% 深度复古图文 + 怀旧拉咖啡文案',
+    brief: '老街情怀南洋茶室，半熟蛋、牛油雪花烤面包与手拉浓郁白咖啡。'
   }
 ];
 
@@ -42,19 +106,20 @@ export const DIRECTOR_DATA = {
   id: 'human_director',
   name: '你 (Studio Director)',
   title: '业务主理人 / 创意总监',
-  x: 975,
+  x: 1070,
   y: 110,
   avatarEmoji: '👑',
   avatarBg: 'bg-gradient-to-tr from-amber-500 via-orange-500 to-rose-500',
-  thought: '👋 点击上方【召集四大部门碰头会】，让市场部、文案部、设计部、视听部到会议室汇报！'
+  thought: '👋 欢迎！接洽部随时有新客户排队，点击【顾客等候大厅】即可一键接单下发！'
 };
 
-// 4 大核心业务部门定义
+// 5 大核心业务部门定义
 export const DEPARTMENTS = [
   { id: 'market', name: '市场分析部', icon: '📊', color: 'text-teal-400', border: 'border-teal-500/30', bg: 'bg-teal-950/15' },
   { id: 'copy', name: '文案脚本部', icon: '✍️', color: 'text-amber-400', border: 'border-amber-500/30', bg: 'bg-amber-950/15' },
   { id: 'design', name: '视觉设计部', icon: '🎨', color: 'text-rose-400', border: 'border-rose-500/30', bg: 'bg-rose-950/15' },
-  { id: 'production', name: '视听制作部', icon: '🎬', color: 'text-cyan-400', border: 'border-cyan-500/30', bg: 'bg-cyan-950/15' }
+  { id: 'production', name: '视听制作部', icon: '🎬', color: 'text-cyan-400', border: 'border-cyan-500/30', bg: 'bg-cyan-950/15' },
+  { id: 'reception', name: '顾客接洽部', icon: '🛎️', color: 'text-yellow-400', border: 'border-yellow-500/30', bg: 'bg-yellow-950/15' }
 ];
 
 export const INITIAL_AGENTS = [
@@ -65,14 +130,14 @@ export const INITIAL_AGENTS = [
     face: '👀',
     dept: 'market',
     deptName: '市场分析部',
-    role: '全网热点与竞品嗅探',
+    role: '全网热点嗅探',
     avatarColor: 'bg-teal-500',
     borderColor: 'border-teal-400',
     haloColor: 'rgba(45, 212, 191, 0.45)',
     status: 'active',
-    homeX: 130,
+    homeX: 90,
     homeY: 135,
-    x: 130,
+    x: 90,
     y: 135,
     currentTask: '抓取 KL 华裔美食圈 #KLFoodie #吉隆坡新开 飙升词',
     thought: '📊 发现大马美食词 #沙巴海鲜粉 搜索量月环比 +185%，已通知文案部抢占！',
@@ -90,9 +155,9 @@ export const INITIAL_AGENTS = [
     borderColor: 'border-emerald-400',
     haloColor: 'rgba(52, 211, 153, 0.4)',
     status: 'active',
-    homeX: 230,
+    homeX: 200,
     homeY: 135,
-    x: 230,
+    x: 200,
     y: 135,
     currentTask: '分析昨日美食探店 15s 完播衰减与 FB 评论 @ 互动率',
     thought: '📊 归因总结：前 3 秒展现大铁锅沸腾热气可降低跳出率 26%，指令已反哺！',
@@ -112,9 +177,9 @@ export const INITIAL_AGENTS = [
     borderColor: 'border-amber-400',
     haloColor: 'rgba(251, 191, 36, 0.45)',
     status: 'active',
-    homeX: 130,
+    homeX: 90,
     homeY: 320,
-    x: 130,
+    x: 90,
     y: 320,
     currentTask: '拆解 Tomato Boy 15s 三段式脚本：Hook / 夹粉 / 开张福利',
     thought: '📝 0~3s 痛点台词已敲定：“别再去沙巴排队了！”，分镜 Prompt 已指派视听部！',
@@ -127,14 +192,14 @@ export const INITIAL_AGENTS = [
     face: '💬',
     dept: 'copy',
     deptName: '文案脚本部',
-    role: '社媒种草与拉群文案师',
+    role: '社媒种草文案师',
     avatarColor: 'bg-orange-500',
     borderColor: 'border-orange-400',
     haloColor: 'rgba(251, 146, 60, 0.4)',
     status: 'active',
-    homeX: 230,
+    homeX: 200,
     homeY: 320,
-    x: 230,
+    x: 200,
     y: 320,
     currentTask: '生成 FB 互动圈友文案与小红书垂涎欲滴 Emoji 排版',
     thought: '✨ 文案已注入大马本地俚语：“Jom 冲去吃”、“鲜到直跺脚”！',
@@ -149,14 +214,14 @@ export const INITIAL_AGENTS = [
     face: '🖼️',
     dept: 'design',
     deptName: '视觉设计部',
-    role: '主力图文与封面 (GPT Image)',
+    role: '主力大字封面 (GPT Image)',
     avatarColor: 'bg-rose-500',
     borderColor: 'border-rose-400',
     haloColor: 'rgba(251, 113, 133, 0.5)',
     status: 'active',
-    homeX: 430,
+    homeX: 370,
     homeY: 135,
-    x: 430,
+    x: 370,
     y: 135,
     currentTask: 'GPT Image 直出 40% 小红书 3:4 爆款高对比大字报封面',
     thought: '🎨 GPT Image 直出完成！“KL终于吃到了！超生猛海鲜番茄粉”大字锐利醒目！',
@@ -174,9 +239,9 @@ export const INITIAL_AGENTS = [
     borderColor: 'border-pink-400',
     haloColor: 'rgba(244, 114, 182, 0.5)',
     status: 'active',
-    homeX: 530,
+    homeX: 460,
     homeY: 135,
-    x: 530,
+    x: 460,
     y: 135,
     currentTask: 'Seedream 生成摄影级海鲜食材光泽、浓郁番茄慢熬质感大片',
     thought: '🌱 Seedream 美学光影已渲染：生猛老虎虾晶莹剔透，色泽温暖饱和，食欲拉满！',
@@ -194,9 +259,9 @@ export const INITIAL_AGENTS = [
     borderColor: 'border-fuchsia-400',
     haloColor: 'rgba(217, 70, 239, 0.4)',
     status: 'idle',
-    homeX: 630,
+    homeX: 550,
     homeY: 135,
-    x: 630,
+    x: 550,
     y: 135,
     currentTask: '辅助图文合成微观高光质感与艺术特效',
     thought: '🪐 辅助图文特效就绪，随时合成高阶视觉背景与排版细节。',
@@ -211,14 +276,14 @@ export const INITIAL_AGENTS = [
     face: '🌊',
     dept: 'production',
     deptName: '视听制作部',
-    role: '主力视频生成流 (Google Flow)',
+    role: '主力视频流 (Google Flow)',
     avatarColor: 'bg-sky-500',
     borderColor: 'border-sky-400',
     haloColor: 'rgba(56, 189, 248, 0.5)',
     status: 'active',
-    homeX: 410,
+    homeX: 360,
     homeY: 320,
-    x: 410,
+    x: 360,
     y: 320,
     currentTask: 'Google Flow 主线管线生成与 15s 全局控速总装',
     thought: '🌊 Google Flow 正在串联主镜头流程，并在第 12 秒稳稳推入 KL 门店开张信息！',
@@ -236,9 +301,9 @@ export const INITIAL_AGENTS = [
     borderColor: 'border-cyan-400',
     haloColor: 'rgba(34, 211, 238, 0.5)',
     status: 'active',
-    homeX: 490,
+    homeX: 430,
     homeY: 320,
-    x: 490,
+    x: 430,
     y: 320,
     currentTask: '可灵 Kling 渲染 0~3s 大铁锅沸腾红亮番茄汤与热气美感',
     thought: '🎬 0~3s Kling 美感镜头生成完毕！沸腾白雾蒸腾，红亮汤底质感极度诱人！',
@@ -256,9 +321,9 @@ export const INITIAL_AGENTS = [
     borderColor: 'border-amber-400',
     haloColor: 'rgba(245, 158, 11, 0.5)',
     status: 'active',
-    homeX: 570,
+    homeX: 500,
     homeY: 320,
-    x: 570,
+    x: 500,
     y: 320,
     currentTask: 'Higgsfield Seedance 2.5 夹粉拉丝与剥虾蘸酱物理动作',
     thought: '⚡ Seedance 2.5 动作运镜完成：筷子高挑米粉与金桔辣酱蘸取物理动态完美！',
@@ -271,14 +336,14 @@ export const INITIAL_AGENTS = [
     face: '🎵',
     dept: 'production',
     deptName: '视听制作部',
-    role: '卡点音乐与配乐 (Suno & Flow)',
+    role: '卡点音乐 (Suno & Flow)',
     avatarColor: 'bg-violet-500',
     borderColor: 'border-violet-400',
     haloColor: 'rgba(167, 139, 250, 0.45)',
     status: 'active',
-    homeX: 650,
+    homeX: 570,
     homeY: 320,
-    x: 650,
+    x: 570,
     y: 320,
     currentTask: 'Suno v3.5 生成欢快探店神曲，第 3.0s 精准 Beat Drop',
     thought: '🎵 Suno 爆款卡点旋律已就绪！第 3.0 秒精准 Beat Drop 完美扣合夹粉瞬间！',
@@ -286,7 +351,49 @@ export const INITIAL_AGENTS = [
     model: 'Suno v3.5 / Flow Music'
   },
 
-  // ── 5. 战略决策会议室 (Executive Boardroom) ──
+  // ── 5. 顾客接洽部门 (Client Reception & Intake Dept) ──
+  {
+    id: 'client_concierge',
+    name: 'Client_Concierge',
+    face: '🛎️',
+    dept: 'reception',
+    deptName: '顾客接洽部',
+    role: 'VIP 客户接洽顾问',
+    avatarColor: 'bg-yellow-600',
+    borderColor: 'border-yellow-400',
+    haloColor: 'rgba(250, 204, 21, 0.45)',
+    status: 'active',
+    homeX: 740,
+    homeY: 135,
+    x: 740,
+    y: 135,
+    currentTask: '审查 Uncle Lim 肉骨茶与 DurianBB 的品牌卖点与素材库',
+    thought: '🛎️ 正在等候厅接待客户！Uncle Lim 瓦煲肉骨茶资料已审核完毕，随时可派单给文案部！',
+    tokenUsage: '12.8k',
+    model: 'GPT-4o'
+  },
+  {
+    id: 'queue_manager',
+    name: 'Queue_Manager',
+    face: '📋',
+    dept: 'reception',
+    deptName: '顾客接洽部',
+    role: '排期调度专员',
+    avatarColor: 'bg-amber-600',
+    borderColor: 'border-amber-400',
+    haloColor: 'rgba(217, 119, 6, 0.4)',
+    status: 'active',
+    homeX: 740,
+    homeY: 320,
+    x: 740,
+    y: 320,
+    currentTask: '监控 3 家新客户等候队列：肉骨茶、榴莲工坊、南洋白咖啡',
+    thought: '📋 接洽部等候队列就绪！已对齐各客户优先级，支持总监一键接单下发！',
+    tokenUsage: '11.5k',
+    model: 'Claude 3.5 Sonnet'
+  },
+
+  // ── 6. 战略决策会议室 (Executive Boardroom) ──
   {
     id: 'ai_cmo',
     name: 'AI_CMO',
@@ -298,12 +405,12 @@ export const INITIAL_AGENTS = [
     borderColor: 'border-purple-400',
     haloColor: 'rgba(192, 132, 252, 0.6)',
     status: 'active',
-    homeX: 975,
+    homeX: 1070,
     homeY: 180,
-    x: 975,
+    x: 1070,
     y: 180,
-    currentTask: '统筹四大部门资源：市场、文案、设计、视听协同闭环',
-    thought: '🧠 报告总监：四大部门全部就位，Tomato Boy 开张宣发阵型拉满！',
+    currentTask: '统筹接洽部、市场、文案、设计、视听协同闭环',
+    thought: '🧠 报告总监：五大部门全部就位，等候厅客户储备充足，Tomato Boy 开张宣发阵型拉满！',
     tokenUsage: '58.4k',
     model: 'o3-mini / Claude 3.5'
   }
@@ -311,20 +418,25 @@ export const INITIAL_AGENTS = [
 
 // 会议室环绕圆桌坐席坐标
 export const MEETING_SEATS = {
-  human_director: { x: 975, y: 110 },
-  ai_cmo: { x: 975, y: 180 },
-  trend_scout: { x: 900, y: 220 },      // 市场部代表
-  script_master: { x: 920, y: 285 },    // 文案部代表
-  seedream_artist: { x: 975, y: 310 },  // 设计部代表 (Seedream & GPT)
-  seedance_motion: { x: 1030, y: 285 }, // 视听部代表 (Seedance & Kling)
-  suno_music_op: { x: 1050, y: 220 }    // 音频代表 (Suno)
+  human_director: { x: 1070, y: 110 },
+  ai_cmo: { x: 1070, y: 180 },
+  client_concierge: { x: 980, y: 190 }, // 接洽部代表
+  trend_scout: { x: 990, y: 260 },      // 市场部代表
+  script_master: { x: 1030, y: 315 },    // 文案部代表
+  seedream_artist: { x: 1110, y: 315 },  // 设计部代表 (Seedream & GPT)
+  seedance_motion: { x: 1150, y: 260 }, // 视听部代表 (Seedance & Kling)
+  suno_music_op: { x: 1160, y: 190 }    // 音频代表 (Suno)
 };
 
-// 四大部门向总监汇报开张方案的圆桌剧本
+// 四大部门与接洽部向总监汇报开张方案的圆桌剧本
 export const MEETING_DIALOGUES = [
   {
     speakerId: 'human_director',
-    text: '“四大部门注意！下周 Tomato Boy 番茄仔在 KL 新开张，汇报各自战备配合方案！”'
+    text: '“各部门注意！下周 Tomato Boy 番茄仔在 KL 新开张，汇报各自战备与客户接洽进度！”'
+  },
+  {
+    speakerId: 'client_concierge',
+    text: '“【顾客接洽部】汇报：Tomato Boy 正全速生产中！等候厅另有 Uncle Lim 肉骨茶与 DurianBB 等 3 家新客户排队就绪，随时可并线接入！”'
   },
   {
     speakerId: 'trend_scout',
@@ -344,11 +456,11 @@ export const MEETING_DIALOGUES = [
   },
   {
     speakerId: 'ai_cmo',
-    text: '“报告总监：市场、文案、设计、视听四大部门协同完毕！请总监在审核台最后拍板！”'
+    text: '“报告总监：接洽部、市场、文案、设计、视听全部协同完毕！请总监在审核台最后拍板！”'
   }
 ];
 
-// 跨部门动态连线 (从市场 ──> 文案 ──> 设计 & 视听)
+// 跨部门动态连线 (从市场 ──> 文案 ──> 设计 & 视听 ──> 决策室)
 export const INITIAL_LINKS = [
   { id: 'l1', from: 'trend_scout', to: 'script_master', label: '市场热词投递' },
   { id: 'l2', from: 'script_master', to: 'gpt_image_master', label: '大字封面需求' },
@@ -356,7 +468,8 @@ export const INITIAL_LINKS = [
   { id: 'l4', from: 'script_master', to: 'kling_master', label: '0~3s美感分镜' },
   { id: 'l5', from: 'script_master', to: 'seedance_motion', label: '3~10s动作运镜' },
   { id: 'l6', from: 'script_master', to: 'suno_music_op', label: 'Suno卡点情绪' },
-  { id: 'l7', from: 'insight_oracle', to: 'ai_cmo', label: '留存归因反哺' }
+  { id: 'l7', from: 'client_concierge', to: 'queue_manager', label: '客户队列同步' },
+  { id: 'l8', from: 'insight_oracle', to: 'ai_cmo', label: '留存归因反哺' }
 ];
 
 export const PENDING_APPROVALS = [
@@ -450,7 +563,7 @@ export const PENDING_APPROVALS = [
 ];
 
 export const LIVE_LOGS = [
-  { time: '16:48:12', agent: 'Insight_Oracle', text: '【市场分析部】昨日数据归因：沸腾红汤前3秒留存高达 82.4%，指令已反哺文案部！' },
+  { time: '16:48:12', agent: 'Client_Concierge', text: '【顾客接洽部】Uncle Lim 瓦煲肉骨茶与 DurianBB 已排入等候服务大厅。' },
   { time: '16:48:45', agent: 'Trend_Scout', text: '【市场分析部】捕获 KL 飙升词「沙巴海鲜番茄粉」，自动投送脚本工位。' },
   { time: '16:49:10', agent: 'Script_Master', text: '【文案脚本部】生成 Tomato Boy 15s 脚本，分派视听部与设计部。' },
   { time: '16:49:33', agent: 'GPT_Image_Master', text: '【视觉设计部】GPT Image 直出小红书 3:4 避坑大字封面，排版完成。' },
