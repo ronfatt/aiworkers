@@ -1,0 +1,176 @@
+import React, { useState } from 'react';
+import Header from './components/Header';
+import StudioCanvas from './components/StudioCanvas';
+import ApprovalModal from './components/ApprovalModal';
+import AgentDetailModal from './components/AgentDetailModal';
+import InsightsDrawer from './components/InsightsDrawer';
+import EventTicker from './components/EventTicker';
+
+import { 
+  INITIAL_CLIENTS, 
+  INITIAL_AGENTS, 
+  INITIAL_LINKS, 
+  PENDING_APPROVALS, 
+  LIVE_LOGS 
+} from './data/mockData';
+
+export default function App() {
+  const [clients, setClients] = useState(INITIAL_CLIENTS);
+  const [agents, setAgents] = useState(INITIAL_AGENTS);
+  const [links, setLinks] = useState(INITIAL_LINKS);
+  const [approvals, setApprovals] = useState(PENDING_APPROVALS);
+  const [logs, setLogs] = useState(LIVE_LOGS);
+
+  const [selectedClientId, setSelectedClientId] = useState('c1');
+  const [selectedAgent, setSelectedAgent] = useState(null);
+  const [isApprovalOpen, setIsApprovalOpen] = useState(false);
+  const [selectedApprovalId, setSelectedApprovalId] = useState('app_1');
+  const [isInsightsOpen, setIsInsightsOpen] = useState(false);
+
+  // Approve a post
+  const handleApprovePost = (id) => {
+    setApprovals(prev => prev.filter(item => item.id !== id));
+    
+    // Add success log
+    const now = new Date();
+    const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    const newLog = {
+      time: timeStr,
+      agent: 'Human_Director',
+      text: `已通过内容审核并授权！TikTok / Reels / 小红书 自动排期发布已就绪。`
+    };
+    setLogs(prev => [...prev, newLog]);
+
+    // Update client progress
+    setClients(prev => prev.map(c => {
+      if (c.id === selectedClientId) {
+        return { ...c, progress: 100, status: 'published' };
+      }
+      return c;
+    }));
+  };
+
+  // Trigger manual simulation run
+  const handleTriggerRun = () => {
+    const now = new Date();
+    const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    
+    // Update agents thoughts
+    setAgents(prev => prev.map(a => {
+      if (a.id === 'trend_scout') {
+        return {
+          ...a,
+          thought: '🔥 抓取到小红书今日上升词 #熬夜自救指南 检索量环比 +310%，已投喂文案工位！',
+          status: 'active'
+        };
+      }
+      if (a.id === 'script_master') {
+        return {
+          ...a,
+          thought: '✍️ 0~3s 新反常识脚本构建中：以“别急着撕面膜”作为阻断滑走 Hook！',
+          status: 'active'
+        };
+      }
+      return a;
+    }));
+
+    setLogs(prev => [
+      ...prev,
+      {
+        time: timeStr,
+        agent: 'Swarm_Master',
+        text: '收到人工手动触发指令，各工位已启动并发检索与 15s 分镜生成！'
+      }
+    ]);
+  };
+
+  // Test single agent
+  const handleTestAgent = (agentId) => {
+    const now = new Date();
+    const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    setLogs(prev => [
+      ...prev,
+      {
+        time: timeStr,
+        agent: agentId,
+        text: `接收到独立调度指令，正在重新执行该节点的单项工具调用...`
+      }
+    ]);
+  };
+
+  // Open approval specifically for a client
+  const handleOpenApprovalForClient = (clientId) => {
+    const item = approvals.find(a => a.clientId === clientId) || approvals[0];
+    if (item) {
+      setSelectedApprovalId(item.id);
+    }
+    setIsApprovalOpen(true);
+  };
+
+  return (
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#090d16] text-slate-100 font-sans">
+      {/* Top Header */}
+      <Header
+        clients={clients}
+        selectedClientId={selectedClientId}
+        onSelectClient={setSelectedClientId}
+        onOpenApproval={() => setIsApprovalOpen(true)}
+        pendingCount={approvals.length}
+        onOpenInsights={() => setIsInsightsOpen(true)}
+        onTriggerRun={handleTriggerRun}
+      />
+
+      {/* Main Virtual Office Floor Plan Canvas */}
+      <main className="flex-1 relative overflow-hidden flex flex-col justify-center">
+        <StudioCanvas
+          agents={agents}
+          links={links}
+          onSelectAgent={setSelectedAgent}
+          activeClientId={selectedClientId}
+          clients={clients}
+          onOpenApprovalForClient={handleOpenApprovalForClient}
+          onTriggerLog={(agent, text) => {
+            const now = new Date();
+            const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+            setLogs(prev => [...prev, { time: timeStr, agent, text }]);
+          }}
+        />
+      </main>
+
+      {/* Bottom Live Event Stream */}
+      <EventTicker logs={logs} />
+
+      {/* Human-in-the-Loop Content Approval Modal (15s Video + Carousel) */}
+      <ApprovalModal
+        isOpen={isApprovalOpen}
+        onClose={() => setIsApprovalOpen(false)}
+        approvalItems={approvals}
+        selectedItemId={selectedApprovalId}
+        onApprovePost={handleApprovePost}
+      />
+
+      {/* Agent Detail Inspector Modal */}
+      <AgentDetailModal
+        agent={selectedAgent}
+        onClose={() => setSelectedAgent(null)}
+        onTestAgent={handleTestAgent}
+      />
+
+      {/* Retention Curve & Tomorrow Strategy Insights Drawer */}
+      <InsightsDrawer
+        isOpen={isInsightsOpen}
+        onClose={() => setIsInsightsOpen(false)}
+        onApplyStrategy={() => {
+          setLogs(prev => [
+            ...prev,
+            {
+              time: 'JUST NOW',
+              agent: 'AI_CMO',
+              text: '已将《明日 Post 调优策略》成功注入全员 Prompt 规则库！'
+            }
+          ]);
+        }}
+      />
+    </div>
+  );
+}
