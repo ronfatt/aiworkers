@@ -149,17 +149,17 @@ export default function StudioCanvas({
     const scenarios = [
       {
         walker: 'client_concierge',
-        targetX: 200,
-        targetY: 320, // Walks from Reception to Copy Dept
+        targetX: 350,
+        targetY: 125, // Walks from Reception to Copy Dept
         walkerSpeech: '🛎️ Uncle Lim 肉骨茶的品牌档案已审核完毕，递交文案部建立 15s 脚本！',
-        targetId: 'viral_copywriter',
+        targetId: 'script_master',
         targetSpeech: '收到客户资料！马上撰写 30 年老字号药膳痛点文案！',
         log: '【顾客接洽部】Client_Concierge 走向【文案脚本部】工位转交排队客户资料。'
       },
       {
         walker: 'trend_scout',
-        targetX: 90,
-        targetY: 320, // Walks from Market to Copy Dept
+        targetX: 410,
+        targetY: 200, // Walks from Market to Copy Dept
         walkerSpeech: '📊 市场部捕获到 KL 飙升词 #沙巴海鲜粉，快写入今日 0~3s 脚本！',
         targetId: 'script_master',
         targetSpeech: '文案部收到！痛点冲突已敲定：“别飞沙巴排队了”！',
@@ -167,20 +167,29 @@ export default function StudioCanvas({
       },
       {
         walker: 'script_master',
-        targetX: 460,
-        targetY: 135, // Walks from Copy Dept to Design Dept (Seedream)
+        targetX: 475,
+        targetY: 330, // Walks from Copy Dept to Design Dept (Seedream)
         walkerSpeech: '✍️ 脚本出炉！设计部 Seedream 老师，需要一组摄影级鲜虾微距！',
         targetId: 'seedream_artist',
         targetSpeech: '设计部收到！Seedream 正在渲染摄影级鲜虾光泽与老坛番茄红汤！',
         log: '【文案脚本部】Script_Master 走向【视觉设计部】交付 Seedream 美学海报需求。'
       },
       {
+        walker: 'google_flow_op',
+        targetX: 770,
+        targetY: 145, // Walks to Kling in AV Dept
+        walkerSpeech: '🌊 Google Flow 全局视频管线就绪，Kling 老师美感分镜已融合！',
+        targetId: 'kling_master',
+        targetSpeech: 'Kling 0~3s 沸腾热气已渲染完毕，光影氛围满分！',
+        log: '【视听制作部】Google_Flow_Op 与 Kling_Aesthetic 会合协同分镜。'
+      },
+      {
         walker: 'queue_manager',
-        targetX: 1020,
-        targetY: 140, // Walks from Reception to Boardroom to notify Director
+        targetX: 990,
+        targetY: 210, // Walks from Reception to Boardroom to notify Director
         walkerSpeech: '👑 总监！接洽部有 3 家优质新餐饮客户排队，随时可一键接单下发！',
         targetId: 'human_director',
-        targetSpeech: '好的，等 Tomato Boy 首发上线后立即接入 Uncle Lim 肉骨茶！',
+        targetSpeech: '收到！等 Tomato Boy 首发成片确认后立即接入 Uncle Lim 肉骨茶！',
         log: '【顾客接洽部】Queue_Manager 走进决策室向总监汇报等候队列。'
       }
     ];
@@ -259,8 +268,8 @@ export default function StudioCanvas({
         }}
       />
 
-      {/* Main Floor Plan Container (1240px x 580px) */}
-      <div className="relative w-full max-w-[1240px] h-[580px] bg-[#0c1322]/95 rounded-2xl border border-slate-800 shadow-2xl backdrop-blur-xl overflow-hidden">
+      {/* Main Floor Plan Container (1260px x 590px) */}
+      <div className="relative w-full max-w-[1260px] h-[590px] bg-[#0c1322]/95 rounded-2xl border border-slate-800 shadow-2xl backdrop-blur-xl overflow-hidden">
         
         {/* Top Floating Control Bar for Movement / Meetings */}
         <div className="absolute top-3 right-4 z-40 flex items-center space-x-2.5">
@@ -307,7 +316,46 @@ export default function StudioCanvas({
         {/* ── 5 大业务部门 + 战略决策室 Floor Plan (12 Columns) ── */}
         <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 gap-2.5 p-3.5 pointer-events-none">
           
-          {/* Department 1: 市场分析部 (Cols 1-3, Rows 1-3) */}
+          {/* Department 1: 顾客接洽部与等候大厅 (Cols 1-3, Rows 1-3) */}
+          <div 
+            onClick={onOpenQueue}
+            className="col-span-3 row-span-3 rounded-xl border border-yellow-500/30 hover:border-yellow-400/60 bg-gradient-to-b from-yellow-950/20 via-slate-900/40 to-yellow-950/15 p-2.5 relative flex flex-col justify-between pointer-events-auto cursor-pointer transition-all hover:bg-yellow-950/25 group"
+          >
+            <div className="flex items-center justify-between text-yellow-400 font-mono text-[10px] font-bold tracking-wider">
+              <div className="flex items-center space-x-1">
+                <BellRing className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
+                <span>顾客接洽部</span>
+              </div>
+              <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-yellow-950 text-yellow-300 border border-yellow-700/60 font-semibold flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-ping"></span>
+                {queuedWaitingCount} 位等候
+              </span>
+            </div>
+
+            {/* Waiting Queue Visual List */}
+            <div className="mt-auto space-y-1.5 pt-1">
+              <div className="text-[9px] font-mono text-slate-400 flex items-center justify-between">
+                <span>🛋️ VIP 客户等候沙发展示</span>
+                <span className="text-yellow-400 text-[8px] group-hover:underline">点击展开 ➔</span>
+              </div>
+              {waitingClients.slice(1, 3).map((c) => (
+                <div 
+                  key={c.id}
+                  className="px-2 py-1 rounded-lg bg-slate-900/80 border border-yellow-500/20 flex items-center justify-between text-xs transition group-hover:border-yellow-500/50 shadow"
+                >
+                  <div className="flex items-center space-x-1.5">
+                    <span className="text-sm">{c.avatar}</span>
+                    <span className="font-bold text-white text-[10px] line-clamp-1">{c.name}</span>
+                  </div>
+                  <span className="text-[8px] px-1 rounded bg-yellow-950/80 text-yellow-300 border border-yellow-800 font-mono shrink-0">
+                    {c.waitTime}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Department 2: 市场分析部 (Cols 1-3, Rows 4-6) */}
           <div className="col-span-3 row-span-3 rounded-xl border border-teal-500/25 bg-teal-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-teal-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
@@ -315,16 +363,33 @@ export default function StudioCanvas({
                 <span>市场分析部</span>
               </div>
               <span className="text-[8px] px-1 rounded bg-teal-900/40 text-teal-300 border border-teal-700/40">
-                爆款嗅探
+                爆款嗅探与留存
               </span>
             </div>
             <div className="grid grid-cols-2 gap-1.5 opacity-35">
-              <div className="h-9 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[8px] text-teal-300 font-mono">全网雷达</div>
-              <div className="h-9 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[8px] text-emerald-300 font-mono">留存归因</div>
+              <div className="h-9 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[8px] text-teal-300 font-mono">全网飙升雷达</div>
+              <div className="h-9 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[8px] text-emerald-300 font-mono">留存归因分析</div>
             </div>
           </div>
 
-          {/* Department 3: 视觉设计部 (Cols 4-6, Rows 1-3) - GPT Image & Seedream */}
+          {/* Department 3: 文案脚本部 (Cols 4-6, Rows 1-3) */}
+          <div className="col-span-3 row-span-3 rounded-xl border border-amber-500/25 bg-amber-950/15 p-2.5 relative flex flex-col justify-between">
+            <div className="flex items-center justify-between text-amber-400 font-mono text-[10px] font-bold tracking-wider">
+              <div className="flex items-center space-x-1">
+                <PenTool className="w-3.5 h-3.5 text-amber-400" />
+                <span>文案脚本部</span>
+              </div>
+              <span className="text-[8px] px-1 rounded bg-amber-900/40 text-amber-300 border border-amber-700/40">
+                15s 三段式架构
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 opacity-35">
+              <div className="h-9 rounded-lg border border-amber-800/60 bg-amber-900/20 flex items-center justify-center text-[8px] text-amber-300 font-mono">黄金三段式Hook</div>
+              <div className="h-9 rounded-lg border border-orange-800/60 bg-orange-900/20 flex items-center justify-center text-[8px] text-orange-300 font-mono">社媒种草文案</div>
+            </div>
+          </div>
+
+          {/* Department 4: 视觉设计部 (Cols 4-6, Rows 4-6) - GPT Image & Seedream */}
           <div className="col-span-3 row-span-3 rounded-xl border border-rose-500/30 bg-rose-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-rose-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
@@ -332,7 +397,7 @@ export default function StudioCanvas({
                 <span>视觉设计部</span>
               </div>
               <span className="text-[8px] px-1 rounded bg-rose-900/40 text-rose-300 border border-rose-700/40">
-                GPT & Seedream
+                GPT Image & Seedream
               </span>
             </div>
             <div className="grid grid-cols-3 gap-1 opacity-35">
@@ -342,52 +407,40 @@ export default function StudioCanvas({
             </div>
           </div>
 
-          {/* Department 5: 顾客接洽部与等候大厅 (Cols 7-9, Rows 1-6) - NEW! */}
-          <div 
-            onClick={onOpenQueue}
-            className="col-span-3 row-span-6 rounded-xl border-2 border-yellow-500/30 hover:border-yellow-400/60 bg-gradient-to-b from-yellow-950/20 via-slate-900/40 to-yellow-950/15 p-3 relative flex flex-col justify-between pointer-events-auto cursor-pointer transition-all hover:bg-yellow-950/25 group"
-          >
-            <div className="flex items-center justify-between text-yellow-400 font-mono text-[11px] font-bold tracking-wider">
-              <div className="flex items-center space-x-1.5">
-                <BellRing className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
-                <span>顾客接洽部 / CLIENT RECEPTION</span>
+          {/* Department 5: 视听制作部 (Cols 7-9, Rows 1-6) - Flow + Kling + Seedance + Suno (2x2 Pods!) */}
+          <div className="col-span-3 row-span-6 rounded-xl border border-cyan-500/30 bg-cyan-950/15 p-2.5 relative flex flex-col justify-between">
+            <div className="flex items-center justify-between text-cyan-400 font-mono text-[10px] font-bold tracking-wider">
+              <div className="flex items-center space-x-1">
+                <Film className="w-3.5 h-3.5 text-cyan-400" />
+                <span>视听制作部 / AV PRODUCTION</span>
               </div>
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-yellow-950 text-yellow-300 border border-yellow-700/60 font-semibold flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-ping"></span>
-                {queuedWaitingCount} 位等候服务
+              <span className="text-[8px] px-1.5 py-0.5 rounded bg-cyan-900/40 text-cyan-300 border border-cyan-700/40">
+                60% 15s 视频管线
               </span>
             </div>
 
-            {/* Waiting Queue Visual List */}
-            <div className="my-auto space-y-2 py-1">
-              <div className="text-[10px] font-mono text-slate-400 flex items-center justify-between">
-                <span>🛋️ VIP 客户等候沙发展示</span>
-                <span className="text-yellow-400 text-[9px] group-hover:underline">点击展开大厅 ➔</span>
+            {/* Middle Pipeline Ribbon */}
+            <div className="my-auto py-2 px-2.5 rounded-lg border border-cyan-500/20 bg-slate-900/60 text-center">
+              <div className="text-[9px] font-mono text-cyan-300/80 mb-1">
+                ⚡ 15s 视听协同管线
               </div>
-
-              {waitingClients.slice(1, 4).map((c) => (
-                <div 
-                  key={c.id}
-                  className="p-2 rounded-lg bg-slate-900/80 border border-yellow-500/20 flex items-center justify-between text-xs transition group-hover:border-yellow-500/50 shadow"
-                >
-                  <div className="flex items-center space-x-2">
-                    <span className="text-base">{c.avatar}</span>
-                    <div>
-                      <h5 className="font-bold text-white text-[11px] line-clamp-1">{c.name}</h5>
-                      <p className="text-[9px] text-slate-400 line-clamp-1">{c.category}</p>
-                    </div>
-                  </div>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-yellow-950/80 text-yellow-300 border border-yellow-800 font-mono shrink-0">
-                    {c.waitTime}
-                  </span>
-                </div>
-              ))}
+              <div className="text-[8px] font-mono text-slate-400 flex items-center justify-center space-x-1">
+                <span className="text-sky-300">Flow</span>
+                <span>➔</span>
+                <span className="text-cyan-300">Kling</span>
+                <span>➔</span>
+                <span className="text-amber-300">Seedance</span>
+                <span>➔</span>
+                <span className="text-violet-300">Suno</span>
+              </div>
             </div>
 
-            {/* Bottom Reception Desk Tag */}
-            <div className="p-2 rounded-lg bg-yellow-900/20 border border-yellow-700/40 text-[10px] text-yellow-200/90 font-mono flex items-center justify-between">
-              <span>🛎️ 接洽顾问与排期专员</span>
-              <span className="text-[9px] text-yellow-400">一键接入生产线</span>
+            {/* Bottom 4 Pod Tags */}
+            <div className="grid grid-cols-4 gap-1 opacity-35">
+              <div className="h-9 rounded-lg border border-sky-800/70 bg-sky-950/30 flex items-center justify-center text-[8px] text-sky-300 font-mono text-center p-0.5">Flow</div>
+              <div className="h-9 rounded-lg border border-cyan-800/70 bg-cyan-950/30 flex items-center justify-center text-[8px] text-cyan-300 font-mono text-center p-0.5">Kling</div>
+              <div className="h-9 rounded-lg border border-amber-800/70 bg-amber-950/30 flex items-center justify-center text-[8px] text-amber-300 font-mono text-center p-0.5">Seedance</div>
+              <div className="h-9 rounded-lg border border-violet-800/70 bg-violet-950/30 flex items-center justify-center text-[8px] text-violet-300 font-mono text-center p-0.5">Suno</div>
             </div>
           </div>
 
@@ -405,9 +458,9 @@ export default function StudioCanvas({
               )}
             </div>
 
-            {/* Circular Conference Table Graphic */}
-            <div className="relative my-auto w-44 h-44 rounded-full border-2 border-violet-500/40 bg-violet-950/30 flex items-center justify-center shadow-2xl shadow-violet-900/30">
-              <div className="w-24 h-24 rounded-full border border-violet-400/50 bg-violet-900/40 flex flex-col items-center justify-center relative">
+            {/* Circular Conference Table Graphic (Centered at y ≈ 335) */}
+            <div className="relative mt-24 mb-auto w-52 h-52 rounded-full border-2 border-violet-500/40 bg-violet-950/30 flex items-center justify-center shadow-2xl shadow-violet-900/30">
+              <div className="w-28 h-28 rounded-full border border-violet-400/50 bg-violet-900/40 flex flex-col items-center justify-center relative">
                 <div className="absolute inset-0 rounded-full border border-violet-400/30 animate-ping-slow"></div>
                 <span className="text-[10px] font-mono text-violet-200 font-bold tracking-wider">BOARDROOM</span>
                 <span className="text-[8px] text-violet-400">总监指挥中枢</span>
@@ -416,42 +469,6 @@ export default function StudioCanvas({
 
             <div className="w-full text-center text-[9px] text-slate-500 font-mono">
               五部门联席 • 策略与排期拍板
-            </div>
-          </div>
-
-          {/* Department 2: 文案脚本部 (Cols 1-3, Rows 4-6) */}
-          <div className="col-span-3 row-span-3 rounded-xl border border-amber-500/25 bg-amber-950/15 p-2.5 relative flex flex-col justify-between">
-            <div className="flex items-center justify-between text-amber-400 font-mono text-[10px] font-bold tracking-wider">
-              <div className="flex items-center space-x-1">
-                <PenTool className="w-3.5 h-3.5 text-amber-400" />
-                <span>文案脚本部</span>
-              </div>
-              <span className="text-[8px] px-1 rounded bg-amber-900/40 text-amber-300 border border-amber-700/40">
-                15s 脚本架构
-              </span>
-            </div>
-            <div className="grid grid-cols-2 gap-1.5 opacity-35">
-              <div className="h-9 rounded-lg border border-amber-800/60 bg-amber-900/20 flex items-center justify-center text-[8px] text-amber-300 font-mono">黄金三段式</div>
-              <div className="h-9 rounded-lg border border-orange-800/60 bg-orange-900/20 flex items-center justify-center text-[8px] text-orange-300 font-mono">社媒种草文</div>
-            </div>
-          </div>
-
-          {/* Department 4: 视听制作部 (Cols 4-6, Rows 4-6) */}
-          <div className="col-span-3 row-span-3 rounded-xl border border-cyan-500/30 bg-cyan-950/15 p-2.5 relative flex flex-col justify-between">
-            <div className="flex items-center justify-between text-cyan-400 font-mono text-[10px] font-bold tracking-wider">
-              <div className="flex items-center space-x-1">
-                <Film className="w-3.5 h-3.5 text-cyan-400" />
-                <span>视听制作部</span>
-              </div>
-              <span className="text-[8px] px-1 rounded bg-cyan-900/40 text-cyan-300 border border-cyan-700/40">
-                60% 15s 视频
-              </span>
-            </div>
-            <div className="grid grid-cols-4 gap-1 opacity-35">
-              <div className="h-9 rounded-lg border border-sky-800/70 bg-sky-950/30 flex items-center justify-center text-[8px] text-sky-300 font-mono text-center p-0.5">Flow</div>
-              <div className="h-9 rounded-lg border border-cyan-800/70 bg-cyan-950/30 flex items-center justify-center text-[8px] text-cyan-300 font-mono text-center p-0.5">Kling</div>
-              <div className="h-9 rounded-lg border border-amber-800/70 bg-amber-950/30 flex items-center justify-center text-[8px] text-amber-300 font-mono text-center p-0.5">Seedance</div>
-              <div className="h-9 rounded-lg border border-violet-800/70 bg-violet-950/30 flex items-center justify-center text-[8px] text-violet-300 font-mono text-center p-0.5">Suno</div>
             </div>
           </div>
 
@@ -510,7 +527,7 @@ export default function StudioCanvas({
           >
             {(activeSpeakerId === 'human_director' || (!activeSpeakerId && !isMeetingActive)) && (
               <div 
-                className="absolute bottom-11 left-1/2 transform -translate-x-1/2 w-56 p-2.5 rounded-xl border border-amber-400 bg-slate-900/95 backdrop-blur-md shadow-2xl text-[11px] leading-tight z-30 animate-pop-bubble"
+                className="absolute top-14 left-1/2 transform -translate-x-1/2 w-56 p-2.5 rounded-xl border border-amber-400 bg-slate-900/95 backdrop-blur-md shadow-2xl text-[11px] leading-tight z-30 animate-pop-bubble"
               >
                 <div className="flex items-center justify-between text-[9px] font-mono text-amber-400 mb-1 font-bold">
                   <span className="flex items-center gap-1">
@@ -520,7 +537,7 @@ export default function StudioCanvas({
                   <span className="text-slate-400">{DIRECTOR_DATA.title}</span>
                 </div>
                 <p className="text-amber-200 font-medium">{currentSpeakerBubble || DIRECTOR_DATA.thought}</p>
-                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 border-r border-b border-amber-400 rotate-45"></div>
+                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 border-l border-t border-amber-400 rotate-45"></div>
               </div>
             )}
 
@@ -546,6 +563,7 @@ export default function StudioCanvas({
             const pos = agentPositions[agent.id] || { x: agent.homeX, y: agent.homeY, isWalking: false };
             const isSpeaking = activeSpeakerId === agent.id;
             const speechText = pos.bubble || (isSpeaking ? currentSpeakerBubble : null) || (selectedAgentId === agent.id ? agent.thought : null);
+            const isNearTop = pos.y < 210;
 
             return (
               <div 
@@ -562,18 +580,22 @@ export default function StudioCanvas({
                 {/* Dynamically popped speech bubble */}
                 {speechText && (
                   <div 
-                    className="absolute bottom-11 left-1/2 transform -translate-x-1/2 w-52 p-2.5 rounded-xl border border-cyan-400 bg-slate-900/95 backdrop-blur-md shadow-2xl text-[11px] leading-tight z-30 animate-pop-bubble cursor-pointer"
+                    className={`absolute ${isNearTop ? 'top-13' : 'bottom-13'} left-1/2 transform -translate-x-1/2 w-52 p-2.5 rounded-xl border border-cyan-400 bg-slate-900/95 backdrop-blur-md shadow-2xl text-[11px] leading-tight z-30 animate-pop-bubble cursor-pointer`}
                     onClick={() => onSelectAgent(agent)}
                   >
                     <div className="flex items-center justify-between text-[9px] font-mono text-slate-400 mb-1">
-                      <span className="font-semibold text-cyan-400 flex items-center gap-1">
+                      <span className="font-semibold text-cyan-400 flex items-center gap-1 truncate max-w-[120px]">
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
                         {agent.name}
                       </span>
-                      <span className="text-[8px] px-1 rounded bg-slate-800 text-slate-300">{agent.deptName}</span>
+                      <span className="text-[8px] px-1 rounded bg-slate-800 text-slate-300 shrink-0">{agent.deptName}</span>
                     </div>
                     <p className="line-clamp-3 text-slate-100 font-medium">{speechText}</p>
-                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 border-r border-b border-cyan-400 rotate-45"></div>
+                    {isNearTop ? (
+                      <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 border-l border-t border-cyan-400 rotate-45"></div>
+                    ) : (
+                      <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 border-r border-b border-cyan-400 rotate-45"></div>
+                    )}
                   </div>
                 )}
 
