@@ -106,7 +106,7 @@ export const DIRECTOR_DATA = {
   id: 'human_director',
   name: '你 (Studio Director)',
   title: '业务主理人 / 创意总监',
-  x: 1080,
+  x: 1095,
   y: 155,
   avatarEmoji: '👑',
   avatarBg: 'bg-gradient-to-tr from-amber-500 via-orange-500 to-rose-500',
@@ -405,9 +405,9 @@ export const INITIAL_AGENTS = [
     borderColor: 'border-purple-400',
     haloColor: 'rgba(192, 132, 252, 0.6)',
     status: 'active',
-    homeX: 1165,
+    homeX: 1180,
     homeY: 220,
-    x: 1165,
+    x: 1180,
     y: 220,
     currentTask: '统筹接洽部、市场、文案、设计、视听协同闭环',
     thought: '🧠 报告总监：五大部门全部就位，等候厅客户储备充足，Tomato Boy 开张宣发阵型拉满！',
@@ -416,16 +416,16 @@ export const INITIAL_AGENTS = [
   }
 ];
 
-// 会议室环绕圆桌坐席坐标 (围绕圆心 1080, 335 均衡分布)
+// 会议室环绕圆桌坐席坐标 (围绕圆心 1095, 350 均衡分布)
 export const MEETING_SEATS = {
-  human_director: { x: 1080, y: 195 },
-  ai_cmo: { x: 1175, y: 255 },
-  google_flow_op: { x: 1195, y: 345 },
-  seedance_motion: { x: 1165, y: 430 },
-  seedream_artist: { x: 1080, y: 460 },
-  script_master: { x: 995, y: 430 },
-  trend_scout: { x: 965, y: 345 },
-  client_concierge: { x: 985, y: 255 }
+  human_director: { x: 1095, y: 220 },
+  ai_cmo: { x: 1185, y: 275 },
+  google_flow_op: { x: 1205, y: 355 },
+  seedance_motion: { x: 1175, y: 435 },
+  seedream_artist: { x: 1095, y: 465 },
+  script_master: { x: 1015, y: 435 },
+  trend_scout: { x: 985, y: 355 },
+  client_concierge: { x: 1005, y: 275 }
 };
 
 // 四大部门与接洽部向总监汇报开张方案的圆桌剧本

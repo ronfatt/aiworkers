@@ -272,19 +272,7 @@ export default function StudioCanvas({
       <div className="relative w-full max-w-[1260px] h-[590px] bg-[#0c1322]/95 rounded-2xl border border-slate-800 shadow-2xl backdrop-blur-xl overflow-hidden">
         
         {/* Top Floating Control Bar for Movement / Meetings */}
-        <div className="absolute top-3 right-4 z-40 flex items-center space-x-2.5">
-          {/* Quick open Queue Button */}
-          <button
-            onClick={onOpenQueue}
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-yellow-950/60 hover:bg-yellow-900/80 border border-yellow-500/40 text-yellow-300 text-xs font-semibold transition hover:scale-105 active:scale-95 shadow"
-          >
-            <BellRing className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
-            <span>顾客等候大厅</span>
-            <span className="w-4 h-4 rounded-full bg-yellow-500 text-slate-950 text-[10px] font-bold flex items-center justify-center">
-              {queuedWaitingCount}
-            </span>
-          </button>
-
+        <div className="absolute top-3 right-4 z-40 flex items-center space-x-2">
           {!isMeetingActive ? (
             <button
               onClick={handleStartMeeting}
@@ -313,13 +301,13 @@ export default function StudioCanvas({
           </button>
         </div>
 
-        {/* ── 5 大业务部门 + 战略决策室 Floor Plan (12 Columns) ── */}
-        <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 gap-2.5 p-3.5 pointer-events-none">
+        {/* ── 5 大业务部门 + 战略决策室 Floor Plan (4 Columns x 2 Rows) ── */}
+        <div className="absolute inset-0 grid grid-cols-4 grid-rows-2 gap-2.5 p-3.5 pointer-events-none">
           
-          {/* Department 1: 顾客接洽部与等候大厅 (Cols 1-3, Rows 1-3) */}
+          {/* Department 1: 顾客接洽部与等候大厅 (Col 1, Row 1) */}
           <div 
             onClick={onOpenQueue}
-            className="col-span-3 row-span-3 rounded-xl border border-yellow-500/30 hover:border-yellow-400/60 bg-gradient-to-b from-yellow-950/20 via-slate-900/40 to-yellow-950/15 p-2.5 relative flex flex-col justify-between pointer-events-auto cursor-pointer transition-all hover:bg-yellow-950/25 group"
+            className="col-start-1 row-start-1 rounded-xl border border-yellow-500/35 hover:border-yellow-400/60 bg-gradient-to-b from-yellow-950/20 via-slate-900/40 to-yellow-950/15 p-2.5 relative flex flex-col justify-between pointer-events-auto cursor-pointer transition-all hover:bg-yellow-950/25 group shadow-lg"
           >
             <div className="flex items-center justify-between text-yellow-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
@@ -355,8 +343,8 @@ export default function StudioCanvas({
             </div>
           </div>
 
-          {/* Department 2: 市场分析部 (Cols 1-3, Rows 4-6) */}
-          <div className="col-span-3 row-span-3 rounded-xl border border-teal-500/25 bg-teal-950/15 p-2.5 relative flex flex-col justify-between">
+          {/* Department 2: 市场分析部 (Col 1, Row 2) */}
+          <div className="col-start-1 row-start-2 rounded-xl border border-teal-500/25 bg-teal-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-teal-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
                 <BarChart3 className="w-3.5 h-3.5 text-teal-400" />
@@ -372,8 +360,8 @@ export default function StudioCanvas({
             </div>
           </div>
 
-          {/* Department 3: 文案脚本部 (Cols 4-6, Rows 1-3) */}
-          <div className="col-span-3 row-span-3 rounded-xl border border-amber-500/25 bg-amber-950/15 p-2.5 relative flex flex-col justify-between">
+          {/* Department 3: 文案脚本部 (Col 2, Row 1) */}
+          <div className="col-start-2 row-start-1 rounded-xl border border-amber-500/25 bg-amber-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-amber-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
                 <PenTool className="w-3.5 h-3.5 text-amber-400" />
@@ -389,15 +377,15 @@ export default function StudioCanvas({
             </div>
           </div>
 
-          {/* Department 4: 视觉设计部 (Cols 4-6, Rows 4-6) - GPT Image & Seedream */}
-          <div className="col-span-3 row-span-3 rounded-xl border border-rose-500/30 bg-rose-950/15 p-2.5 relative flex flex-col justify-between">
+          {/* Department 4: 视觉设计部 (Col 2, Row 2) - GPT Image & Seedream */}
+          <div className="col-start-2 row-start-2 rounded-xl border border-rose-500/30 bg-rose-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-rose-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
                 <Palette className="w-3.5 h-3.5 text-rose-400" />
                 <span>视觉设计部</span>
               </div>
               <span className="text-[8px] px-1 rounded bg-rose-900/40 text-rose-300 border border-rose-700/40">
-                GPT Image & Seedream
+                GPT & Seedream
               </span>
             </div>
             <div className="grid grid-cols-3 gap-1 opacity-35">
@@ -407,8 +395,8 @@ export default function StudioCanvas({
             </div>
           </div>
 
-          {/* Department 5: 视听制作部 (Cols 7-9, Rows 1-6) - Flow + Kling + Seedance + Suno (2x2 Pods!) */}
-          <div className="col-span-3 row-span-6 rounded-xl border border-cyan-500/30 bg-cyan-950/15 p-2.5 relative flex flex-col justify-between">
+          {/* Department 5: 视听制作部 (Col 3, Rows 1-2 Full Height!) - Flow + Kling + Seedance + Suno */}
+          <div className="col-start-3 row-start-1 row-span-2 rounded-xl border border-cyan-500/30 bg-cyan-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-cyan-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
                 <Film className="w-3.5 h-3.5 text-cyan-400" />
@@ -420,32 +408,32 @@ export default function StudioCanvas({
             </div>
 
             {/* Middle Pipeline Ribbon */}
-            <div className="my-auto py-2 px-2.5 rounded-lg border border-cyan-500/20 bg-slate-900/60 text-center">
-              <div className="text-[9px] font-mono text-cyan-300/80 mb-1">
+            <div className="my-auto py-2.5 px-2.5 rounded-lg border border-cyan-500/20 bg-slate-900/70 text-center shadow">
+              <div className="text-[9px] font-mono text-cyan-300/90 mb-1 font-semibold">
                 ⚡ 15s 视听协同管线
               </div>
-              <div className="text-[8px] font-mono text-slate-400 flex items-center justify-center space-x-1">
-                <span className="text-sky-300">Flow</span>
-                <span>➔</span>
-                <span className="text-cyan-300">Kling</span>
-                <span>➔</span>
-                <span className="text-amber-300">Seedance</span>
-                <span>➔</span>
-                <span className="text-violet-300">Suno</span>
+              <div className="text-[8px] font-mono text-slate-300 flex items-center justify-center space-x-1.5">
+                <span className="text-sky-300 font-bold">Flow</span>
+                <span className="text-slate-500">➔</span>
+                <span className="text-cyan-300 font-bold">Kling</span>
+                <span className="text-slate-500">➔</span>
+                <span className="text-amber-300 font-bold">Seedance</span>
+                <span className="text-slate-500">➔</span>
+                <span className="text-violet-300 font-bold">Suno</span>
               </div>
             </div>
 
             {/* Bottom 4 Pod Tags */}
-            <div className="grid grid-cols-4 gap-1 opacity-35">
-              <div className="h-9 rounded-lg border border-sky-800/70 bg-sky-950/30 flex items-center justify-center text-[8px] text-sky-300 font-mono text-center p-0.5">Flow</div>
-              <div className="h-9 rounded-lg border border-cyan-800/70 bg-cyan-950/30 flex items-center justify-center text-[8px] text-cyan-300 font-mono text-center p-0.5">Kling</div>
-              <div className="h-9 rounded-lg border border-amber-800/70 bg-amber-950/30 flex items-center justify-center text-[8px] text-amber-300 font-mono text-center p-0.5">Seedance</div>
-              <div className="h-9 rounded-lg border border-violet-800/70 bg-violet-950/30 flex items-center justify-center text-[8px] text-violet-300 font-mono text-center p-0.5">Suno</div>
+            <div className="grid grid-cols-4 gap-1 opacity-40">
+              <div className="h-9 rounded-lg border border-sky-800/70 bg-sky-950/30 flex items-center justify-center text-[8px] text-sky-300 font-mono text-center p-0.5">Google Flow</div>
+              <div className="h-9 rounded-lg border border-cyan-800/70 bg-cyan-950/30 flex items-center justify-center text-[8px] text-cyan-300 font-mono text-center p-0.5">可灵 Kling</div>
+              <div className="h-9 rounded-lg border border-amber-800/70 bg-amber-950/30 flex items-center justify-center text-[8px] text-amber-300 font-mono text-center p-0.5">Seedance 2.5</div>
+              <div className="h-9 rounded-lg border border-violet-800/70 bg-violet-950/30 flex items-center justify-center text-[8px] text-violet-300 font-mono text-center p-0.5">Suno v3.5</div>
             </div>
           </div>
 
-          {/* Department 6: 战略决策会议室 (Cols 10-12, Rows 1-6) */}
-          <div className="col-span-3 row-span-6 rounded-xl border border-violet-500/30 bg-violet-950/15 p-2.5 relative flex flex-col items-center justify-between">
+          {/* Department 6: 战略决策会议室 (Col 4, Rows 1-2 Full Height!) */}
+          <div className="col-start-4 row-start-1 row-span-2 rounded-xl border border-violet-500/30 bg-violet-950/15 p-2.5 relative flex flex-col items-center justify-between">
             <div className="w-full flex items-center justify-between text-violet-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
                 <Crown className="w-3.5 h-3.5 text-amber-400" />
@@ -453,16 +441,16 @@ export default function StudioCanvas({
               </div>
               {isMeetingActive && (
                 <span className="text-[8px] text-rose-400 font-bold px-1.5 py-0.2 rounded bg-rose-950/80 border border-rose-800 animate-pulse">
-                  ● 汇报中
+                  ● 联席汇报中
                 </span>
               )}
             </div>
 
-            {/* Circular Conference Table Graphic (Centered at y ≈ 335) */}
-            <div className="relative mt-24 mb-auto w-52 h-52 rounded-full border-2 border-violet-500/40 bg-violet-950/30 flex items-center justify-center shadow-2xl shadow-violet-900/30">
-              <div className="w-28 h-28 rounded-full border border-violet-400/50 bg-violet-900/40 flex flex-col items-center justify-center relative">
+            {/* Circular Conference Table Graphic (Centered at y ≈ 350) */}
+            <div className="relative mt-32 mb-auto w-48 h-48 rounded-full border-2 border-violet-500/40 bg-violet-950/30 flex items-center justify-center shadow-2xl shadow-violet-900/30">
+              <div className="w-24 h-24 rounded-full border border-violet-400/50 bg-violet-900/40 flex flex-col items-center justify-center relative">
                 <div className="absolute inset-0 rounded-full border border-violet-400/30 animate-ping-slow"></div>
-                <span className="text-[10px] font-mono text-violet-200 font-bold tracking-wider">BOARDROOM</span>
+                <span className="text-[9px] font-mono text-violet-200 font-bold tracking-wider">BOARDROOM</span>
                 <span className="text-[8px] text-violet-400">总监指挥中枢</span>
               </div>
             </div>
@@ -527,7 +515,7 @@ export default function StudioCanvas({
           >
             {(activeSpeakerId === 'human_director' || (!activeSpeakerId && !isMeetingActive)) && (
               <div 
-                className="absolute top-14 left-1/2 transform -translate-x-1/2 w-56 p-2.5 rounded-xl border border-amber-400 bg-slate-900/95 backdrop-blur-md shadow-2xl text-[11px] leading-tight z-30 animate-pop-bubble"
+                className="absolute right-14 top-0 w-56 p-2.5 rounded-xl border border-amber-400 bg-slate-900/95 backdrop-blur-md shadow-2xl text-[11px] leading-tight z-30 animate-pop-bubble"
               >
                 <div className="flex items-center justify-between text-[9px] font-mono text-amber-400 mb-1 font-bold">
                   <span className="flex items-center gap-1">
@@ -537,7 +525,7 @@ export default function StudioCanvas({
                   <span className="text-slate-400">{DIRECTOR_DATA.title}</span>
                 </div>
                 <p className="text-amber-200 font-medium">{currentSpeakerBubble || DIRECTOR_DATA.thought}</p>
-                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 border-l border-t border-amber-400 rotate-45"></div>
+                <div className="absolute top-4 -right-1.5 w-3 h-3 bg-slate-900 border-r border-t border-amber-400 rotate-45"></div>
               </div>
             )}
 
