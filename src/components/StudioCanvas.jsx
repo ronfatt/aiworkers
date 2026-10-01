@@ -28,6 +28,7 @@ export default function StudioCanvas({
   waitingClients = [],
   onOpenApprovalForClient,
   onOpenQueue,
+  onOpenResearchDesk,
   onTriggerLog
 }) {
   const currentClient = clients.find(c => c.id === activeClientId) || clients[0];
@@ -82,7 +83,7 @@ export default function StudioCanvas({
   const handleStartMeeting = () => {
     setIsMeetingActive(true);
     setMeetingStep(0);
-    onTriggerLog?.('Human_Director', '召集部门联席会！接洽部、市场、文案、设计、视听主管正前往战略决策室...');
+    onTriggerLog?.('Human_Director', '召集五大投研部门联席会！调度、宏观、量化、编译、图表主管正前往战略决策室...');
 
     setAgentPositions(prev => {
       const next = { ...prev };
@@ -117,7 +118,7 @@ export default function StudioCanvas({
     setIsMeetingActive(false);
     setActiveSpeakerId(null);
     setCurrentSpeakerBubble(null);
-    onTriggerLog?.('AI_CMO', '联席碰头结束，全员返回各自工位投入 Tomato Boy 宣发与新客户排产！');
+    onTriggerLog?.('AI_CQO', '联席碰头结束，全员返回各自工位投入 Telegram 18区与 @sparkone_global 实时广播生产！');
 
     setAgentPositions(prev => {
       const next = { ...prev };
@@ -144,53 +145,53 @@ export default function StudioCanvas({
     }, 1500);
   };
 
-  // Spontaneous cross-department collaboration
+  // Spontaneous cross-department collaboration (Spark Union Quant Operations)
   const triggerRandomCollab = () => {
     const scenarios = [
       {
-        walker: 'client_concierge',
-        targetX: 350,
-        targetY: 125, // Walks from Reception to Copy Dept
-        walkerSpeech: '🛎️ Uncle Lim 肉骨茶的品牌档案已审核完毕，递交文案部建立 15s 脚本！',
-        targetId: 'script_master',
-        targetSpeech: '收到客户资料！马上撰写 30 年老字号药膳痛点文案！',
-        log: '【顾客接洽部】Client_Concierge 走向【文案脚本部】工位转交排队客户资料。'
+        walker: 'tg_topic_concierge',
+        targetX: 100,
+        targetY: 330, // Walks from Gateway to Macro Intel
+        walkerSpeech: '📡 Telegram #5 SPARK AI 话题整点待命，宏观部请交付最新市场脉搏！',
+        targetId: 'macro_oracle',
+        targetSpeech: '收到排期指令！美债 4.22% 回落与黄金 $2,682 脉搏已整理完成！',
+        log: '【TG & X 广播调度部】TG_Topic_Bot 前往【宏观投研部】催收 SPARK AI DAILY 研报。'
       },
       {
-        walker: 'trend_scout',
+        walker: 'macro_oracle',
         targetX: 410,
-        targetY: 200, // Walks from Market to Copy Dept
-        walkerSpeech: '📊 市场部捕获到 KL 飙升词 #沙巴海鲜粉，快写入今日 0~3s 脚本！',
-        targetId: 'script_master',
-        targetSpeech: '文案部收到！痛点冲突已敲定：“别飞沙巴排队了”！',
-        log: '【市场分析部】Trend_Scout 走到【文案脚本部】工位交付大马爆款热词。'
+        targetY: 200, // Walks from Macro to Quant Dept
+        walkerSpeech: '📊 黄金触及 $2,682/oz 强阻力，流动性归因 42%，请 AURORA 策略模型确认读数！',
+        targetId: 'aurora_architect',
+        targetSpeech: 'AURORA 接收数据！多头置信度 71%，已下达凯利仓位动态防守指令！',
+        log: '【宏观投研情报部】Macro_Oracle 走向【量化策略部】递交多维归因参数。'
       },
       {
-        walker: 'script_master',
-        targetX: 475,
-        targetY: 330, // Walks from Copy Dept to Design Dept (Seedream)
-        walkerSpeech: '✍️ 脚本出炉！设计部 Seedream 老师，需要一组摄影级鲜虾微距！',
-        targetId: 'seedream_artist',
-        targetSpeech: '设计部收到！Seedream 正在渲染摄影级鲜虾光泽与老坛番茄红汤！',
-        log: '【文案脚本部】Script_Master 走向【视觉设计部】交付 Seedream 美学海报需求。'
+        walker: 'aurora_architect',
+        targetX: 380,
+        targetY: 330, // Walks from Quant to Global Editorial
+        walkerSpeech: '⚡ AURORA 黄金策略解构就绪！请编译部输出华尔街级权威英文 Thread！',
+        targetId: 'alpha_writer',
+        targetSpeech: '全球编译部收到！4-Tweet 深度研报推文正在组织排版！',
+        log: '【量化策略解构部】Aurora_Core 走向【全球编译部】移交 5 大引擎解构参数。'
       },
       {
-        walker: 'google_flow_op',
-        targetX: 770,
-        targetY: 145, // Walks to Kling in AV Dept
-        walkerSpeech: '🌊 Google Flow 全局视频管线就绪，Kling 老师美感分镜已融合！',
-        targetId: 'kling_master',
-        targetSpeech: 'Kling 0~3s 沸腾热气已渲染完毕，光影氛围满分！',
-        log: '【视听制作部】Google_Flow_Op 与 Kling_Aesthetic 会合协同分镜。'
+        walker: 'alpha_writer',
+        targetX: 710,
+        targetY: 220, // Walks from Editorial to Visual Dept
+        walkerSpeech: '✍️ 推特 Thread 与 TG 稿件完成！图表部请渲染 TradingView 暗黑清算热力图！',
+        targetId: 'chart_renderer',
+        targetSpeech: 'K 线与支撑位 $2,650 标注渲染完毕，TradingView 4K 图表直出！',
+        log: '【全球内容编译部】Alpha_Writer 走向【视听渲染部】交付图表渲染需求。'
       },
       {
-        walker: 'queue_manager',
+        walker: 'x_flight_director',
         targetX: 990,
-        targetY: 210, // Walks from Reception to Boardroom to notify Director
-        walkerSpeech: '👑 总监！接洽部有 3 家优质新餐饮客户排队，随时可一键接单下发！',
+        targetY: 210, // Walks from Gateway to Boardroom to notify Director
+        walkerSpeech: '👑 总监！Telegram 18区与 @sparkone_global 排期已就绪，随时一键投递！',
         targetId: 'human_director',
-        targetSpeech: '收到！等 Tomato Boy 首发成片确认后立即接入 Uncle Lim 肉骨茶！',
-        log: '【顾客接洽部】Queue_Manager 走进决策室向总监汇报等候队列。'
+        targetSpeech: '很好！启动 Level 2 风控防护，在投研发布台一键授权全网广播！',
+        log: '【TG & X 广播调度部】X_Flight_Op 走进决策室向总监汇报全球排期。'
       }
     ];
 
@@ -273,6 +274,15 @@ export default function StudioCanvas({
         
         {/* Top Floating Control Bar for Movement / Meetings */}
         <div className="absolute top-3 right-4 z-40 flex items-center space-x-2">
+          {/* Direct Trigger for SPARK AI Research Desk */}
+          <button
+            onClick={onOpenResearchDesk}
+            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-cyan-950/80 hover:bg-cyan-900/90 border border-cyan-500/50 text-cyan-300 text-xs font-bold transition hover:scale-105 active:scale-95 shadow-lg shadow-cyan-900/30"
+          >
+            <Bot className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+            <span>🤖 打开 SPARK AI 投研发布中心</span>
+          </button>
+
           {!isMeetingActive ? (
             <button
               onClick={handleStartMeeting}
@@ -304,27 +314,27 @@ export default function StudioCanvas({
         {/* ── 5 大业务部门 + 战略决策室 Floor Plan (4 Columns x 2 Rows) ── */}
         <div className="absolute inset-0 grid grid-cols-4 grid-rows-2 gap-2.5 p-3.5 pointer-events-none">
           
-          {/* Department 1: 顾客接洽部与等候大厅 (Col 1, Row 1) */}
+          {/* Department 1: TG & X 广播调度部 (Col 1, Row 1) */}
           <div 
             onClick={onOpenQueue}
             className="col-start-1 row-start-1 rounded-xl border border-yellow-500/35 hover:border-yellow-400/60 bg-gradient-to-b from-yellow-950/20 via-slate-900/40 to-yellow-950/15 p-2.5 relative flex flex-col justify-between pointer-events-auto cursor-pointer transition-all hover:bg-yellow-950/25 group shadow-lg"
           >
             <div className="flex items-center justify-between text-yellow-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
-                <BellRing className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
-                <span>顾客接洽部</span>
+                <Radio className="w-3.5 h-3.5 text-yellow-400 animate-pulse" />
+                <span>TG & X 广播调度部</span>
               </div>
               <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-yellow-950 text-yellow-300 border border-yellow-700/60 font-semibold flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-ping"></span>
-                {queuedWaitingCount} 位等候
+                18区 + @sparkone_global
               </span>
             </div>
 
             {/* Waiting Queue Visual List */}
             <div className="mt-auto space-y-1.5 pt-1">
               <div className="text-[9px] font-mono text-slate-400 flex items-center justify-between">
-                <span>🛋️ VIP 客户等候沙发展示</span>
-                <span className="text-yellow-400 text-[8px] group-hover:underline">点击展开 ➔</span>
+                <span>📡 广播频道与话题排期</span>
+                <span className="text-yellow-400 text-[8px] group-hover:underline">展开排期 ➔</span>
               </div>
               {waitingClients.slice(1, 3).map((c) => (
                 <div 
@@ -343,92 +353,92 @@ export default function StudioCanvas({
             </div>
           </div>
 
-          {/* Department 2: 市场分析部 (Col 1, Row 2) */}
+          {/* Department 2: 宏观投研情报部 (Col 1, Row 2) */}
           <div className="col-start-1 row-start-2 rounded-xl border border-teal-500/25 bg-teal-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-teal-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
                 <BarChart3 className="w-3.5 h-3.5 text-teal-400" />
-                <span>市场分析部</span>
+                <span>宏观投研情报部</span>
               </div>
               <span className="text-[8px] px-1 rounded bg-teal-900/40 text-teal-300 border border-teal-700/40">
-                爆款嗅探与留存
+                DAILY & 多维归因
               </span>
             </div>
             <div className="grid grid-cols-2 gap-1.5 opacity-35">
-              <div className="h-9 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[8px] text-teal-300 font-mono">全网飙升雷达</div>
-              <div className="h-9 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[8px] text-emerald-300 font-mono">留存归因分析</div>
+              <div className="h-9 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[8px] text-teal-300 font-mono">美债/DXY脉搏</div>
+              <div className="h-9 rounded-lg border border-teal-800/60 bg-teal-900/20 flex items-center justify-center text-[8px] text-emerald-300 font-mono">流动性多维归因</div>
             </div>
           </div>
 
-          {/* Department 3: 文案脚本部 (Col 2, Row 1) */}
+          {/* Department 3: 量化策略解构部 (Col 2, Row 1) */}
           <div className="col-start-2 row-start-1 rounded-xl border border-amber-500/25 bg-amber-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-amber-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
-                <PenTool className="w-3.5 h-3.5 text-amber-400" />
-                <span>文案脚本部</span>
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span>量化策略解构部</span>
               </div>
               <span className="text-[8px] px-1 rounded bg-amber-900/40 text-amber-300 border border-amber-700/40">
-                15s 三段式架构
+                AURORA 黄金 & 风控
               </span>
             </div>
             <div className="grid grid-cols-2 gap-1.5 opacity-35">
-              <div className="h-9 rounded-lg border border-amber-800/60 bg-amber-900/20 flex items-center justify-center text-[8px] text-amber-300 font-mono">黄金三段式Hook</div>
-              <div className="h-9 rounded-lg border border-orange-800/60 bg-orange-900/20 flex items-center justify-center text-[8px] text-orange-300 font-mono">社媒种草文案</div>
+              <div className="h-9 rounded-lg border border-amber-800/60 bg-amber-900/20 flex items-center justify-center text-[8px] text-amber-300 font-mono">AURORA 黄金 (71%)</div>
+              <div className="h-9 rounded-lg border border-orange-800/60 bg-orange-900/20 flex items-center justify-center text-[8px] text-orange-300 font-mono">AI RISK ALERT 哨兵</div>
             </div>
           </div>
 
-          {/* Department 4: 视觉设计部 (Col 2, Row 2) - GPT Image & Seedream */}
+          {/* Department 4: 全球内容编译部 (Col 2, Row 2) */}
           <div className="col-start-2 row-start-2 rounded-xl border border-rose-500/30 bg-rose-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-rose-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
-                <Palette className="w-3.5 h-3.5 text-rose-400" />
-                <span>视觉设计部</span>
+                <PenTool className="w-3.5 h-3.5 text-rose-400" />
+                <span>全球内容编译部</span>
               </div>
               <span className="text-[8px] px-1 rounded bg-rose-900/40 text-rose-300 border border-rose-700/40">
-                GPT & Seedream
+                X Thread & 11国语言
               </span>
             </div>
             <div className="grid grid-cols-3 gap-1 opacity-35">
-              <div className="h-9 rounded-lg border border-rose-800/60 bg-rose-900/20 flex items-center justify-center text-[8px] text-rose-300 font-mono text-center">GPT 大字报</div>
-              <div className="h-9 rounded-lg border border-pink-800/60 bg-pink-900/20 flex items-center justify-center text-[8px] text-pink-300 font-mono text-center">Seedream摄影</div>
-              <div className="h-9 rounded-lg border border-fuchsia-800/60 bg-fuchsia-900/20 flex items-center justify-center text-[8px] text-fuchsia-300 font-mono text-center">Higgs特效</div>
+              <div className="h-9 rounded-lg border border-rose-800/60 bg-rose-900/20 flex items-center justify-center text-[8px] text-rose-300 font-mono text-center">权威英文排版</div>
+              <div className="h-9 rounded-lg border border-pink-800/60 bg-pink-900/20 flex items-center justify-center text-[8px] text-pink-300 font-mono text-center">11国母语本地化</div>
+              <div className="h-9 rounded-lg border border-fuchsia-800/60 bg-fuchsia-900/20 flex items-center justify-center text-[8px] text-fuchsia-300 font-mono text-center">高传播投资哲思</div>
             </div>
           </div>
 
-          {/* Department 5: 视听制作部 (Col 3, Rows 1-2 Full Height!) - Flow + Kling + Seedance + Suno */}
+          {/* Department 5: 视听图表渲染部 (Col 3, Rows 1-2 Full Height!) */}
           <div className="col-start-3 row-start-1 row-span-2 rounded-xl border border-cyan-500/30 bg-cyan-950/15 p-2.5 relative flex flex-col justify-between">
             <div className="flex items-center justify-between text-cyan-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
                 <Film className="w-3.5 h-3.5 text-cyan-400" />
-                <span>视听制作部 / AV PRODUCTION</span>
+                <span>视听图表渲染部 / VISUAL INFOGRAPHICS</span>
               </div>
               <span className="text-[8px] px-1.5 py-0.5 rounded bg-cyan-900/40 text-cyan-300 border border-cyan-700/40">
-                60% 15s 视频管线
+                TradingView 4K & Seedream
               </span>
             </div>
 
             {/* Middle Pipeline Ribbon */}
             <div className="my-auto py-2.5 px-2.5 rounded-lg border border-cyan-500/20 bg-slate-900/70 text-center shadow">
               <div className="text-[9px] font-mono text-cyan-300/90 mb-1 font-semibold">
-                ⚡ 15s 视听协同管线
+                ⚡ SPARK 工业化投研管线
               </div>
               <div className="text-[8px] font-mono text-slate-300 flex items-center justify-center space-x-1.5">
-                <span className="text-sky-300 font-bold">Flow</span>
+                <span className="text-sky-300 font-bold">Macro</span>
                 <span className="text-slate-500">➔</span>
-                <span className="text-cyan-300 font-bold">Kling</span>
+                <span className="text-cyan-300 font-bold">Aurora</span>
                 <span className="text-slate-500">➔</span>
-                <span className="text-amber-300 font-bold">Seedance</span>
+                <span className="text-amber-300 font-bold">Thread</span>
                 <span className="text-slate-500">➔</span>
-                <span className="text-violet-300 font-bold">Suno</span>
+                <span className="text-violet-300 font-bold">TG/X 广播</span>
               </div>
             </div>
 
             {/* Bottom 4 Pod Tags */}
             <div className="grid grid-cols-4 gap-1 opacity-40">
-              <div className="h-9 rounded-lg border border-sky-800/70 bg-sky-950/30 flex items-center justify-center text-[8px] text-sky-300 font-mono text-center p-0.5">Google Flow</div>
-              <div className="h-9 rounded-lg border border-cyan-800/70 bg-cyan-950/30 flex items-center justify-center text-[8px] text-cyan-300 font-mono text-center p-0.5">可灵 Kling</div>
-              <div className="h-9 rounded-lg border border-amber-800/70 bg-amber-950/30 flex items-center justify-center text-[8px] text-amber-300 font-mono text-center p-0.5">Seedance 2.5</div>
-              <div className="h-9 rounded-lg border border-violet-800/70 bg-violet-950/30 flex items-center justify-center text-[8px] text-violet-300 font-mono text-center p-0.5">Suno v3.5</div>
+              <div className="h-9 rounded-lg border border-sky-800/70 bg-sky-950/30 flex items-center justify-center text-[8px] text-sky-300 font-mono text-center p-0.5">TradingView</div>
+              <div className="h-9 rounded-lg border border-cyan-800/70 bg-cyan-950/30 flex items-center justify-center text-[8px] text-cyan-300 font-mono text-center p-0.5">Seedream科技</div>
+              <div className="h-9 rounded-lg border border-amber-800/70 bg-amber-950/30 flex items-center justify-center text-[8px] text-amber-300 font-mono text-center p-0.5">15s 投研动态</div>
+              <div className="h-9 rounded-lg border border-violet-800/70 bg-violet-950/30 flex items-center justify-center text-[8px] text-violet-300 font-mono text-center p-0.5">Suno 赛博音效</div>
             </div>
           </div>
 
@@ -437,11 +447,11 @@ export default function StudioCanvas({
             <div className="w-full flex items-center justify-between text-violet-400 font-mono text-[10px] font-bold tracking-wider">
               <div className="flex items-center space-x-1">
                 <Crown className="w-3.5 h-3.5 text-amber-400" />
-                <span>战略决策室</span>
+                <span>战略决策与一键广播中枢</span>
               </div>
               {isMeetingActive && (
                 <span className="text-[8px] text-rose-400 font-bold px-1.5 py-0.2 rounded bg-rose-950/80 border border-rose-800 animate-pulse">
-                  ● 联席汇报中
+                  ● 联席终审中
                 </span>
               )}
             </div>
@@ -456,7 +466,7 @@ export default function StudioCanvas({
             </div>
 
             <div className="w-full text-center text-[9px] text-slate-500 font-mono">
-              五部门联席 • 策略与排期拍板
+              五部门联席 • 针对 Telegram & X.com 终审拍板
             </div>
           </div>
 
@@ -625,8 +635,8 @@ export default function StudioCanvas({
 
       </div>
 
-      {/* Floating Bottom Client Pipeline Bar */}
-      <div className="w-full max-w-[1240px] mt-2.5 h-12 bg-gradient-to-r from-slate-900/90 via-[#0d1526]/90 to-cyan-950/80 border border-cyan-500/30 rounded-xl px-4 flex items-center justify-between shadow-lg">
+      {/* Floating Bottom Client Pipeline Bar (SPARK ONE Focused) */}
+      <div className="w-full max-w-[1260px] mt-2.5 h-12 bg-gradient-to-r from-slate-900/90 via-[#0d1526]/90 to-cyan-950/80 border border-cyan-500/30 rounded-xl px-4 flex items-center justify-between shadow-lg">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-lg shadow">
             {currentClient.avatar}
@@ -646,18 +656,18 @@ export default function StudioCanvas({
           <div className="flex items-center space-x-2">
             <div className="w-36 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
               <div 
-                className="h-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-400 rounded-full transition-all duration-1000"
+                className="h-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-amber-400 rounded-full transition-all duration-1000"
                 style={{ width: `${currentClient.progress}%` }}
               />
             </div>
-            <span className="text-[10px] font-mono font-bold text-cyan-400">{currentClient.progress}% 制作中</span>
+            <span className="text-[10px] font-mono font-bold text-cyan-400">{currentClient.progress}% 研报已就绪</span>
           </div>
 
           <button
             onClick={() => onOpenApprovalForClient(currentClient.id)}
-            className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 text-xs font-semibold transition-all hover:scale-105 active:scale-95 shadow"
+            className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-amber-500/20 hover:from-cyan-500/30 hover:to-amber-500/30 border border-cyan-500/40 text-cyan-300 text-xs font-semibold transition-all hover:scale-105 active:scale-95 shadow"
           >
-            <span>检阅 15s 成片与图文</span>
+            <span>检阅 𝕏 推特与 ✈️ TG 全球成稿</span>
             <ChevronRight className="w-3 h-3" />
           </button>
         </div>

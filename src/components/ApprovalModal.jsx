@@ -1,440 +1,392 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   X, 
-  Play, 
-  Pause, 
-  RotateCcw, 
   CheckCircle2, 
-  Sparkles, 
+  Send, 
   Share2, 
-  Clock, 
-  Flame, 
-  Film, 
-  Image as ImageIcon,
-  MessageCircle,
-  TrendingUp,
-  Volume2,
-  Send,
-  Eye,
-  Check
+  TrendingUp, 
+  Globe, 
+  Sparkles, 
+  Repeat2, 
+  Heart, 
+  Bookmark, 
+  MessageSquare, 
+  Bot, 
+  ExternalLink,
+  ShieldCheck,
+  Check,
+  Film,
+  Play,
+  Pause
 } from 'lucide-react';
 
 export default function ApprovalModal({ 
   isOpen, 
   onClose, 
-  approvalItems, 
+  approvalItems = [], 
   selectedItemId,
   onApprovePost 
 }) {
   if (!isOpen) return null;
 
-  const [activeItem, setActiveItem] = useState(
-    approvalItems.find(i => i.id === selectedItemId) || approvalItems[0]
-  );
-
-  // 15s Video Player states
+  const [activeTab, setActiveTab] = useState('x_com'); // 'x_com' | 'telegram' | 'video_15s'
+  const [selectedLang, setSelectedLang] = useState('EN');
+  const [isApproved, setIsApproved] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0); // 0 to 15 seconds
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [approvedStatus, setApprovedStatus] = useState({});
-  const [musicSource, setMusicSource] = useState('suno'); // 'suno' | 'flow_music'
+  const [videoTime, setVideoTime] = useState(0);
 
-  useEffect(() => {
-    let timer;
-    if (isPlaying && activeItem.type === '15s_video') {
-      timer = setInterval(() => {
-        setCurrentTime((prev) => {
-          if (prev >= 14.8) {
-            setIsPlaying(false);
-            return 14.8;
-          }
-          return Number((prev + 0.1).toFixed(1));
-        });
-      }, 100);
-    }
-    return () => clearInterval(timer);
-  }, [isPlaying, activeItem]);
+  const languages = ['EN (English)', '中文 (Chinese)', '日本語 (Japanese)', '한국어 (Korean)', 'Español', 'العربية (Arabic)', 'Русский'];
 
-  // Determine current active script beat
-  const getCurrentBeat = () => {
-    if (currentTime < 3.0) return activeItem.scriptStructure?.[0];
-    if (currentTime < 10.0) return activeItem.scriptStructure?.[1];
-    return activeItem.scriptStructure?.[2];
+  const handleApprove = () => {
+    setIsApproved(true);
+    onApprovePost?.(selectedItemId || 'app_1');
+    setTimeout(() => {
+      onClose();
+    }, 1200);
   };
-
-  const handleApprove = (id) => {
-    setApprovedStatus(prev => ({ ...prev, [id]: true }));
-    onApprovePost(id);
-  };
-
-  const currentBeat = activeItem.type === '15s_video' ? getCurrentBeat() : null;
-  const isApproved = approvedStatus[activeItem.id];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-5xl h-[88vh] bg-[#0c1220] border border-slate-700/80 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in select-none">
+      <div className="relative w-full max-w-5xl h-[88vh] max-h-[740px] bg-[#0c1220] border border-cyan-500/30 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Modal Top Bar */}
-        <div className="h-14 border-b border-slate-800 px-6 flex items-center justify-between bg-slate-900/60">
+        {/* Top Header Bar */}
+        <div className="h-14 border-b border-slate-800 px-6 flex items-center justify-between bg-slate-900/70">
           <div className="flex items-center space-x-3">
-            <div className="p-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-              <CheckCircle2 className="w-5 h-5" />
+            <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center font-bold">
+              ⚡
             </div>
             <div>
               <h2 className="text-sm font-bold text-white flex items-center gap-2">
-                <span>内容审核工作台 (Human-in-the-Loop)</span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
-                  人类最后拍板把关
+                <span>Spark Union Capital 终审发布工作台</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800/60 font-mono">
+                  Human-in-the-Loop 终审把关
                 </span>
               </h2>
             </div>
           </div>
 
-          {/* Switch between Pending Items */}
-          <div className="flex items-center space-x-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
-            {approvalItems.map(item => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setActiveItem(item);
-                  setCurrentTime(0);
-                  setIsPlaying(false);
-                }}
-                className={`px-3 py-1 rounded-md text-xs font-medium flex items-center space-x-1.5 transition-all ${
-                  activeItem.id === item.id 
-                    ? 'bg-cyan-600 text-white shadow' 
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                {item.type === '15s_video' ? (
-                  <Film className="w-3.5 h-3.5 text-cyan-300" />
-                ) : (
-                  <ImageIcon className="w-3.5 h-3.5 text-pink-300" />
-                )}
-                <span>{item.clientName}</span>
-                {approvedStatus[item.id] && (
-                  <Check className="w-3 h-3 text-emerald-300 ml-1" />
-                )}
-              </button>
-            ))}
+          {/* Platform Tab Switcher */}
+          <div className="flex items-center space-x-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+            <button
+              onClick={() => setActiveTab('x_com')}
+              className={`px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 ${
+                activeTab === 'x_com'
+                  ? 'bg-slate-800 text-white border border-slate-700 shadow'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <span className="font-bold">𝕏</span>
+              <span>X.com Thread 预览</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('telegram')}
+              className={`px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 ${
+                activeTab === 'telegram'
+                  ? 'bg-cyan-600/30 text-cyan-300 border border-cyan-500/40 shadow'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Send className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Telegram 18区看板</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('video_15s')}
+              className={`px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 ${
+                activeTab === 'video_15s'
+                  ? 'bg-amber-600/30 text-amber-300 border border-amber-500/40 shadow'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Film className="w-3.5 h-3.5 text-amber-400" />
+              <span>15s 金融动态成片</span>
+            </button>
           </div>
 
           <button 
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+            className="w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Modal Body: Left Phone Mockup Preview, Right Script & Insight breakdown */}
-        <div className="flex-1 grid grid-cols-12 overflow-hidden bg-[#090e18]">
+        {/* Modal Main Content */}
+        <div className="flex-1 grid grid-cols-12 overflow-hidden">
           
-          {/* Left Column: Visual Simulator (9:16 vertical player or Carousel viewer) */}
-          <div className="col-span-5 p-6 border-r border-slate-800/80 flex flex-col items-center justify-center bg-slate-950/40 relative">
+          {/* Left Preview Pane (Cols 1-7) */}
+          <div className="col-span-7 border-r border-slate-800/80 bg-slate-950/60 p-6 flex flex-col items-center justify-center overflow-y-auto custom-scrollbar">
             
-            {activeItem.type === '15s_video' ? (
-              /* 9:16 Smartphone Mockup */
-              <div className="relative w-[270px] h-[480px] bg-slate-900 rounded-[32px] border-[5px] border-slate-700/80 shadow-2xl overflow-hidden flex flex-col justify-between">
-                {/* Simulated Screen Content */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-all duration-700"
-                  style={{ backgroundImage: `url(${activeItem.videoMockUrl})` }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
-                </div>
-
-                {/* Top Phone UI (TikTok / Reels style) */}
-                <div className="relative z-10 px-4 pt-3 flex justify-between items-center text-[10px] text-white/80 font-mono">
-                  <span className="bg-rose-500/80 px-1.5 py-0.5 rounded text-[9px] font-bold">15s REELS / TIKTOK</span>
-                  
-                  {/* Interactive Music Selector (Suno vs Google Flow Music) */}
-                  <button 
-                    onClick={() => setMusicSource(prev => prev === 'suno' ? 'flow_music' : 'suno')}
-                    title="点击切换 BGM 引擎: Suno 卡点 vs Flow Music 氛围"
-                    className="flex items-center space-x-1 bg-black/60 hover:bg-black/90 px-2 py-0.5 rounded-full backdrop-blur border border-white/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                  >
-                    <Volume2 className={`w-3 h-3 ${musicSource === 'suno' ? 'text-fuchsia-400 animate-pulse' : 'text-sky-400'}`} />
-                    <span className="font-sans text-[10px]">
-                      {musicSource === 'suno' ? '🎵 Suno: 强卡点神曲' : '🎼 Flow: 氛围轻音'}
-                    </span>
+            {/* VIEW 1: X.com Thread Simulator */}
+            {activeTab === 'x_com' && (
+              <div className="w-full max-w-lg bg-black border border-slate-800 rounded-2xl p-4 text-white shadow-2xl font-sans">
+                {/* User Header */}
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 via-cyan-500 to-indigo-600 p-[1.5px] flex items-center justify-center">
+                      <div className="w-full h-full bg-black rounded-full flex items-center justify-center font-bold text-amber-400 text-sm">
+                        ⚡
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-1.5">
+                        <span className="font-bold text-sm text-white">Spark Union Capital</span>
+                        <span className="text-amber-400 text-xs" title="Verified Gold Organization">🟡</span>
+                      </div>
+                      <span className="text-slate-500 text-xs">@sparkone_global · 1/4 Thread</span>
+                    </div>
+                  </div>
+                  <button className="px-3 py-1 bg-white text-black font-bold text-xs rounded-full hover:bg-slate-200">
+                    Follow
                   </button>
                 </div>
 
-                {/* Center Dynamic Subtitles Overlay based on current playback beat */}
-                <div className="relative z-10 px-4 text-center my-auto">
-                  {currentBeat && (
-                    <div className="bg-black/70 backdrop-blur-md border border-white/20 p-2.5 rounded-xl shadow-2xl animate-in zoom-in-95 duration-150">
-                      <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-cyan-500 text-black font-extrabold mb-1 inline-block">
-                        {currentBeat.phase}
-                      </span>
-                      <p className="text-sm font-extrabold text-amber-300 drop-shadow-md leading-snug tracking-wide">
-                        "{currentBeat.spokenText}"
-                      </p>
-                    </div>
-                  )}
-                </div>
+                {/* Tweet Body */}
+                <p className="text-xs text-slate-200 leading-relaxed mb-3 font-mono">
+                  ⚡ <strong className="text-cyan-400">[SPARK AI DAILY]</strong> Global Macro Pulse & Quantitative Attribution.<br/><br/>
+                  1. Macro: Gold (XAU/USD) hits $2,682/oz while US 10Y yields ease to 4.22%.<br/>
+                  2. Crypto: Bitcoin consolidates at $68,500 amid +$315M net ETF inflows.<br/>
+                  3. AURORA Engine: 71% Long Momentum confirmed with tightened 1.6% trailing stops.<br/><br/>
+                  Deep attribution breakdown below 🧵👇
+                </p>
 
-                {/* Bottom Social Action Overlay */}
-                <div className="relative z-10 p-3 flex flex-col space-y-2">
-                  <div className="text-[11px] text-white">
-                    <p className="font-bold text-cyan-300">@{activeItem.clientName}</p>
-                    <p className="text-[10px] text-slate-200 line-clamp-2 mt-0.5">{activeItem.copyCaption}</p>
+                {/* Visual Chart Card */}
+                <div className="rounded-xl border border-slate-800 bg-[#090d16] overflow-hidden mb-3">
+                  <div className="p-2 border-b border-slate-800 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <span className="text-cyan-400 font-bold">TradingView 4K • XAU/USD vs BTC Multi-Correlation</span>
+                    <span className="text-emerald-400 font-semibold">+1.8% QoQ Liquidity Surge</span>
                   </div>
-
-                  {/* 15s Timeline Bar (3-beat color coded) */}
-                  <div className="space-y-1">
-                    <div className="h-1.5 w-full bg-slate-700 rounded-full overflow-hidden flex relative">
-                      {/* Beat 1 (0-3s Hook): Red/Rose */}
-                      <div className="w-[20%] h-full bg-rose-500 border-r border-black" title="0~3s Hook" />
-                      {/* Beat 2 (3-10s Core): Cyan */}
-                      <div className="w-[47%] h-full bg-cyan-400 border-r border-black" title="3~10s Demo" />
-                      {/* Beat 3 (10-15s CTA): Emerald */}
-                      <div className="w-[33%] h-full bg-emerald-400" title="10~15s CTA" />
-
-                      {/* Current playhead indicator */}
-                      <div 
-                        className="absolute top-0 bottom-0 w-1 bg-white shadow-lg shadow-white"
-                        style={{ left: `${(currentTime / 14.8) * 100}%` }}
-                      />
+                  <div className="h-44 bg-gradient-to-br from-slate-900 via-[#0c1626] to-slate-950 p-3 flex flex-col justify-between relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#38bdf8 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+                    <div className="flex items-center justify-between text-xs font-mono z-10">
+                      <div>
+                        <span className="text-slate-400 text-[10px]">AURORA QUANT SIGNAL</span>
+                        <div className="text-sm font-bold text-emerald-400 font-mono">LONG BIAS 71.4% (Kelly 0.35)</div>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-slate-400 text-[10px]">CURRENT RESISTANCE</span>
+                        <div className="text-sm font-bold text-amber-400 font-mono">$2,710.00</div>
+                      </div>
                     </div>
-                    <div className="flex justify-between text-[9px] font-mono text-slate-400">
-                      <span>0s (Hook)</span>
-                      <span>3s</span>
-                      <span>10s</span>
-                      <span>14.8s</span>
+                    {/* Simulated Neon Chart Line */}
+                    <div className="my-auto h-20 w-full flex items-end space-x-1.5 pt-4">
+                      {[35, 42, 38, 55, 60, 52, 70, 65, 82, 88, 79, 95, 92, 100].map((val, idx) => (
+                        <div key={idx} className="flex-1 flex flex-col items-center gap-1">
+                          <div 
+                            className="w-full rounded-t bg-gradient-to-t from-cyan-600/30 to-cyan-400 transition-all"
+                            style={{ height: `${val}%` }}
+                          />
+                        </div>
+                      ))}
                     </div>
-                  </div>
-
-                  {/* Play / Pause Controls */}
-                  <div className="flex items-center justify-between pt-1">
-                    <div className="flex items-center space-x-2">
-                      <button 
-                        onClick={() => setIsPlaying(!isPlaying)}
-                        className="w-7 h-7 rounded-full bg-white text-slate-900 flex items-center justify-center hover:scale-105 active:scale-95 transition"
-                      >
-                        {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
-                      </button>
-                      <button 
-                        onClick={() => { setCurrentTime(0); setIsPlaying(true); }}
-                        className="p-1 rounded text-slate-400 hover:text-white"
-                      >
-                        <RotateCcw className="w-3.5 h-3.5" />
-                      </button>
+                    <div className="flex items-center justify-between text-[9px] font-mono text-slate-400 z-10">
+                      <span>00:00 UTC</span>
+                      <span className="text-cyan-300">Target Alpha Zone</span>
+                      <span>24:00 UTC</span>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-300 font-bold">{currentTime}s / 14.8s</span>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              /* Carousel Simulator (小红书/Instagram) */
-              <div className="w-[290px] h-[460px] bg-slate-900 rounded-2xl border border-slate-700/80 shadow-2xl overflow-hidden flex flex-col justify-between">
-                <div 
-                  className="relative flex-1 bg-cover bg-center p-4 flex flex-col justify-between"
-                  style={{ backgroundImage: `url(${activeItem.slides[activeSlideIndex].imageUrl})` }}
-                >
-                  <div className="absolute inset-0 bg-black/40" />
-
-                  {/* RedBook / IG Mockup Header */}
-                  <div className="relative z-10 flex justify-between items-center">
-                    <span className="bg-rose-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                      小红书 3:4 爆款格式
-                    </span>
-                    <span className="bg-black/60 text-white text-[10px] font-mono px-2 py-0.5 rounded-full">
-                      {activeSlideIndex + 1} / {activeItem.slides.length}
-                    </span>
-                  </div>
-
-                  {/* Simulated High-Impact Typography on Cover */}
-                  <div className="relative z-10 bg-black/70 backdrop-blur-md p-3 rounded-xl border border-white/20">
-                    <span className="text-[9px] font-bold text-amber-400 uppercase tracking-wider block mb-1">
-                      {activeItem.slides[activeSlideIndex].tag}
-                    </span>
-                    <h4 className="text-base font-extrabold text-white leading-tight">
-                      {activeItem.slides[activeSlideIndex].title}
-                    </h4>
-                    <p className="text-[11px] text-slate-300 mt-1 leading-snug">
-                      {activeItem.slides[activeSlideIndex].sub}
-                    </p>
                   </div>
                 </div>
 
-                {/* Slide Thumbnail Strip */}
-                <div className="p-2.5 bg-slate-950 flex items-center justify-center space-x-2 border-t border-slate-800">
-                  {activeItem.slides.map((s, idx) => (
-                    <button
-                      key={s.index}
-                      onClick={() => setActiveSlideIndex(idx)}
-                      className={`w-9 h-12 rounded border overflow-hidden transition-all ${
-                        activeSlideIndex === idx 
-                          ? 'border-cyan-400 ring-2 ring-cyan-500/40 scale-105' 
-                          : 'border-slate-700 opacity-60 hover:opacity-100'
-                      }`}
-                    >
-                      <img src={s.imageUrl} alt="" className="w-full h-full object-cover" />
-                    </button>
-                  ))}
+                {/* Tweet Metrics */}
+                <div className="flex items-center justify-between text-slate-500 text-xs pt-2 border-t border-slate-800">
+                  <span className="flex items-center gap-1.5 hover:text-cyan-400 cursor-pointer">
+                    <MessageSquare className="w-3.5 h-3.5" /> 148
+                  </span>
+                  <span className="flex items-center gap-1.5 hover:text-emerald-400 cursor-pointer">
+                    <Repeat2 className="w-3.5 h-3.5" /> 612
+                  </span>
+                  <span className="flex items-center gap-1.5 hover:text-rose-400 cursor-pointer">
+                    <Heart className="w-3.5 h-3.5" /> 2,480
+                  </span>
+                  <span className="flex items-center gap-1.5 hover:text-cyan-400 cursor-pointer">
+                    <Bookmark className="w-3.5 h-3.5" /> 420
+                  </span>
+                  <span className="flex items-center gap-1.5 hover:text-cyan-400 cursor-pointer">
+                    <Share2 className="w-3.5 h-3.5" />
+                  </span>
                 </div>
               </div>
             )}
+
+            {/* VIEW 2: Telegram Simulator */}
+            {activeTab === 'telegram' && (
+              <div className="w-full max-w-md bg-[#17212b] border border-cyan-500/30 rounded-2xl p-4 text-white shadow-2xl font-sans">
+                {/* TG Channel Header */}
+                <div className="flex items-center justify-between pb-3 border-b border-[#242f3d] mb-3">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="w-9 h-9 rounded-full bg-cyan-600 flex items-center justify-center font-bold text-white text-sm">
+                      ⚡
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-xs text-white flex items-center gap-1">
+                        <span>Spark Union Capital • Official</span>
+                        <ShieldCheck className="w-3 h-3 text-cyan-400" />
+                      </h4>
+                      <p className="text-[10px] text-slate-400 font-mono">Topic: 🤖 SPARK AI (#5) • 42,500 members</p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-cyan-900/60 text-cyan-300 font-mono">
+                    11-Lang Broadcast
+                  </span>
+                </div>
+
+                {/* TG Message Bubble */}
+                <div className="p-3.5 rounded-xl bg-[#202b36] border border-[#2b3a4a] text-xs text-slate-200 leading-relaxed mb-3 space-y-2">
+                  <div className="flex items-center justify-between text-[10px] text-cyan-400 font-bold font-mono">
+                    <span>🤖 SPARK AI BOT [RESEARCH DISPATCH]</span>
+                    <span className="text-slate-400">12:10 PM</span>
+                  </div>
+
+                  <p className="font-mono text-[11px] leading-relaxed">
+                    ⚡ <strong>[SPARK AI DAILY & MARKET INTELLIGENCE]</strong><br/><br/>
+                    <strong>1. GLOBAL MACRO:</strong><br/>
+                    US 10Y Yields cooling to 4.22%. Gold ($2,682) & Bitcoin ($68.5k) sustain co-breakout.<br/><br/>
+                    <strong>2. ATTRIBUTION BREAKDOWN:</strong><br/>
+                    • Liquidity Surplus: 42%<br/>
+                    • Derivatives Flush: 28%<br/>
+                    • De-Dollarization Reserve: 30%<br/><br/>
+                    <strong>3. AURORA QUANT ENGINE:</strong><br/>
+                    71% Long Momentum active. Trailing stop tightened to 1.6%.
+                  </p>
+
+                  {/* Inline Action Buttons */}
+                  <div className="grid grid-cols-2 gap-1.5 pt-2 border-t border-[#2b3a4a]">
+                    <button className="py-1.5 px-2 bg-[#2b3a4a] hover:bg-[#344659] text-[10px] font-semibold rounded text-cyan-300 flex items-center justify-center gap-1 transition">
+                      <BarChart3 className="w-3 h-3" />
+                      <span>查看 TradingView 图表</span>
+                    </button>
+                    <button className="py-1.5 px-2 bg-[#2b3a4a] hover:bg-[#344659] text-[10px] font-semibold rounded text-amber-300 flex items-center justify-center gap-1 transition">
+                      <Zap className="w-3 h-3" />
+                      <span>AURORA 引擎读数</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="text-center text-[10px] text-slate-400 font-mono">
+                  ✈️ 已同步至 18 个 Telegram 主题区与 11 国语言专属频道
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 3: 15s Video Simulator */}
+            {activeTab === 'video_15s' && (
+              <div className="relative w-64 h-[420px] rounded-2xl bg-black border-2 border-cyan-500/40 shadow-2xl overflow-hidden flex flex-col justify-between p-3.5">
+                <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400 z-10">
+                  <span className="px-1.5 py-0.5 rounded bg-black/60 border border-cyan-500/30">9:16 Financial Reel</span>
+                  <span>14.8s • 4K</span>
+                </div>
+
+                {/* Simulated Center Video Graphic */}
+                <div className="my-auto text-center space-y-2 z-10">
+                  <div className="w-16 h-16 rounded-full bg-cyan-500/20 border-2 border-cyan-400 mx-auto flex items-center justify-center shadow-lg shadow-cyan-500/30 animate-pulse">
+                    <span className="text-3xl">⚡</span>
+                  </div>
+                  <h4 className="text-xs font-bold text-white font-mono">AURORA QUANT ENGINE</h4>
+                  <p className="text-[10px] text-cyan-300 font-mono">GOLD & BTC MACRO BREAKOUT</p>
+                </div>
+
+                {/* Bottom Video Controls */}
+                <div className="z-10 space-y-1.5">
+                  <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                    <div className="bg-cyan-400 h-full w-3/4 animate-pulse" />
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <span>Google Flow 控速</span>
+                    <span className="text-amber-400">Suno 3.0s Beat</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
           </div>
 
-          {/* Right Column: Detailed Breakdown, Copywriting, Model Prompts, and One-Click Approval */}
-          <div className="col-span-7 p-6 overflow-y-auto space-y-5">
-            
-            {/* Header info */}
-            <div>
-              <div className="flex items-center space-x-2 mb-1">
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800">
-                  {activeItem.type === '15s_video' ? '60% 份额 • 15s 短视频' : '40% 份额 • 深度干货图文'}
+          {/* Right Audit & Execution Panel (Cols 8-12) */}
+          <div className="col-span-5 p-6 flex flex-col justify-between bg-slate-900/30">
+            <div className="space-y-4">
+              <div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60 font-bold uppercase">
+                  Audit & Dispatch Checklist
                 </span>
-                <span className="text-xs text-slate-400 font-mono">预估曝光: {activeItem.predictedViews}</span>
-                {activeItem.estimatedRetention && (
-                  <span className="text-xs text-emerald-400 font-mono">
-                    预期完播率: {activeItem.estimatedRetention}
-                  </span>
-                )}
+                <h3 className="text-base font-bold text-white mt-1">
+                  Spark Union Capital 国际投研宣发排期
+                </h3>
+                <p className="text-xs text-slate-400 mt-1">
+                  该内容由宏观投研部与量化策略部自动编译，符合最高合规与华尔街机构传播标准。
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-white">{activeItem.title}</h3>
-            </div>
 
-            {/* Target Distribution Channels */}
-            <div className="flex items-center space-x-2 text-xs">
-              <span className="text-slate-400 font-mono">目标发布渠道:</span>
-              {activeItem.platforms.map(p => (
-                <span key={p} className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 border border-slate-700 font-medium">
-                  {p}
-                </span>
-              ))}
-            </div>
-
-            {/* Script Breakdown if Video */}
-            {activeItem.type === '15s_video' && (
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-bold font-mono text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <Film className="w-3.5 h-3.5" />
-                    <span>15s 黄金分镜拆解 (Google Flow + Kling + Seedance 2.5)</span>
-                  </h4>
-                  <span className="text-[10px] font-mono text-slate-400">各镜头专模专精</span>
+              {/* Multi-language Dispatch Selector */}
+              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <div className="flex items-center justify-between text-xs text-slate-300 font-semibold mb-2">
+                  <span className="flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>全球 11 国语言本地化广播状态</span>
+                  </span>
+                  <span className="text-emerald-400 text-[10px] font-mono">全部就绪</span>
                 </div>
-
-                <div className="space-y-2.5">
-                  {activeItem.scriptStructure.map((sc, i) => (
-                    <div 
-                      key={i}
-                      className={`p-3.5 rounded-xl border text-xs transition-all ${
-                        currentBeat?.phase === sc.phase 
-                          ? 'border-cyan-500/80 bg-cyan-950/20 ring-1 ring-cyan-500/30' 
-                          : 'border-slate-800 bg-slate-900/50'
-                      }`}
-                    >
-                      <div className="flex justify-between items-center font-mono text-[10px] text-slate-400 mb-1.5">
-                        <strong className="text-cyan-300 text-xs">{sc.phase}</strong>
-                        <div className="flex items-center space-x-2">
-                          {sc.engineTag && (
-                            <span className="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700/60 font-mono text-[9px] font-bold">
-                              {sc.engineTag}
-                            </span>
-                          )}
-                          <span>时长: {sc.durationSec}s</span>
-                        </div>
-                      </div>
-                      <p className="font-semibold text-slate-100">口播: "{sc.spokenText}"</p>
-                      <p className="text-[11px] text-slate-400 mt-1">分镜视觉 Prompt: {sc.visualPrompt}</p>
-                    </div>
-                  ))}
+                <div className="grid grid-cols-2 gap-1 text-[10px] font-mono text-slate-400">
+                  <div className="p-1 rounded bg-slate-900 border border-slate-800 text-slate-300">🇬🇧 English (Primary)</div>
+                  <div className="p-1 rounded bg-slate-900 border border-slate-800 text-slate-300">🇨🇳 中文普通话</div>
+                  <div className="p-1 rounded bg-slate-900 border border-slate-800 text-slate-300">🇯🇵 日本語</div>
+                  <div className="p-1 rounded bg-slate-900 border border-slate-800 text-slate-300">🇰🇷 한국어</div>
+                  <div className="p-1 rounded bg-slate-900 border border-slate-800 text-slate-300">🇪🇸 Español</div>
+                  <div className="p-1 rounded bg-slate-900 border border-slate-800 text-slate-300">🇦🇪 العربية</div>
                 </div>
               </div>
-            )}
 
-            {/* Copywriting & Caption Section */}
-            <div className="space-y-2">
-              <h4 className="text-xs font-bold font-mono text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <MessageCircle className="w-3.5 h-3.5 text-indigo-400" />
-                <span>社媒正文与热门 Hashtag</span>
-              </h4>
-              <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed font-sans">
-                {activeItem.copyCaption}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {activeItem.hashtags.map(tag => (
-                  <span key={tag} className="text-[11px] font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/40">
-                    {tag}
+              {/* Multi-Channel Distribution Target */}
+              <div className="space-y-2 text-xs">
+                <div className="flex items-center justify-between p-2 rounded-lg bg-slate-900/60 border border-slate-800">
+                  <span className="text-slate-300 flex items-center gap-1.5">
+                    <span className="text-sm">𝕏</span>
+                    <span>X.com (@sparkone_global)</span>
                   </span>
-                ))}
+                  <span className="text-[10px] text-cyan-400 font-mono font-bold">4-Tweet Thread</span>
+                </div>
+
+                <div className="flex items-center justify-between p-2 rounded-lg bg-slate-900/60 border border-slate-800">
+                  <span className="text-slate-300 flex items-center gap-1.5">
+                    <Send className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Telegram 18区超级社群 (#5 SPARK AI)</span>
+                  </span>
+                  <span className="text-[10px] text-emerald-400 font-mono font-bold">全网广播</span>
+                </div>
               </div>
             </div>
 
-            {/* Action Bar: Approve or Regenerate with specific models */}
-            <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center space-x-2">
-                {activeItem.type === '15s_video' ? (
+            {/* Bottom Approval Action */}
+            <div className="pt-4 border-t border-slate-800/80 space-y-2.5">
+              <button
+                onClick={handleApprove}
+                disabled={isApproved}
+                className={`w-full py-3 rounded-xl text-xs font-bold shadow-xl transition-all flex items-center justify-center space-x-2 active:scale-95 ${
+                  isApproved
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-gradient-to-r from-cyan-500 via-indigo-600 to-amber-500 hover:from-cyan-400 hover:to-amber-400 text-white shadow-cyan-500/25'
+                }`}
+              >
+                {isApproved ? (
                   <>
-                    <button 
-                      onClick={() => alert('已调用 Kling AI：正在重新增强 0~3s 面部素颜反差与美感光影质感...')}
-                      className="px-2.5 py-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-900 text-cyan-300 text-[11px] font-medium border border-cyan-800 transition flex items-center gap-1"
-                    >
-                      <span>✨ 调 Kling 强化美感</span>
-                    </button>
-                    <button 
-                      onClick={() => alert('已调用 Higgsfield Seedance 2.5：正在重新演算物理运镜与产品动作轨迹...')}
-                      className="px-2.5 py-1.5 rounded-lg bg-amber-950/60 hover:bg-amber-900 text-amber-300 text-[11px] font-medium border border-amber-800 transition flex items-center gap-1"
-                    >
-                      <span>🎯 调 Seedance 优化动作</span>
-                    </button>
-                    <button 
-                      onClick={() => alert('已调用 Suno v3.5：正在基于 15s 情绪转折曲线重新生成第 3.0s 精准 Beat Drop 伴奏...')}
-                      className="px-2.5 py-1.5 rounded-lg bg-fuchsia-950/60 hover:bg-fuchsia-900 text-fuchsia-300 text-[11px] font-medium border border-fuchsia-800 transition flex items-center gap-1"
-                    >
-                      <span>🎵 调 Suno 重做卡点</span>
-                    </button>
-                    <button 
-                      onClick={() => alert('已调用 Google Flow：正在全局调度控速重刷完整 15s 渲染管线...')}
-                      className="px-2.5 py-1.5 rounded-lg bg-sky-950/60 hover:bg-sky-900 text-sky-300 text-[11px] font-medium border border-sky-800 transition flex items-center gap-1"
-                    >
-                      <span>🌊 调 Google Flow 全片重刷</span>
-                    </button>
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                    <span>总监已授权！Telegram & X.com 全球排期广播已启动</span>
                   </>
                 ) : (
                   <>
-                    <button 
-                      onClick={() => alert('【视觉设计部】已调用 GPT Image：正在重新排版小红书 3:4 高对比大字报封面...')}
-                      className="px-2.5 py-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900 text-rose-300 text-[11px] font-medium border border-rose-800 transition flex items-center gap-1"
-                    >
-                      <span>🎨 调 GPT Image 重出大字封面</span>
-                    </button>
-                    <button 
-                      onClick={() => alert('【视觉设计部】已调用 Seedream：正在重新生成摄影级食材微距与光泽质感大片...')}
-                      className="px-2.5 py-1.5 rounded-lg bg-pink-950/60 hover:bg-pink-900 text-pink-300 text-[11px] font-medium border border-pink-800 transition flex items-center gap-1"
-                    >
-                      <span>🌱 调 Seedream 重生美学摄影</span>
-                    </button>
-                    <button 
-                      onClick={() => alert('【文案脚本部】已通知文案工位重新构思爆款种草文案...')}
-                      className="px-2.5 py-1.5 rounded-lg bg-amber-950/60 hover:bg-amber-900 text-amber-300 text-[11px] font-medium border border-amber-800 transition flex items-center gap-1"
-                    >
-                      <span>✍️ 调文案部重写种草文</span>
-                    </button>
+                    <Check className="w-4 h-4" />
+                    <span>总监一键拍板授权发布 (Approve & Broadcast)</span>
                   </>
                 )}
-              </div>
+              </button>
 
-              <button 
-                onClick={() => handleApprove(activeItem.id)}
-                disabled={isApproved}
-                className={`flex items-center space-x-2 px-5 py-2.5 rounded-xl font-bold text-xs shadow-xl transition-all ${
-                  isApproved 
-                    ? 'bg-emerald-600/30 text-emerald-300 border border-emerald-500/50 cursor-default' 
-                    : 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 hover:scale-105 active:scale-95 shadow-emerald-500/20'
-                }`}
+              <button
+                onClick={onClose}
+                className="w-full py-2 bg-slate-800/60 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl text-xs font-semibold transition"
               >
-                <CheckCircle2 className="w-4 h-4" />
-                <span>{isApproved ? '已审批排期！等待自动推送' : '一键过审并定时自动发布'}</span>
+                返回投研控制台调整
               </button>
             </div>
 
           </div>
+
         </div>
 
       </div>

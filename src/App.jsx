@@ -6,6 +6,7 @@ import AgentDetailModal from './components/AgentDetailModal';
 import InsightsDrawer from './components/InsightsDrawer';
 import EventTicker from './components/EventTicker';
 import ClientQueueModal from './components/ClientQueueModal';
+import SparkResearchDeskModal from './components/SparkResearchDeskModal';
 
 import { 
   INITIAL_CLIENTS, 
@@ -28,6 +29,7 @@ export default function App() {
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [isApprovalOpen, setIsApprovalOpen] = useState(false);
   const [isQueueOpen, setIsQueueOpen] = useState(false);
+  const [isResearchDeskOpen, setIsResearchDeskOpen] = useState(false);
   const [selectedApprovalId, setSelectedApprovalId] = useState('app_1');
   const [isInsightsOpen, setIsInsightsOpen] = useState(false);
 
@@ -160,8 +162,7 @@ export default function App() {
         onOpenApproval={() => setIsApprovalOpen(true)}
         pendingCount={approvals.length}
         onOpenInsights={() => setIsInsightsOpen(true)}
-        onOpenQueue={() => setIsQueueOpen(true)}
-        waitingCount={waitingClients.filter(c => c.status === 'waiting').length}
+        onOpenResearchDesk={() => setIsResearchDeskOpen(true)}
         onTriggerRun={handleTriggerRun}
       />
 
@@ -175,7 +176,7 @@ export default function App() {
           clients={clients}
           waitingClients={waitingClients}
           onOpenApprovalForClient={handleOpenApprovalForClient}
-          onOpenQueue={() => setIsQueueOpen(true)}
+          onOpenResearchDesk={() => setIsResearchDeskOpen(true)}
           onTriggerLog={(agent, text) => {
             const now = new Date();
             const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
@@ -194,6 +195,29 @@ export default function App() {
         waitingClients={waitingClients}
         activeClientId={selectedClientId}
         onActivateClient={handleActivateClient}
+      />
+
+      {/* SPARK AI Research Desk Modal (Screenshot 1-to-1 Interactive Center) */}
+      <SparkResearchDeskModal
+        isOpen={isResearchDeskOpen}
+        onClose={() => setIsResearchDeskOpen(false)}
+        onBroadcastSuccess={(pillarTitle, channel) => {
+          const now = new Date();
+          const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+          setLogs(prev => [
+            ...prev,
+            {
+              time: timeStr,
+              agent: 'TG_Topic_Bot',
+              text: `🚀 [SPARK ONE] 成功广播投研研报【${pillarTitle}】至 ${channel === 'both' ? '✈️ Telegram (#5 SPARK AI) 与 𝕏 (@sparkone_global)' : channel}！已分发 11 国语言！`
+            }
+          ]);
+        }}
+        onTriggerLog={(agent, text) => {
+          const now = new Date();
+          const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+          setLogs(prev => [...prev, { time: timeStr, agent, text }]);
+        }}
       />
 
       {/* Human-in-the-Loop Content Approval Modal (15s Video + Carousel) */}

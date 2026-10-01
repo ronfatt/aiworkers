@@ -1,136 +1,273 @@
+// Spark Union Capital (SPARK ONE) 专属金融区块链与量化投研数据配置
+// 专为 Telegram (18区社群) 与 X.com (@sparkone_global) 全球 11 国语言宣发定制
+
 export const INITIAL_CLIENTS = [
   {
     id: 'c1',
-    name: 'Tomato Boy 番茄仔',
-    category: 'KL沙巴海鲜番茄粉 (下周新开张)',
-    avatar: '🍅',
-    platforms: ['Facebook', 'Instagram', 'TikTok', '小红书'],
-    todayGoal: '下周新开张首发：1 条 15s 狂流口水海鲜短视频 + 1 套 KL 探店大字图文',
-    progress: 92,
+    name: 'Spark Union Capital',
+    brandName: 'SPARK ONE',
+    category: 'AI量化与金融区块链生态 (Global Market Intelligence)',
+    avatar: '⚡',
+    platforms: ['Telegram (18区社群)', 'X.com (@sparkone_global)', 'Binance Square', 'Discord'],
+    todayGoal: '每小时自动随机抽选 + 6大投研支柱多维归因 + 11国语言全球即时广播',
+    progress: 96,
     status: 'review_ready',
-    activePostType: '15s_video',
-    brandTone: '浓郁鲜红老坛番茄汤底、生猛老虎虾/鲜鱿/鱼片、食欲拉满、新店开张福利'
-  },
-  {
-    id: 'w1',
-    name: 'Uncle Lim 瓦煲肉骨茶',
-    category: 'KL甲洞老字号肉骨茶',
-    avatar: '🍲',
-    platforms: ['Facebook', '小红书', 'TikTok'],
-    todayGoal: '15s 药膳沸腾探店视频 + FB 爆款打卡贴',
-    progress: 25,
-    status: 'review_ready',
-    activePostType: '15s_video',
-    brandTone: '30年祖传秘方药膳、大块排骨与酥脆油条、古早味情怀'
-  },
-  {
-    id: 'w2',
-    name: 'DurianBB 榴莲甜品工坊',
-    category: '武吉免登旗舰店',
-    avatar: '🍈',
-    platforms: ['Instagram', '小红书', 'TikTok'],
-    todayGoal: '猫山王纯果肉爆浆冰淇淋视频 + Seedream 摄影图',
-    progress: 15,
-    status: 'in_production',
-    activePostType: '15s_video',
-    brandTone: '顶级猫山王D197、金黄爆浆、年轻潮酷打卡'
-  },
-  {
-    id: 'c2',
-    name: 'Zenith Coffee',
-    category: '精品咖啡连锁',
-    avatar: '☕',
-    platforms: ['小红书', 'Instagram', 'Facebook'],
-    todayGoal: '1 套手冲避坑干货轮播图 (40%份额)',
-    progress: 95,
-    status: 'review_ready',
-    activePostType: 'image_carousel',
-    brandTone: '美学生活方式、保姆级保真教程、文艺松弛感'
+    activePostType: 'spark_research',
+    brandTone: '全球宏观脉搏、极简投研、AURORA黄金与加密量化引擎、Risk First 突发风控'
   }
 ];
 
-// 顾客接洽部：等候服务大厅与签约客户队列
+// SPARK ONE 重点宣发板块与资产矩阵 (对应 Telegram 18 大主题区)
 export const WAITING_CLIENTS = [
   {
     id: 'c1',
-    name: 'Tomato Boy 番茄仔',
-    category: 'KL沙巴海鲜番茄粉',
-    avatar: '🍅',
+    name: 'SPARK AI 核心投研 (#5)',
+    category: '6大核心投研支柱与极简观点',
+    avatar: '🤖',
     status: 'active',
-    waitTime: '正在四部门生产中',
-    priority: '最高 - 下周正式开张',
-    progress: 92,
-    service: '60% 15s 短视频 (Flow+Kling+Seedance+Suno) + 40% 小红书图文 (GPT Image+Seedream)',
-    brief: '大马 KL 首家正宗沙巴老坛番茄海鲜汤粉，鲜虾鱼片爆汁，下周新店开张大促销。'
+    waitTime: '正在四部门编译中',
+    priority: '最高 - 持续每小时广播',
+    progress: 96,
+    service: 'SPARK AI DAILY + 多维归因 + AURORA引擎解构 + X.com Thread + Telegram 18区广播',
+    brief: '覆盖黄金(XAU/USD)、比特币(BTC)、以太坊与宏观流动性，权威纯正英文与11国语言即时出稿。'
   },
   {
     id: 'w1',
-    name: 'Uncle Lim 瓦煲肉骨茶',
-    category: 'KL甲洞老字号肉骨茶',
-    avatar: '🍲',
+    name: 'AURORA 黄金量化策略区 (#1)',
+    category: '高频统计套利与波动率曲面',
+    avatar: '📈',
     status: 'waiting',
-    waitTime: '排队 15 分钟',
-    priority: '紧急 - 下周试营业',
-    progress: 25,
-    service: '15s 药膳沸腾探店视频 + FB 爆款打卡贴',
-    brief: '30年祖传秘方药膳瓦煲肉骨茶，大块排骨与油条，需强化老字号醇厚食欲感。'
+    waitTime: '排队 12 分钟',
+    priority: '高优先级 - 突发风控联动',
+    progress: 40,
+    service: '实时胜率追踪 + 动态止损警报 + 5大引擎架构展示',
+    brief: '解构 AURORA 黄金策略运行管线，在黄金突破 $2,680 节点输出机构级风险防御参数。'
   },
   {
     id: 'w2',
-    name: 'DurianBB 榴莲甜品工坊',
-    category: '武吉免登旗舰店',
-    avatar: '🍈',
+    name: '全球 11 国语言社区治理 (#2-#12)',
+    category: '多语种本地化社群矩阵',
+    avatar: '🌐',
     status: 'waiting',
-    waitTime: '排队 28 分钟',
-    priority: '高 - 旺季特推',
+    waitTime: '排队 25 分钟',
+    priority: '日常全球轮播',
     progress: 15,
-    service: '15s 猫山王冰淇淋物理动作视频 + Seedream 摄影美学图',
-    brief: '纯正猫山王D197榴莲果肉爆浆泡芙与手作冰淇淋，主攻年轻游客与情侣打卡。'
+    service: '英/日/韩/西/阿/俄/德/法等 11 国语言全自动翻译投递',
+    brief: '无缝打通 Telegram 各语言专属频道与推特多语账号，实现全球投资者 24 小时零时差接收。'
   },
   {
     id: 'w3',
-    name: '南洋经典 Kopitiam 1978',
-    category: '传统炭烤吐司与白咖啡',
-    avatar: '☕',
+    name: 'AI KNOWLEDGE 量化微课堂 (#15)',
+    category: '#001-#008 投资者教育单点打透',
+    avatar: '🎓',
     status: 'waiting',
-    waitTime: '排队 42 分钟',
-    priority: '常规日更托管',
+    waitTime: '排队 40 分钟',
+    priority: '深度长效沉淀',
     progress: 0,
-    service: '40% 深度复古图文 + 怀旧拉咖啡文案',
-    brief: '老街情怀南洋茶室，半熟蛋、牛油雪花烤面包与手拉浓郁白咖啡。'
+    service: '单点打透的量化微课堂 + 凯利公式 + 订单流深度教学',
+    brief: '输出具有极高二次裂变传播力的投资哲思与量化科普，塑造 Spark Union Capital 国际顶级投研形象。'
+  }
+];
+
+// 6 大核心投研栏目 (直接对应控制台截图中的功能)
+export const SPARK_RESEARCH_PILLARS = [
+  {
+    id: 'hourly_auto',
+    code: '0',
+    title: '每小时自动随机抽选',
+    badge: 'Hourly Auto',
+    badgeColor: 'bg-emerald-950 text-emerald-300 border-emerald-700/60',
+    subtitle: '系统每整点自动从 6 大支柱中轮巡/加权随机抽取一条推送',
+    btnText: '立即随机抽取一条内容',
+    icon: '🎲'
+  },
+  {
+    id: 'daily',
+    code: '1',
+    title: 'SPARK AI DAILY',
+    badge: '每日必看',
+    badgeColor: 'bg-amber-950 text-amber-300 border-amber-700/60',
+    subtitle: '极简全球市场脉搏与宏观观点',
+    btnText: '生成今日市场脉搏',
+    icon: '⚡',
+    content: `⚡ [SPARK AI DAILY] Oct 01 Macro Pulse & Crypto Alpha
+
+1. GLOBAL MACRO:
+US 10Y Treasury Yields pull back to 4.22%, easing broad liquidity constraints. DXY soft at 103.4. Gold (XAU/USD) sustains breakout at $2,682/oz as central bank reserve accumulation offsets higher-for-longer rate narratives.
+
+2. CRYPTO ECOSYSTEM:
+Bitcoin consolidates firmly in the $68,200 - $69,100 range. Net spot ETF inflows clocked +$315M yesterday (BlackRock IBIT leading). Ethereum/BTC ratio begins mean reversion test at 0.0385 support.
+
+3. QUANT INSIGHT (AURORA ENGINE):
+Aurora Model signals 71% Long Momentum on Gold & Layer-1 majors with trailing risk bands tightened to 1.6%.
+Volatility index (VIX-Crypto) compressed at 44.5 — algorithmic liquidity expansion anticipated into US cash open.
+
+#SparkUnion #SPARKAI #QuantTrading #MacroPulse #Bitcoin`
+  },
+  {
+    id: 'market_intel',
+    code: '2',
+    title: 'MARKET INTELLIGENCE',
+    badge: '多维归因',
+    badgeColor: 'bg-cyan-950 text-cyan-300 border-cyan-700/60',
+    subtitle: '深度剖析“黄金/加密市场为什么这样走”',
+    btnText: '生成多维归因分析',
+    icon: '📊',
+    content: `📊 [SPARK MARKET INTELLIGENCE] Multi-Dimensional Attribution
+
+Asset Focus: Gold (XAU/USD) & Bitcoin (BTC) Dual Breakout
+
+WHY THE MARKET MOVES THIS WAY:
+• Liquidity Attribution (42% Weight): Global M2 expansion across Tier-1 central banks up +1.8% QoQ. Synthetic liquidity surplus is systematically absorbed by hard-cap collateral assets.
+• Derivatives Structure (28% Weight): Perpetual funding rates reset to flat (0.007%) following a $140M short liquidation cascade. Open Interest (OI) remains healthy at $38.4B.
+• Geopolitical / De-Dollarization (30% Weight): Sovereign reserve diversification accelerated; BRICS settlement basket pilots increase demand for decentralized reserve balance sheets.
+
+KEY LEVEL TO MONITOR:
+Support: BTC $67,400 / Gold $2,650
+Resistance: BTC $70,800 / Gold $2,710
+Strategy: Avoid chasing high-funding spikes; accumulate on structural dips.
+
+#MarketIntelligence #MacroAttribution #SPARKONE #AlphaDeepDive`
+  },
+  {
+    id: 'how_it_thinks',
+    code: '3',
+    title: 'HOW SPARK AI THINKS',
+    badge: '5大引擎',
+    badgeColor: 'bg-purple-950 text-purple-300 border-purple-700/60',
+    subtitle: '解构核心引擎架构与运行管线',
+    btnText: '解构核心引擎管线',
+    icon: '🧠',
+    engines: [
+      'AURORA (黄金策略)',
+      'PHOENIX (高频统计套利)',
+      'NEBULA (链上巨鲸异动)',
+      'CHRONOS (跨期波动率曲面)',
+      'AEGIS (动态资产组合防御)'
+    ],
+    content: `🧠 [HOW SPARK AI THINKS] Engine Pipeline: AURORA (Gold & Macro Strategy)
+
+Architecture Breakdown:
+• Sub-Model 1: Micro-Structure Order Book Imbalance (5ms scan across CME & Binance futures)
+• Sub-Model 2: Macro Yield-Differential Vector (Real yields vs. Inflation breakeven)
+• Sub-Model 3: Dynamic Volatility Envelope (Automated Bollinger-Kelter Band fusion)
+
+Execution Snapshot:
+When market volatility spikes beyond 2.4 sigma, AURORA dynamically adjusts position sizing using fractional Kelly Criterion, scaling out 35% of exposure to lock in realized alpha while letting remaining runners trail stop.
+
+Human trader feels greed and fear. AURORA operates purely on mathematical expectancy and cold execution.
+
+#AlgorithmicTrading #AuroraEngine #QuantArchitecture #SPARKAI`
+  },
+  {
+    id: 'risk_alert',
+    code: '4',
+    title: 'AI RISK ALERT',
+    badge: '突发风控',
+    badgeColor: 'bg-rose-950 text-rose-300 border-rose-700/60',
+    subtitle: '波动加剧时启动防御: Risk First',
+    btnText: '生成突发风控警报',
+    icon: '🚨',
+    content: `🚨 [AI RISK ALERT - LEVEL 2 PROTOCOL ACTIVE]
+
+Trigger Event: Anomalous funding rate divergence & sudden $85M long liquidation cascade in perpetual markets within 15 minutes.
+
+Automated Risk Directives:
+1. Trailing Stop-Loss tightened from 2.5% to 1.2% across high-beta crypto holdings.
+2. Aurora Engine shifted into Dynamic Delta-Neutral Hedge Mode.
+3. Leverage cap lowered to max 3x on open algorithmic execution tracks.
+
+Directive to Traders:
+Do not attempt knife-catching while spot CVD remains divergent. Preservation of principal is the prerequisite for asymmetric compounding.
+
+#RiskManagement #RiskFirst #AIEngine #EmergencyAlert #SparkUnion`
+  },
+  {
+    id: 'knowledge',
+    code: '5',
+    title: 'AI KNOWLEDGE',
+    badge: '#001-#008',
+    badgeColor: 'bg-indigo-950 text-indigo-300 border-indigo-700/60',
+    subtitle: '单点打透的量化微课堂',
+    btnText: '载入微课堂精炼知识',
+    icon: '🎓',
+    classes: [
+      { id: '#001', name: '#001 What is Quant Trading?' },
+      { id: '#002', name: '#002 The Kelly Criterion in Capital Allocation' },
+      { id: '#003', name: '#003 Order Book Imbalance & Liquidity Pools' },
+      { id: '#004', name: '#004 Delta Neutral Hedging Explained' },
+      { id: '#005', name: '#005 Volatility Smiles & Options Gamma' }
+    ],
+    content: `🎓 [SPARK AI KNOWLEDGE #001] What is Quantitative Trading?
+
+Traditional trading relies on intuition, chart patterns, and subjective sentiment.
+Quantitative trading replaces emotional guesswork with rigorous mathematical models and probabilistic algorithms.
+
+How SPARK ONE executes quant systems:
+1. Data Ingestion: Millions of ticks processed per second (order book, sentiment, macro).
+2. Alpha Hypothesis: Formulating testable statistical edges with verifiable backtesting.
+3. Execution Engine: High-speed API execution minimizing slippage and market impact.
+4. Risk Bounds: Strict stop-losses hardcoded into smart contracts and algorithmic gateways.
+
+Result: Consistent mathematical expectancy independent of market hype.
+
+#Quant101 #CryptoEducation #AlphaAcademy #SPARKONE`
+  },
+  {
+    id: 'insight',
+    code: '6',
+    title: 'SPARK AI INSIGHT',
+    badge: '高传播金句',
+    badgeColor: 'bg-fuchsia-950 text-fuchsia-300 border-fuchsia-700/60',
+    subtitle: '极具洞见的投资哲思，利于二次裂变',
+    btnText: '换一条高传播观点',
+    icon: '✨',
+    quotes: [
+      '“Financial markets are designed to transfer wealth from the impatient to the quantitative. Emotion is the enemy of compounding.”',
+      '“In crypto and blockchain, volatility isn’t risk; it is the price of admission for non-correlated generational alpha.”',
+      '“A retail trader asks: \'Will it pump?\' A quantitative fund asks: \'What is our expected value across 1,000 statistical iterations?\'”',
+      '“Risk management is not what you do after the crash. It is the architectural foundation built before placing the first satoshi.”'
+    ],
+    content: `✨ [SPARK AI INSIGHT] On Compounding & Quantitative Edge
+
+“Financial markets are designed to transfer wealth from the impatient to the quantitative. Emotion is the enemy of compounding. Systems outlast sentiments.”
+
+In the hyper-financialized crypto landscape, edge doesn't come from predicting the future; it comes from having a mathematical protocol for managing every possible future.
+
+#CryptoPhilosophy #QuantitativeMindset #SparkUnion #AlphaTakeaway`
   }
 ];
 
 // Director (You) sitting in Meeting Room
 export const DIRECTOR_DATA = {
   id: 'human_director',
-  name: '你 (Studio Director)',
-  title: '业务主理人 / 创意总监',
+  name: '你 (Spark Union 总监 / COO)',
+  title: '全球首席运营总监 / 资深量化主理人',
   x: 1095,
   y: 155,
-  avatarEmoji: '👑',
-  avatarBg: 'bg-gradient-to-tr from-amber-500 via-orange-500 to-rose-500',
-  thought: '👋 欢迎！接洽部随时有新客户排队，点击【顾客等候大厅】即可一键接单下发！'
+  avatarEmoji: '⚡',
+  avatarBg: 'bg-gradient-to-tr from-amber-500 via-cyan-500 to-indigo-600',
+  thought: '⚡ 欢迎！Telegram 18区与 X.com @sparkone_global 已全线贯通，点击【投研发布中心】即可一键生成并广播！'
 };
 
-// 5 大核心业务部门定义
+// 5 大金融区块链投研部门定义
 export const DEPARTMENTS = [
-  { id: 'reception', name: '顾客接洽部', icon: '🛎️', color: 'text-yellow-400', border: 'border-yellow-500/30', bg: 'bg-yellow-950/15' },
-  { id: 'market', name: '市场分析部', icon: '📊', color: 'text-teal-400', border: 'border-teal-500/30', bg: 'bg-teal-950/15' },
-  { id: 'copy', name: '文案脚本部', icon: '✍️', color: 'text-amber-400', border: 'border-amber-500/30', bg: 'bg-amber-950/15' },
-  { id: 'design', name: '视觉设计部', icon: '🎨', color: 'text-rose-400', border: 'border-rose-500/30', bg: 'bg-rose-950/15' },
-  { id: 'production', name: '视听制作部', icon: '🎬', color: 'text-cyan-400', border: 'border-cyan-500/30', bg: 'bg-cyan-950/15' }
+  { id: 'gateway', name: 'TG & X 广播调度部', icon: '📡', color: 'text-yellow-400', border: 'border-yellow-500/35', bg: 'bg-yellow-950/15' },
+  { id: 'market', name: '宏观投研情报部', icon: '📊', color: 'text-teal-400', border: 'border-teal-500/30', bg: 'bg-teal-950/15' },
+  { id: 'quant', name: '量化策略解构部', icon: '🧠', color: 'text-amber-400', border: 'border-amber-500/30', bg: 'bg-amber-950/15' },
+  { id: 'editorial', name: '全球编译发布部', icon: '✍️', color: 'text-rose-400', border: 'border-rose-500/30', bg: 'bg-rose-950/15' },
+  { id: 'visual', name: '视听图表渲染部', icon: '🎨', color: 'text-cyan-400', border: 'border-cyan-500/30', bg: 'bg-cyan-950/15' }
 ];
 
 export const INITIAL_AGENTS = [
-  // ── 1. 顾客接洽部门 (Client Reception & Intake Dept) ── (Col 1-3, Row 1-3)
+  // ── 1. TG & X 广播调度部 (Telegram 18区与推特排期网关) ── (Col 1, Row 1)
   {
-    id: 'client_concierge',
-    name: 'Client_Concierge',
-    face: '🛎️',
-    dept: 'reception',
-    deptName: '顾客接洽部',
-    role: 'VIP 客户接洽顾问',
+    id: 'tg_topic_concierge',
+    name: 'TG_Topic_Bot',
+    face: '📡',
+    dept: 'gateway',
+    deptName: '广播调度部',
+    role: 'Telegram 18区话题调度官',
     avatarColor: 'bg-yellow-600',
     borderColor: 'border-yellow-400',
     haloColor: 'rgba(250, 204, 21, 0.45)',
@@ -139,18 +276,18 @@ export const INITIAL_AGENTS = [
     homeY: 105,
     x: 100,
     y: 105,
-    currentTask: '审查 Uncle Lim 肉骨茶与 DurianBB 的品牌卖点与素材库',
-    thought: '🛎️ 正在等候厅接待客户！Uncle Lim 瓦煲肉骨茶资料已审核完毕，随时可派单给文案部！',
-    tokenUsage: '12.8k',
-    model: 'GPT-4o'
+    currentTask: '监控 Telegram #5 SPARK AI 话题与 11 国语言广播频道',
+    thought: '📡 Telegram 18区连接正常！#5 SPARK AI 话题就绪，随时广播最新宏观脉搏！',
+    tokenUsage: '14.2k',
+    model: 'TG Bot API Gateway'
   },
   {
-    id: 'queue_manager',
-    name: 'Queue_Manager',
-    face: '📋',
-    dept: 'reception',
-    deptName: '顾客接洽部',
-    role: '排期调度专员',
+    id: 'x_flight_director',
+    name: 'X_Flight_Op',
+    face: '𝕏',
+    dept: 'gateway',
+    deptName: '广播调度部',
+    role: '@sparkone_global 排期专家',
     avatarColor: 'bg-amber-600',
     borderColor: 'border-amber-400',
     haloColor: 'rgba(217, 119, 6, 0.4)',
@@ -159,62 +296,62 @@ export const INITIAL_AGENTS = [
     homeY: 105,
     x: 235,
     y: 105,
-    currentTask: '监控 3 家新客户等候队列：肉骨茶、榴莲工坊、南洋白咖啡',
-    thought: '📋 接洽部等候队列就绪！已对齐各客户优先级，支持总监一键接单下发！',
-    tokenUsage: '11.5k',
-    model: 'Claude 3.5 Sonnet'
+    currentTask: '调度 @sparkone_global 每小时推文 Thread 与高传播金句',
+    thought: '𝕏 推特 API 管道畅通！准备发布黄金(XAU/USD)与比特币双突破长推！',
+    tokenUsage: '18.5k',
+    model: 'X API v2 Stream'
   },
 
-  // ── 2. 市场分析部门 (Market Intelligence Dept) ── (Col 1-3, Row 4-6)
+  // ── 2. 宏观投研情报部 (Global Market Intel & Daily Pulse) ── (Col 1, Row 2)
   {
-    id: 'trend_scout',
-    name: 'Trend_Scout',
-    face: '👀',
+    id: 'macro_oracle',
+    name: 'Macro_Oracle',
+    face: '🌐',
     dept: 'market',
-    deptName: '市场分析部',
-    role: '全网热点嗅探',
+    deptName: '宏观投研部',
+    role: 'SPARK AI DAILY 脉搏分析师',
     avatarColor: 'bg-teal-500',
     borderColor: 'border-teal-400',
     haloColor: 'rgba(45, 212, 191, 0.45)',
     status: 'active',
     homeX: 100,
-    homeY: 395,
+    homeY: 410,
     x: 100,
-    y: 395,
-    currentTask: '抓取 KL 华裔美食圈 #KLFoodie #吉隆坡新开 飙升词',
-    thought: '📊 发现大马美食词 #沙巴海鲜粉 搜索量月环比 +185%，已通知文案部抢占！',
-    tokenUsage: '16.4k',
+    y: 410,
+    currentTask: '抓取美债10Y利率(4.22%)、DXY美元指数与黄金现货数据',
+    thought: '📊 宏观点评：黄金触碰 $2,682/oz 强阻力，流动性溢出正涌向加密硬通货！',
+    tokenUsage: '26.4k',
     model: 'Gemini 1.5 Pro'
   },
   {
-    id: 'insight_oracle',
-    name: 'Insight_Oracle',
+    id: 'attribution_quant',
+    name: 'Attribution_AI',
     face: '📈',
     dept: 'market',
-    deptName: '市场分析部',
-    role: '数据留存归因与调优',
+    deptName: '宏观投研部',
+    role: '多维归因深度专家',
     avatarColor: 'bg-emerald-500',
     borderColor: 'border-emerald-400',
     haloColor: 'rgba(52, 211, 153, 0.4)',
     status: 'active',
     homeX: 235,
-    homeY: 395,
+    homeY: 410,
     x: 235,
-    y: 395,
-    currentTask: '分析昨日美食探店 15s 完播衰减与 FB 评论 @ 互动率',
-    thought: '📊 归因总结：前 3 秒展现大铁锅沸腾热气可降低跳出率 26%，指令已反哺！',
-    tokenUsage: '28.1k',
+    y: 410,
+    currentTask: '解构“黄金/加密市场为什么这样走”：流动性42%+衍生品28%',
+    thought: '📈 多维归因模型完成：去美元化储备配置是本轮资产共振上涨的核心催化剂！',
+    tokenUsage: '32.1k',
     model: 'Claude 3.5 Sonnet'
   },
 
-  // ── 3. 文案脚本部门 (Copywriting & Script Dept) ── (Col 4-6, Row 1-3)
+  // ── 3. 量化策略解构部 (How Spark AI Thinks & Risk Alert) ── (Col 2, Row 1)
   {
-    id: 'script_master',
-    name: 'Script_Master',
-    face: '✍️',
-    dept: 'copy',
-    deptName: '文案脚本部',
-    role: '15秒黄金分镜架构师',
+    id: 'aurora_architect',
+    name: 'Aurora_Core',
+    face: '⚡',
+    dept: 'quant',
+    deptName: '量化策略部',
+    role: 'AURORA 黄金量化引擎架构师',
     avatarColor: 'bg-amber-500',
     borderColor: 'border-amber-400',
     haloColor: 'rgba(251, 191, 36, 0.45)',
@@ -223,18 +360,18 @@ export const INITIAL_AGENTS = [
     homeY: 125,
     x: 410,
     y: 125,
-    currentTask: '拆解 Tomato Boy 15s 三段式脚本：Hook / 夹粉 / 开张福利',
-    thought: '📝 0~3s 痛点台词已敲定：“别再去沙巴排队了！”，分镜 Prompt 已指派视听部！',
-    tokenUsage: '35.8k',
-    model: 'GPT-4o'
+    currentTask: '解构 AURORA 黄金策略运行管线与多空凯利仓位动态配置',
+    thought: '⚡ AURORA 黄金模型读数更新：多头动能达 71%，动态布林带收敛，执行冷峻加仓！',
+    tokenUsage: '42.8k',
+    model: 'GPT-4o Quant Engine'
   },
   {
-    id: 'viral_copywriter',
-    name: 'Viral_Copywriter',
-    face: '💬',
-    dept: 'copy',
-    deptName: '文案脚本部',
-    role: '社媒种草文案师',
+    id: 'risk_sentinel',
+    name: 'Risk_Sentinel',
+    face: '🚨',
+    dept: 'quant',
+    deptName: '量化策略部',
+    role: 'AI RISK ALERT 突发风控官',
     avatarColor: 'bg-orange-500',
     borderColor: 'border-orange-400',
     haloColor: 'rgba(251, 146, 60, 0.4)',
@@ -243,164 +380,164 @@ export const INITIAL_AGENTS = [
     homeY: 125,
     x: 545,
     y: 125,
-    currentTask: '生成 FB 互动圈友文案与小红书垂涎欲滴 Emoji 排版',
-    thought: '✨ 文案已注入大马本地俚语：“Jom 冲去吃”、“鲜到直跺脚”！',
-    tokenUsage: '19.2k',
-    model: 'Claude 3.5 Sonnet'
+    currentTask: '24小时盯梢爆仓异动，启动 Level 2 突发防御协议',
+    thought: '🚨 波动加剧预警：永续合约资金费率异常，已命令 AURORA 收紧追踪止损至 1.2%！',
+    tokenUsage: '29.2k',
+    model: 'o3-mini Risk First'
   },
 
-  // ── 4. 视觉设计部门 (Visual Design Dept - GPT Image & Seedream) ── (Col 4-6, Row 4-6)
+  // ── 4. 全球编译发布部 (Global Editorial & 11-Lang Dispatch) ── (Col 2, Row 2)
   {
-    id: 'gpt_image_master',
-    name: 'GPT_Image_Master',
-    face: '🖼️',
-    dept: 'design',
-    deptName: '视觉设计部',
-    role: '主力大字封面 (GPT Image)',
+    id: 'alpha_writer',
+    name: 'Alpha_Writer',
+    face: '✍️',
+    dept: 'editorial',
+    deptName: '全球编译部',
+    role: 'X.com 深度 Thread 首席作家',
     avatarColor: 'bg-rose-500',
     borderColor: 'border-rose-400',
     haloColor: 'rgba(251, 113, 133, 0.5)',
     status: 'active',
-    homeX: 375,
-    homeY: 395,
-    x: 375,
-    y: 395,
-    currentTask: 'GPT Image 直出 40% 小红书 3:4 爆款高对比大字报封面',
-    thought: '🎨 GPT Image 直出完成！“KL终于吃到了！超生猛海鲜番茄粉”大字锐利醒目！',
-    tokenUsage: '34.2k',
-    model: 'GPT Image / DALL-E 3'
+    homeX: 380,
+    homeY: 410,
+    x: 380,
+    y: 410,
+    currentTask: '撰写权威纯正的华尔街英文研报与 Telegram 格式化帖文',
+    thought: '✍️ 国际标准英文排版完成！“Why Gold & BTC are Unlocking Asymmetric Alpha” 极具感染力！',
+    tokenUsage: '38.2k',
+    model: 'Claude 3.5 Sonnet'
   },
   {
-    id: 'seedream_artist',
-    name: 'Seedream_Artist',
-    face: '🌱',
-    dept: 'design',
-    deptName: '视觉设计部',
-    role: '美学摄影与质感画师 (Seedream)',
+    id: 'polyglot_11lang',
+    name: 'Polyglot_11L',
+    face: '🌍',
+    dept: 'editorial',
+    deptName: '全球编译部',
+    role: '11国语言即时编译官',
     avatarColor: 'bg-pink-500',
     borderColor: 'border-pink-400',
     haloColor: 'rgba(244, 114, 182, 0.5)',
     status: 'active',
     homeX: 475,
-    homeY: 395,
+    homeY: 410,
     x: 475,
-    y: 395,
-    currentTask: 'Seedream 生成摄影级海鲜食材光泽、浓郁番茄慢熬质感大片',
-    thought: '🌱 Seedream 美学光影已渲染：生猛老虎虾晶莹剔透，色泽温暖饱和，食欲拉满！',
-    tokenUsage: '31.5k',
-    model: 'Seedream 2.0 / 3.0'
+    y: 410,
+    currentTask: '将投研内容一键转译为日、韩、西、阿、俄等 11 国母语版本',
+    thought: '🌍 11 国语言本地化翻译同步完成，各语区 Telegram 社区可立即同步接收！',
+    tokenUsage: '35.5k',
+    model: 'DeepL Pro / GPT-4o'
   },
   {
-    id: 'higgsfield_vision',
-    name: 'Higgsfield_Vision',
-    face: '🪐',
-    dept: 'design',
-    deptName: '视觉设计部',
-    role: '特效视觉合成 (Higgsfield)',
+    id: 'insight_philosopher',
+    name: 'Insight_Echo',
+    face: '✨',
+    dept: 'editorial',
+    deptName: '全球编译部',
+    role: '高传播投资金句策划',
     avatarColor: 'bg-fuchsia-500',
     borderColor: 'border-fuchsia-400',
     haloColor: 'rgba(217, 70, 239, 0.4)',
     status: 'idle',
-    homeX: 575,
-    homeY: 395,
-    x: 575,
-    y: 395,
-    currentTask: '辅助图文合成微观高光质感与艺术特效',
-    thought: '🪐 辅助图文特效就绪，随时合成高阶视觉背景与排版细节。',
-    tokenUsage: '14.1k',
-    model: 'Higgsfield Studio'
+    homeX: 570,
+    homeY: 410,
+    x: 570,
+    y: 410,
+    currentTask: '提炼利于二次裂变的投资哲思金句',
+    thought: '✨ 今日金句：“市场旨在将财富从浮躁者转移至量化者。情绪是复利的死敌。”',
+    tokenUsage: '16.1k',
+    model: 'Claude 3.5 Sonnet'
   },
 
-  // ── 5. 视听制作部门 (AV Production Dept - Flow / Kling / Seedance / Suno) ── (Col 7-9, Row 1-6)
+  // ── 5. 视听图表渲染部 (TradingView & Visual Terminal) ── (Col 3, Rows 1-2 Full Height!)
   {
-    id: 'google_flow_op',
-    name: 'Google_Flow_Op',
-    face: '🌊',
-    dept: 'production',
-    deptName: '视听制作部',
-    role: '主力视频流 (Google Flow)',
+    id: 'chart_renderer',
+    name: 'Chart_Renderer',
+    face: '📊',
+    dept: 'visual',
+    deptName: '视听渲染部',
+    role: '暗黑量化 K 线与深度图渲染',
     avatarColor: 'bg-sky-500',
     borderColor: 'border-sky-400',
     haloColor: 'rgba(56, 189, 248, 0.5)',
     status: 'active',
-    homeX: 700,
+    homeX: 710,
     homeY: 145,
-    x: 700,
+    x: 710,
     y: 145,
-    currentTask: 'Google Flow 主线管线生成与 15s 全局控速总装',
-    thought: '🌊 Google Flow 正在串联主镜头流程，并在第 12 秒稳稳推入 KL 门店开张信息！',
-    tokenUsage: '53.1k',
-    model: 'Google Flow / Veo'
+    currentTask: '直出 XAU/USD 黄金突破阻力位与 BTC 清算热力图',
+    thought: '📊 TradingView 4K 赛博暗黑图表直出完成：黄金支撑位 $2,650 标注清晰！',
+    tokenUsage: '48.1k',
+    model: 'Quant Chart Engine'
   },
   {
-    id: 'kling_master',
-    name: 'Kling_Aesthetic',
-    face: '✨',
-    dept: 'production',
-    deptName: '视听制作部',
-    role: '高美感画面专精 (Kling AI)',
+    id: 'seedream_infographic',
+    name: 'Seedream_Vision',
+    face: '🎨',
+    dept: 'visual',
+    deptName: '视听渲染部',
+    role: '链上多维归因视觉海报 (Seedream)',
     avatarColor: 'bg-cyan-500',
     borderColor: 'border-cyan-400',
     haloColor: 'rgba(34, 211, 238, 0.5)',
     status: 'active',
-    homeX: 840,
+    homeX: 860,
     homeY: 145,
-    x: 840,
+    x: 860,
     y: 145,
-    currentTask: '可灵 Kling 渲染 0~3s 大铁锅沸腾红亮番茄汤与热气美感',
-    thought: '🎬 0~3s Kling 美感镜头生成完毕！沸腾白雾蒸腾，红亮汤底质感极度诱人！',
-    tokenUsage: '39.8k',
-    model: 'Kling AI 1.5 Pro'
+    currentTask: 'Seedream 生成 3:4 赛博金融科技推特大字封面',
+    thought: '🎨 Seedream 美学海报已出炉：金色流光与区块链节点微观质感极其震撼！',
+    tokenUsage: '41.8k',
+    model: 'Seedream 3.0 Pro'
   },
   {
-    id: 'seedance_motion',
-    name: 'Seedance_Motion',
-    face: '🎯',
-    dept: 'production',
-    deptName: '视听制作部',
-    role: '产品动作运镜 (Seedance 2.5)',
+    id: 'motion_15s',
+    name: 'Kinetic_Motion',
+    face: '⚡',
+    dept: 'visual',
+    deptName: '视听渲染部',
+    role: '15s 投研动态卡点动效 (Seedance)',
     avatarColor: 'bg-amber-500',
     borderColor: 'border-amber-400',
     haloColor: 'rgba(245, 158, 11, 0.5)',
     status: 'active',
-    homeX: 700,
-    homeY: 395,
-    x: 700,
-    y: 395,
-    currentTask: 'Higgsfield Seedance 2.5 夹粉拉丝与剥虾蘸酱物理动作',
-    thought: '⚡ Seedance 2.5 动作运镜完成：筷子高挑米粉与金桔辣酱蘸取物理动态完美！',
-    tokenUsage: '44.2k',
-    model: 'Higgsfield Seedance 2.5'
+    homeX: 710,
+    homeY: 410,
+    x: 710,
+    y: 410,
+    currentTask: '渲染 15s 投研快讯动态分镜与数字心跳律动',
+    thought: '⚡ 15s 金融动态运镜压制就绪：第 3.0 秒精准放大 AURORA 信号节点！',
+    tokenUsage: '45.2k',
+    model: 'Seedance 2.5 Kinetic'
   },
   {
-    id: 'suno_music_op',
-    name: 'Suno_Music_Op',
+    id: 'suno_fintech',
+    name: 'Suno_Sound_Op',
     face: '🎵',
-    dept: 'production',
-    deptName: '视听制作部',
-    role: '卡点音乐 (Suno & Flow)',
+    dept: 'visual',
+    deptName: '视听渲染部',
+    role: '金融科技卡点音效 (Suno)',
     avatarColor: 'bg-violet-500',
     borderColor: 'border-violet-400',
     haloColor: 'rgba(167, 139, 250, 0.45)',
     status: 'active',
-    homeX: 840,
-    homeY: 395,
-    x: 840,
-    y: 395,
-    currentTask: 'Suno v3.5 生成欢快探店神曲，第 3.0s 精准 Beat Drop',
-    thought: '🎵 Suno 爆款卡点旋律已就绪！第 3.0 秒精准 Beat Drop 完美扣合夹粉瞬间！',
-    tokenUsage: '23.6k',
-    model: 'Suno v3.5 / Flow Music'
+    homeX: 860,
+    homeY: 410,
+    x: 860,
+    y: 410,
+    currentTask: 'Suno v3.5 生成充满未来科技感的低频脉冲背景音',
+    thought: '🎵 赛博朋克量化节拍就绪，为 TG 与 X 视频赋予顶级机构质感！',
+    tokenUsage: '25.6k',
+    model: 'Suno v3.5 Fintech'
   },
 
-  // ── 6. 战略决策会议室 (Executive Boardroom) ── (Col 10-12, Row 1-6)
+  // ── 6. 战略决策与一键广播中枢 (Executive Boardroom) ── (Col 4, Rows 1-2 Full Height!)
   {
-    id: 'ai_cmo',
-    name: 'AI_CMO',
+    id: 'ai_cqo',
+    name: 'AI_CQO',
     face: '🧠',
     dept: 'boardroom',
     deptName: '战略决策室',
-    role: '首席策略运营总监',
+    role: '首席量化策略指挥官 (Spark AI)',
     avatarColor: 'bg-purple-600',
     borderColor: 'border-purple-400',
     haloColor: 'rgba(192, 132, 252, 0.6)',
@@ -409,9 +546,9 @@ export const INITIAL_AGENTS = [
     homeY: 220,
     x: 1180,
     y: 220,
-    currentTask: '统筹接洽部、市场、文案、设计、视听协同闭环',
-    thought: '🧠 报告总监：五大部门全部就位，等候厅客户储备充足，Tomato Boy 开张宣发阵型拉满！',
-    tokenUsage: '58.4k',
+    currentTask: '统筹 6 大投研支柱，审核 Telegram 18区与 X.com 广播排期',
+    thought: '🧠 报告总监：Telegram 18区与 @sparkone_global 排期已校准，AURORA 研报随时可一键广播！',
+    tokenUsage: '62.4k',
     model: 'o3-mini / Claude 3.5'
   }
 ];
@@ -419,154 +556,97 @@ export const INITIAL_AGENTS = [
 // 会议室环绕圆桌坐席坐标 (围绕圆心 1095, 350 均衡分布)
 export const MEETING_SEATS = {
   human_director: { x: 1095, y: 220 },
-  ai_cmo: { x: 1185, y: 275 },
-  google_flow_op: { x: 1205, y: 355 },
-  seedance_motion: { x: 1175, y: 435 },
-  seedream_artist: { x: 1095, y: 465 },
-  script_master: { x: 1015, y: 435 },
-  trend_scout: { x: 985, y: 355 },
-  client_concierge: { x: 1005, y: 275 }
+  ai_cqo: { x: 1185, y: 275 },
+  chart_renderer: { x: 1205, y: 355 },
+  motion_15s: { x: 1175, y: 435 },
+  alpha_writer: { x: 1095, y: 465 },
+  aurora_architect: { x: 1015, y: 435 },
+  macro_oracle: { x: 985, y: 355 },
+  tg_topic_concierge: { x: 1005, y: 275 }
 };
 
-// 四大部门与接洽部向总监汇报开张方案的圆桌剧本
+// 五大部门向总监汇报开张方案的圆桌剧本 (针对 Spark Union Capital)
 export const MEETING_DIALOGUES = [
   {
     speakerId: 'human_director',
-    text: '“各部门注意！下周 Tomato Boy 番茄仔在 KL 新开张，汇报各自战备与客户接洽进度！”'
+    text: '“各部门注意！Spark Union Capital 全球宣发已启动，汇报 Telegram 18区与 X.com 当前战备排期！”'
   },
   {
-    speakerId: 'client_concierge',
-    text: '“【顾客接洽部】汇报：Tomato Boy 正全速生产中！等候厅另有 Uncle Lim 肉骨茶与 DurianBB 等 3 家新客户排队就绪，随时可并线接入！”'
+    speakerId: 'tg_topic_concierge',
+    text: '“【广播调度部】汇报：Telegram 18个社区板块全线连通！#5 SPARK AI 话题待命，11国语言频道即时接收推送！”'
   },
   {
-    speakerId: 'trend_scout',
-    text: '“【市场分析部】汇报：KL 华裔美食圈数据已锁定！#KLFoodie 与 #吉隆坡新开 飙升热词已输送给文案部！”'
+    speakerId: 'macro_oracle',
+    text: '“【宏观投研部】汇报：美债收益率4.22%回落，黄金 $2,682 与比特币稳固在 $68.5k，SPARK AI DAILY 脉搏已就绪！”'
   },
   {
-    speakerId: 'script_master',
-    text: '“【文案脚本部】汇报：15s 黄金脚本敲定！0~3s 痛点反转‘别飞沙巴了’已分发给设计部与视听部！”'
+    speakerId: 'aurora_architect',
+    text: '“【量化策略部】汇报：AURORA 黄金量化策略运行良好，多头置信度 71%，风控哨兵 Risk First 处于警戒防御态！”'
   },
   {
-    speakerId: 'seedream_artist',
-    text: '“【视觉设计部】汇报：GPT Image 直出大字封面，Seedream 渲染摄影级鲜虾光泽，美学质感已拉满！”'
+    speakerId: 'alpha_writer',
+    text: '“【全球编译部】汇报：X.com 深度 Thread 已按华尔街标准出稿，11国语言本地化版本已完成校验！”'
   },
   {
-    speakerId: 'google_flow_op',
-    text: '“【视听制作部】汇报：Google Flow 串联全片，Kling 沸腾热气 + Seedance 夹粉拉丝 + Suno 3s 卡点已合成！”'
+    speakerId: 'chart_renderer',
+    text: '“【视听渲染部】汇报：TradingView 暗黑清算热力图 + Seedream 科技海报 + Suno 音效已合成！”'
   },
   {
-    speakerId: 'ai_cmo',
-    text: '“报告总监：接洽部、市场、文案、设计、视听全部协同完毕！请总监在审核台最后拍板！”'
+    speakerId: 'ai_cqo',
+    text: '“报告总监：投研、量化、编译、图表、广播全部闭环！请总监在投研发布台一键授权投递！”'
   }
 ];
 
-// 跨部门动态连线 (从接洽 ──> 市场 ──> 文案 ──> 设计/视听 ──> 策略中枢)
+// 跨部门动态连线 (从调度 ──> 宏观 ──> 量化 ──> 编译/渲染 ──> 决策中枢)
 export const INITIAL_LINKS = [
-  { id: 'l1', from: 'client_concierge', to: 'trend_scout', label: '新客档案派单' },
-  { id: 'l2', from: 'trend_scout', to: 'script_master', label: '市场热词投递' },
-  { id: 'l3', from: 'script_master', to: 'gpt_image_master', label: '小红书封面需求' },
-  { id: 'l4', from: 'script_master', to: 'google_flow_op', label: '15s视频脚本分发' },
-  { id: 'l5', from: 'gpt_image_master', to: 'ai_cmo', label: '图文大片呈报' },
-  { id: 'l6', from: 'google_flow_op', to: 'ai_cmo', label: '视听成片递交' },
-  { id: 'l7', from: 'insight_oracle', to: 'queue_manager', label: '排期效能回流' }
+  { id: 'l1', from: 'tg_topic_concierge', to: 'macro_oracle', label: '排期任务触发' },
+  { id: 'l2', from: 'macro_oracle', to: 'aurora_architect', label: '宏观脉搏反哺' },
+  { id: 'l3', from: 'aurora_architect', to: 'alpha_writer', label: '量化信号交付' },
+  { id: 'l4', from: 'alpha_writer', to: 'chart_renderer', label: '推特Thread配图' },
+  { id: 'l5', from: 'chart_renderer', to: 'ai_cqo', label: '图文终端呈报' },
+  { id: 'l6', from: 'alpha_writer', to: 'ai_cqo', label: '多语稿件终审' },
+  { id: 'l7', from: 'attribution_quant', to: 'x_flight_director', label: '多维归因同步' }
 ];
 
 export const PENDING_APPROVALS = [
   {
     id: 'app_1',
     clientId: 'c1',
-    clientName: 'Tomato Boy 番茄仔',
-    type: '15s_video',
-    title: '【15s新店开张首发】不用飞沙巴！KL终于能吃到这碗生猛海鲜番茄粉了！',
-    platforms: ['Facebook', 'Instagram Reels', 'TikTok', '小红书'],
-    duration: '14.8s',
-    ratio: '9:16',
-    estimatedRetention: '54.2%',
-    predictedViews: '150k ~ 320k',
-    videoEngineOverview: 'Google Flow 控速 + Kling 沸腾热气美感 + Seedance 2.5 夹粉动作 + Suno 卡点',
-    scriptStructure: [
-      {
-        phase: '0~3s 黄金 Hook (Kling 美感专精)',
-        spokenText: '别再去沙巴排队了！KL竟然把一整锅生猛海鲜倒进浓郁番茄汤里！',
-        visualPrompt: 'Kling 1.5 极度诱人慢动作：大铁锅内沸腾滚烫的鲜红老坛番茄浓汤，升腾诱人白雾热气，生猛老虎虾、鲜鱿、嫩鱼片层层叠叠堆满画面！',
-        engineTag: 'Kling AI 1.5 Pro (沸腾热气与红亮光泽)',
-        durationSec: 3.0
-      },
-      {
-        phase: '3~10s 核心演示 (Seedance 2.5 动作专精)',
-        spokenText: '现剥大老虎虾、脆爽鱿鱼、滑嫩鱼片，配上熬足6小时的沙巴番茄汤，吸一口粉鲜到骨子里！',
-        visualPrompt: 'Higgsfield Seedance 2.5 物理动作：一双筷子精准将吸饱浓郁红汤的滑爽米粉高高挑起拉丝，紧接着慢动作手持剥开金黄虾肉蘸入特制金桔辣椒酱！',
-        engineTag: 'Higgsfield Seedance 2.5 (挑粉拉丝与蘸酱动作)',
-        durationSec: 7.0
-      },
-      {
-        phase: '10~15s 诱人开张 CTA (Google Flow 总成)',
-        spokenText: '下周正式开张！全场海鲜套餐限时特惠，带上你的吉隆坡饭搭子直接冲！',
-        visualPrompt: 'Google Flow 镜头拉远展现摆满各种不同海鲜搭配的大合影，定格打出 KL 门市地址与限时开张福利浮层！',
-        engineTag: 'Google Flow 主线总成',
-        durationSec: 4.8
-      }
-    ],
-    videoMockUrl: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80',
-    videoThumbnail: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80',
-    copyCaption: '🔥 KL的吃货赶紧收藏！不用大老远飞沙巴，正宗【Tomato Boy 番茄仔】海鲜番茄粉下周正式在 KL 隆重开张试营业啦！🍅🦐 每日新鲜直运的生猛老虎虾、大花枝鱿鱼、鲜嫩鱼片，配上熬足6小时的老坛番茄浓汤，酸爽鲜甜超开胃！下周开张限时粉丝专属福利，快 @ 你的饭搭子一起去打卡！📍详细地址与营业时间见第一条评论👇 #KLFoodie #吉隆坡美食 #TomatoBoySeafood #番茄仔海鲜粉 #吉隆坡新开 #沙巴海鲜粉 #KL探店 #马来西亚美食',
-    hashtags: ['#KLFoodie', '#吉隆坡美食', '#TomatoBoySeafood', '#番茄仔海鲜粉', '#沙巴海鲜粉', '#KL探店']
-  },
-  {
-    id: 'app_2',
-    clientId: 'c2',
-    clientName: 'Zenith Coffee',
-    type: 'image_carousel',
-    title: '【40%干货图文】手冲咖啡避坑指南：90%新手都在错的3个点',
-    platforms: ['小红书', 'Instagram', 'Facebook'],
-    ratio: '3:4 (小红书) / 1:1 (IG)',
-    predictedViews: '32k ~ 60k',
-    videoEngineOverview: '设计部 GPT Image 大字封面 + Seedream 美学摄影质感图',
-    slides: [
-      {
-        index: 1,
-        type: 'cover',
-        title: '劝退警告！这3个错误毁了你几百块的豆子',
-        sub: '手冲冠军不会告诉你的萃取真相',
-        tag: 'GPT Image 直出大字封面',
-        imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80'
-      },
-      {
-        index: 2,
-        type: 'content',
-        title: '错误一：水温无脑拉到 95°C',
-        sub: '深烘豆苦涩杂味全出来！黄金区间：浅烘91°C，深烘86°C',
-        tag: 'Seedream 摄影级萃取质感',
-        imageUrl: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80'
-      },
-      {
-        index: 3,
-        type: 'content',
-        title: '错误二：闷蒸时间太随意',
-        sub: '不排气直接注水，萃取率暴跌 40%。看准鼓包完全回落（约30秒）',
-        tag: 'Seedream 摄影级微距水流',
-        imageUrl: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80'
-      },
-      {
-        index: 4,
-        type: 'cta',
-        title: '私信回复【参数表】免费领',
-        sub: '整理了12款经典产区研磨度+水温对照表，新手照着冲绝不翻车',
-        tag: '转化引流卡片',
-        imageUrl: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80'
-      }
-    ],
-    copyCaption: '花了上百块买精品浅烘瑰夏，冲出来又酸又涩像中药？新手先自查这3个致命错误！建议点赞收藏对照冲煮☕ 评论区扣【参数】无偿领高清产区表！ #手冲咖啡 #咖啡小白入门 #手冲参数 #打工人续命咖啡 #咖啡生活',
-    hashtags: ['#手冲咖啡', '#咖啡日常', '#小红书干货', '#CoffeeGram']
+    clientName: 'Spark Union Capital',
+    type: 'spark_research',
+    title: '【SPARK AI 投研发布】黄金 $2,682 与 比特币 $68.5k 宏观共振多维归因深度解析',
+    platforms: ['X.com (@sparkone_global)', 'Telegram (#5 SPARK AI)', 'Binance Square'],
+    duration: 'X Thread (4 Tweets) + TG 广播',
+    ratio: '16:9 (TradingView) / 3:4 (Seedream)',
+    estimatedRetention: '88.5%',
+    predictedViews: '240k ~ 580k Impressions',
+    videoEngineOverview: 'TradingView 暗黑 K 线 + Seedream 赛博美学海报 + AURORA 黄金策略解构',
+    contentPreview: `⚡ [SPARK AI DAILY & MARKET INTELLIGENCE]
+Macro Pulse & Quantitative Attribution
+
+1. MACRO FORCES:
+US 10Y Yields drop to 4.22%. DXY softening to 103.4.
+Gold (XAU/USD) testing $2,682/oz while Bitcoin forms high-timeframe accumulation at $68,500.
+
+2. MULTI-DIMENSIONAL ATTRIBUTION:
+• Liquidity Injection: 42%
+• Derivatives Flush: 28%
+• De-Dollarization Reserve Demand: 30%
+
+3. AURORA QUANT STRATEGY:
+Maintaining 71% Long Momentum bias. Trailing stop-loss tightened to 1.6%.
+
+#SparkUnion #SPARKAI #Bitcoin #QuantTrading #MacroPulse`,
+    hashtags: ['#SparkUnion', '#SPARKAI', '#QuantTrading', '#MacroPulse', '#Bitcoin', '#Gold']
   }
 ];
 
 export const LIVE_LOGS = [
-  { time: '16:48:12', agent: 'Client_Concierge', text: '【顾客接洽部】Uncle Lim 瓦煲肉骨茶与 DurianBB 已排入等候服务大厅。' },
-  { time: '16:48:45', agent: 'Trend_Scout', text: '【市场分析部】捕获 KL 飙升词「沙巴海鲜番茄粉」，自动投送脚本工位。' },
-  { time: '16:49:10', agent: 'Script_Master', text: '【文案脚本部】生成 Tomato Boy 15s 脚本，分派视听部与设计部。' },
-  { time: '16:49:33', agent: 'GPT_Image_Master', text: '【视觉设计部】GPT Image 直出小红书 3:4 避坑大字封面，排版完成。' },
-  { time: '16:49:50', agent: 'Seedream_Artist', text: '【视觉设计部】Seedream 生成摄影级海鲜光泽与质感海报，细节极佳。' },
-  { time: '16:50:05', agent: 'Seedance_Motion', text: '【视听制作部】Seedance 2.5 渲染夹粉与剥虾蘸酱物理动作，运动真实。' },
-  { time: '16:50:22', agent: 'Google_Flow_Op', text: '【视听制作部】Google Flow 15s 全片总成压制完毕，移交【审核工作台】。' }
+  { time: '12:08:12', agent: 'TG_Topic_Bot', text: '【广播调度部】Telegram #5 SPARK AI 话题接入，18社区板块心跳监测正常。' },
+  { time: '12:08:45', agent: 'Macro_Oracle', text: '【宏观投研部】捕获金价 $2,682/oz 突破信号，美债10Y走低，生成 SPARK AI DAILY。' },
+  { time: '12:09:10', agent: 'Aurora_Core', text: '【量化策略部】解构 AURORA 黄金策略运行管线，多头置信度 71%，风控收紧。' },
+  { time: '12:09:33', agent: 'Alpha_Writer', text: '【全球编译部】按国际权威英文排版生成 X.com 深度 Thread，极具专业深度。' },
+  { time: '12:09:50', agent: 'Polyglot_11L', text: '【全球编译部】11国母语本地化译文编译完毕（中/日/韩/西/阿/俄等）。' },
+  { time: '12:10:05', agent: 'Chart_Renderer', text: '【视听渲染部】TradingView 4K 暗黑清算图与 Seedream 科技海报直出。' },
+  { time: '12:10:22', agent: 'AI_CQO', text: '【战略决策室】全量投研资料审定完毕，就绪在【SPARK AI 投研发布台】一键全网广播！' }
 ];
