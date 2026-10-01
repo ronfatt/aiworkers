@@ -15,7 +15,8 @@ import {
   Palette,
   Film,
   BellRing,
-  Clock
+  Clock,
+  Radio
 } from 'lucide-react';
 import { DIRECTOR_DATA, MEETING_SEATS, MEETING_DIALOGUES } from '../data/mockData';
 
